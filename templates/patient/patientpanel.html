@@ -1,0 +1,161 @@
+{% extends 'patient/patientbase.html' %}
+{% block content %}
+{%load static%}
+
+<div class="container-fluid">
+    <!-- Card stats -->
+    <div class="card shadow border-0">
+        <div class="card-body">
+            <div style="font-size: 2rem;">Chúc {{request.user}} một ngày tốt lành!</div>
+            <div class="brief"> <i>“Lương y như từ mẫu” – Hồ Chí Minh.
+                </i> </div>
+        </div>
+    </div>
+    <br>
+    <div class="row g-6 mb-6">
+        <div class="col-xl-6 col-sm-6 col-12">
+            <div class="card shadow border-0">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col">
+                            <span class="h6 font-semibold text-muted text-sm d-block mb-2">Hoạt động xả stress</span>
+                            <span class="h3 font-bold mb-0">Sắp có</span>
+                        </div>
+                        <div class="col-auto">
+                            <div class="icon icon-shape bg-tertiary text-white text-lg rounded-circle"
+                                style="background:#e34269 !important ">
+                                <i class="fa-solid fa-person-running"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <div class="mt-2 mb-0 text-sm">
+                        <span class="badge badge-pill bg-soft-success text-success me-2">
+                            <i class="bi bi-arrow-up me-1"></i>13%
+                        </span>
+                        <span class="text-nowrap text-xs text-muted">Since last month</span>
+                    </div> -->
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-6 col-sm-6 col-12">
+            <div class="card shadow border-0">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col">
+                            <span class="h6 font-semibold text-muted text-sm d-block mb-2">Bác sĩ</span>
+                            <span class="h3 font-bold mb-0">{{numpatient}}</span>
+                        </div>
+                        <div class="col-auto">
+                            <div class="icon icon-shape bg-primary text-white text-lg rounded-circle">
+                                <i class="fa-solid fa-user-doctor"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <div class="mt-2 mb-0 text-sm">
+                        <span class="badge badge-pill bg-soft-success text-success me-2">
+                            <i class="bi bi-arrow-up me-1"></i>30%
+                        </span>
+                        <span class="text-nowrap text-xs text-muted">Since last month</span>
+                    </div> -->
+                </div>
+            </div>
+        </div>
+        <!--         <div class="col-xl-3 col-sm-6 col-12">
+            <div class="card shadow border-0">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col">
+                            <span class="h6 font-semibold text-muted text-sm d-block mb-2">Work load</span>
+                            <span class="h3 font-bold mb-0">95%</span>
+                        </div>
+                        <div class="col-auto">
+                            <div class="icon icon-shape bg-warning text-white text-lg rounded-circle">
+                                <i class="bi bi-minecart-loaded"></i>
+                            </div>
+                        </div>
+                    </div>
+              <div class="mt-2 mb-0 text-sm">
+                        <span class="badge badge-pill bg-soft-success text-success me-2">
+                            <i class="bi bi-arrow-up me-1"></i>10%
+                        </span>
+                        <span class="text-nowrap text-xs text-muted">Since last month</span>
+                    </div> 
+                    https://sex2.xoainon.cc/sex-loan-luan-em-ho-xinh-xan-chieu-anh-trai-toi-ben.html
+                </div>
+            </div>
+        </div> -->
+    </div>
+    <div class="card shadow border-0 mb-7">
+        <div class="card-header">
+            <h5 class="mb-0">Bác sĩ</h5>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-hover table-nowrap">
+                <thead class="thead-light">
+                    <tr>
+                        <th scope="col">Ảnh đại diện</th>
+                        <th scope="col">Họ tên</th>
+                        <th scope="col">Trạng thái</th>
+                        <!-- <th scope="col">Nội dung</th> -->
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for t in patient %}
+
+                    <tr>
+                        <td>
+                            <a href="{% url 'patient-doctor' t.id  %}">
+                                <img style="background: #fafafa;
+    box-shadow: 4px 6px 36px -6px rgba(1, 1, 1, 0.5);
+    margin: auto;   
+    border-radius: 50%;
+    height: 50px;
+    object-fit: cover;
+    margin: auto;" width="50" height="50" alt="..." src="https://res.cloudinary.com/dyiesiahu/image/upload/v1/{{ t.profile_pic }}">
+
+                            </a>
+                        </td>
+                        <td> {{t.user}}</td>
+
+                        <td>
+
+                            <a class="status text-heading font-semibold">
+                                {{t.status}}
+                            </a>
+                        </td>
+                        <!-- 
+                        <td>
+                            Chủ đề
+                        </td> -->
+                        <td class="text-end">
+                            <a href="{% url 'patient-doctor' t.id  %}" class="btn btn-sm btn-neutral">Hiển thị thêm</a>
+                           
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="card-footer border-0 py-5">
+            <a style="color: gray" class=" text-sm">Hiển thị thêm</a>
+        </div>
+    </div>
+</div>
+
+<script>
+    function status() {
+        var status = document.getElementsByClassName("status")
+        for (let index = 0; index < status.length; index++) {
+            if (status[index].innerHTML == "True") {
+                status[index].innerHTML = "Đã xác nhận"
+            } else {
+                status[index].innerHTML = "Chưa xác nhận"
+            }
+        }
+
+    }
+    setTimeout(function () { status() }, 1);
+
+</script>
+{% endblock content%}

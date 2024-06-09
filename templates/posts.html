@@ -1,0 +1,408 @@
+{% load static %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer">
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>PathFindr</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+  <!-- Favicons -->
+  <link href="https://i.postimg.cc/jSNNWYds/logo-removebg-preview-1.png" rel="icon">
+  <link href="https://i.postimg.cc/jSNNWYds/logo-removebg-preview-1.png" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="https://cdn.jsdelivr.net/gh/linuxguist/bizpage@main/assets/vendor/animate.css/animate.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/gh/linuxguist/bizpage@main/assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/gh/linuxguist/bizpage@main/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/gh/linuxguist/bizpage@main/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/gh/linuxguist/bizpage@main/assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/gh/linuxguist/bizpage@main/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="https://cdn.jsdelivr.net/gh/linuxguist/bizpage@main/assets/css/style.css" rel="stylesheet">
+
+  <!-- =======================================================
+  * Template Name: PathFindr
+  * Updated: Mar 10 2023 with Bootstrap v5.2.3
+  * Template URL: https://bootstrapmade.com/PathFindr-bootstrap-business-template/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+  <style type="text/css">
+    img {
+        max-width: 100%;
+        object-fit: cover;
+    }
+
+    /* Add styles for div.post */
+    .post {
+        margin-bottom: 20px; /* Adjust margin as needed */
+        padding: 20px; /* Add padding to create space around each post */
+        background-color: #f9f9f9; /* Change background color */
+        border: 1px solid #ddd; /* Add border */
+        border-radius: 8px; /* Add border radius for rounded corners */
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Add box shadow */
+    }
+
+    .thumbnail {
+        width: 100px; /* Adjust thumbnail size as needed */
+        height: auto;
+        margin-right: 20px; /* Add space between thumbnail and post content */
+        float: left; /* Float thumbnail to the left */
+    }
+
+  
+    /* Styles for search form */
+    #searchForm {
+        margin-bottom: 20px; /* Add margin to separate from posts */
+        display: flex;
+    align-items: center;
+    justify-content: space-around;
+    }
+
+    #searchForm input[type="text"] {
+        padding: 10px; /* Add padding to text input */
+        border: 1px solid #ccc; /* Add border */
+        border-radius: 5px; /* Add border radius */
+        width: calc(100% - 189px);    }
+
+    #searchForm input[type="submit"] {
+        padding: 10px 20px; /* Add padding to submit button */
+        background-color: #18d26e; /* Set background color */
+        color: white; /* Set text color */
+        border: none; /* Remove border */
+        border-radius: 5px; /* Add border radius */
+        cursor: pointer; /* Add pointer cursor */
+        transition: background-color 0.3s; /* Add transition effect */
+    }
+
+    #searchForm input[type="submit"]:hover {
+        background-color: #15b85b; /* Change background color on hover */
+    }  /* Styles for post content */
+    .post-preview {
+        font-size: 16px; /* Adjust font size */
+        line-height: 1.5; /* Adjust line height */
+        margin-bottom: 10px; /* Add margin below post content */
+    }
+    header {
+      background: rgba(0, 0, 0, 0.9) !important
+    }
+    /* Styles for post title */
+    .post-title {
+        font-size: 24px; /* Adjust font size */
+        font-weight: bold; /* Make title bold */
+        margin-bottom: 5px; /* Add margin below title */
+    }
+
+    /* Styles for post intro */
+    .post-intro {
+        font-size: 18px; /* Adjust font size */
+        color: #555; /* Change text color */
+        margin-bottom: 10px; /* Add margin below intro */
+    }
+
+    /* Styles for tags */
+    .tag {
+        display: inline-block; /* Make tags display inline */
+        padding: 5px 10px; /* Add padding to tags */
+        background-color: #f0f0f0; /* Set background color */
+        color: #666; /* Set text color */
+        border-radius: 5px; /* Add border radius */
+        margin-right: 5px; /* Add margin between tags */
+    }
+    .main-container{
+        margin: 30px
+    }
+    ul.pagination {justify-content: center;
+}
+</style>
+</head>
+
+<body>
+
+  <!-- ======= Header ======= -->
+  <header id="header" class="fixed-top d-flex align-items-center header-transparent">
+    <div class="container-fluid">
+
+      <div class="row justify-content-center align-items-center">
+        <div class="col-xl-11 d-flex align-items-center justify-content-between">
+          <h1 class="logo" ><a href="/">PathFindr</a></h1>
+          <!-- Uncomment below if you prefer to use an image logo -->
+          <!-- <a href="index.html" class="logo"><img src="https://cdn.jsdelivr.net/gh/linuxguist/bizpage@main/assets/img/logo.png" alt="" class="img-fluid"></a>-->
+
+          <nav id="navbar" class="navbar">
+            <ul>
+              <li><a class="nav-link scrollto" href="/">Trang chủ</a></li>
+              <li><a class="nav-link scrollto" href="/question">Tra cứu TS10</a></li>
+              <li><a class="nav-link scrollto" href="/posts">Review Các trường THPT</a></li>
+
+              <li><a class="nav-link scrollto" href="/forums">Diễn đàn</a></li>
+              {% if request.user.is_authenticated %}
+              <div class="auth" style="
+                        margin-left: 16px;
+                ">
+                <style>
+                .account-icon {
+                  
+                            display: inline-block;
+                            cursor: pointer;
+                        }
+                        .account-icon img {
+                            width: 50px;
+                            height: 50px;
+                            border-radius: 50%;
+                        }
+                        .dropdown-menu {
+                            display: none;
+                            position: absolute;
+                            top: 60px;
+                            right: 0;
+                            background-color: white;
+                            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+                            z-index: 1;
+                            width: 200px;
+                        }
+                        .dropdown-menu a {
+                            color: black;
+                            padding: 12px 16px;
+                            text-decoration: none;
+                            display: block;
+                        }
+                        .dropdown-menu a:hover {
+                            background-color: #f1f1f1;
+                        }
+                      .auth .show {
+                            display: block;
+                        }
+                .auth button {
+                        border-radius: 4px;
+                        box-shadow: 0 2px 4px 0 rgba(0,0,0,0.2), 0 1.5px 5px 0 rgba(0,0,0,0.19);
+
+                        text-decoration: none;
+                    border: none;
+                    background: #0074d9;
+                    color: white !important;
+                    font-family: 'Varela Round';
+                }
+                .auth button a {
+                    color: white;
+                    text-decoration: none;
+                    display: block;
+                    color: white;
+                    text-decoration: none;
+                    padding: 8px 16px;
+                }
+
+                </style>
+
+
+                <div class="account-icon" onclick="toggleDropdown()">
+                  <img src="{{student.profile_pic.url}}" alt="Account Icon">
+                  <div class="dropdown-menu" id="dropdownMenu">
+                      <a href="/profile">Thông tin cá nhân</a>
+                      <a href="/history" style="    text-wrap: wrap;">Lịch sử tư vấn tuyển sinh 10</a>
+                      <a href="/logout">Đăng xuất</a>
+                  </div>
+                </div>
+                    
+
+                      
+                <script>
+                      function toggleDropdown() {
+                            var dropdownMenu = document.getElementById("dropdownMenu");
+                            dropdownMenu.classList.toggle("show");
+                        }
+
+                        // Close the dropdown if the user clicks outside of it
+                        window.onclick = function(event) {
+                            if (!event.target.matches('.account-icon img')) {
+                                var dropdowns = document.getElementsByClassName("dropdown-menu");
+                                for (var i = 0; i < dropdowns.length; i++) {
+                                    var openDropdown = dropdowns[i];
+                                    if (openDropdown.classList.contains('show')) {
+                                        openDropdown.classList.remove('show');
+                                    }
+                                }
+                            }
+                        }
+                </script>
+                </div>
+                {% else %}
+              <li><a id="login" class="btn-get-started scrollto animate__animated animate__fadeInUp" style="" href="/login">Đăng nhập</a></li>
+                {% endif %}
+
+            </ul>
+            <i class="bi bi-list mobile-nav-toggle"></i>
+          </nav><!-- .navbar -->
+        </div>
+      </div>
+
+    </div>
+  </header><!-- End Header -->
+<br><br><br>
+
+<div class="main-container">
+	<h1 style="    margin: auto;
+  text-align: center;">Review các trường THPT </h1>
+	
+	<form id="searchForm" method="GET">
+    <i class="fa-solid fa-magnifying-glass" style="    font-size: 36px;"></i>
+		{{myFilter.form|safe}}
+		
+		<input class="btn btn-primary" type="submit" value="search">
+	</form>
+	<br>
+	<div class="post-wrapper">
+
+		{% for post in posts %}
+		<div>
+			<div class="post">
+				<img class="thumbnail" src="{{post.thumbnail.url}}">
+				<div class="post-preview">
+					<h6 class="post-title">{{post.headline}}</h6>
+					<p class="post-intro">{{post.sub_headline}}</p>
+					<a href="{% url 'post' post.slug %}">Xem thêm</a>
+
+					
+					<hr>
+					{% for tag in post.tags.all %}
+						<span class="tag">{{tag}}</span>
+					{% endfor %}
+				</div>
+			</div>
+		</div>
+		{% empty %}
+			<h3>No posts found...</h3>
+		{% endfor %}
+	</div>
+
+	<div class="row">
+		
+		{% if posts.has_other_pages %}
+
+			<ul class="pagination">
+
+				{% if posts.has_previous %}
+					<li class="page-item"><a data-page="{{posts.previous_page_number}}" href="?page={{posts.previous_page_number}}" class="page-link">&laquo</a></li>
+
+					<li class="page-item"><a data-page="1" href="?page=1" class="page-link">Đầu tiên</a></li>
+				{% endif %}
+
+
+				{% for i in posts.paginator.page_range %}
+					{% if posts.number == i %}
+						<li class="page-item"><a class="active page-link">{{i}}</a></li>
+					{% else %}
+						<li class="page-item"><a data-page="{{i}}" href="?page={{i}}" class="page-link">{{i}}</a></li>
+					{% endif %}
+					
+				{% endfor %}
+
+
+				{% if posts.has_next %}
+					<li class="page-item"><a data-page="{{posts.paginator.num_pages}}" href="?page={{posts.paginator.num_pages}}" class="page-link">Cuối cùng</a></li>
+
+					<li class="page-item"><a data-page="{{posts.next_page_number}}" href="?page={{posts.next_page_number}}" class="page-link">&raquo</a></li>
+				{% endif %}
+			</ul>
+
+		{% endif %}
+	</div>
+</div>
+
+  <!-- ======= Footer ======= -->
+  <footer id="footer">
+    <div class="footer-top">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12 col-md-6 footer-info">
+            <h3>PathFindr</h3>
+            <p style="font-size: 18px;">PathFindr là dịch vụ giúp tư vấn hướng nghiệp, hay hướng nghiệp khi đăng ký hồ sơ vào các trường cấp ba nhằm hỗ trợ một cá nhân nào đó trong việc lựa chọn ngành nghề phù hợp nhất với khả năng, sở thích của bản thân. Không chỉ là ngành nghề phù hợp, cá nhân đó cũng được tư vấn, hỗ trợ để chọn ngành nghề đáp ứng được nhu cầu nhân lực của xã hội lúc bấy giờ.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container
+
+">
+      <div class="copyright">
+        &copy; Copyright <strong><a href="https://3dviet.vercel.app">VietVu</a></strong>. All Rights Reserved
+      </div>
+    </div>
+  </footer><!-- End Footer -->
+
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+    class="bi bi-arrow-up-short"></i></a>
+    <a href="/chat" style="display: block; position: relative;">   <img style="    background: #fafafa;
+      box-shadow: 4px 6px 36px -6px rgba(1, 1, 1, 0.5);
+      margin: auto;
+      z-index: 199;
+      padding: 0px;
+      right: 7px;
+      border-radius: 50%;
+      bottom: 64px;
+      position: fixed;
+      margin: auto;"
+      width="60" height="60" src="https://i.ibb.co/SnbvPY7/Thi-t-k-ch-a-c-t-n-1.png" alt="LEVIOOSA"></a>
+
+  <!-- Vendor JS Files -->
+  <script src="https://cdn.jsdelivr.net/gh/linuxguist/bizpage@main/assets/vendor/purecounter/purecounter_vanilla.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/linuxguist/bizpage@main/assets/vendor/aos/aos.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/linuxguist/bizpage@main/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/linuxguist/bizpage@main/assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/linuxguist/bizpage@main/assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/linuxguist/bizpage@main/assets/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/linuxguist/bizpage@main/assets/vendor/waypoints/noframework.waypoints.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/linuxguist/bizpage@main/assets/vendor/php-email-form/validate.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="https://cdn.jsdelivr.net/gh/linuxguist/bizpage@main/assets/js/main.js"></script>
+
+  <script type="text/javascript">
+
+    var label = document.getElementsByTagName('label')
+    label[0].style.display = "none"
+    var input = document.getElementsByTagName('input')
+    input[1].value = "Tìm kiếm"
+    document.addEventListener('DOMContentLoaded', function () {
+      var documentUrl = document.location.href.replace(/#.*$/, '');
+      var linkEls = document.getElementsByTagName('A');
+      for (var linkIndex = 0; linkIndex < linkEls.length; linkIndex++) {
+        var linkEl = linkEls[linkIndex];
+        if (!linkEl.getAttribute('href').match(/^#/)) {
+          continue;
+        }
+        linkEl.setAttribute('href', documentUrl + linkEl.getAttribute('href'));
+      }
+    })    
+  </script>
+
+<script type="text/javascript">
+	let searchForm = document.getElementById('searchForm')
+	let pageLinks = document.getElementsByClassName('page-link')
+
+	for(var i=0; pageLinks.length > i; i++){
+
+		pageLinks[i].addEventListener('click', function(e){
+			e.preventDefault()
+			let page = this.dataset.page
+			console.log('Page:', page)
+			searchForm.innerHTML += `<input value="${page}" name="page" hidden >`
+			searchForm.submit()
+		})
+
+	}
+</script>
+
+</body>
+</html>
+

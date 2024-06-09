@@ -1,0 +1,148 @@
+{% extends 'admin/adminbase.html' %}
+{% block content %}
+{%load static%}
+
+<div class="container-fluid">
+    <!-- Card stats -->
+    <div class="card shadow border-0">
+        <div class="card-body">
+            <div style="font-size: 2rem;">Chúc {{request.user}} một ngày tốt lành!</div>
+            <div class="brief"> <i>“Giáo dục là vũ khí mạnh nhất mà người ta có thể sử dụng để thay đổi cả thế giới.” - Nelson Mandela
+                </i> </div>
+        </div>
+    </div>
+    <br>
+    <div class="row g-6 mb-6">
+        <a  href='/khongchuyen' class="col-xl-6 col-sm-6 col-12">
+            <div class="card shadow border-0">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col">
+                            <span class="h6 font-semibold text-muted text-sm d-block mb-2">THPT Chuyên </span>
+                            <span class="h3 font-bold mb-0">{{chuyen}}</span>
+                        </div>
+                        <div class="col-auto">
+                            <div class="icon icon-shape bg-tertiary text-white text-lg rounded-circle"
+                                style="background:#040539 !important ">
+                                <i class="fa-solid fa-crown"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <div class="mt-2 mb-0 text-sm">
+                        <span class="badge badge-pill bg-soft-success text-success me-2">
+                            <i class="bi bi-arrow-up me-1"></i>13%
+                        </span>
+                        <span class="text-nowrap text-xs text-muted">Since last month</span>
+                    </div> -->
+                </div>
+            </div>
+        </a>
+        <a  href='/khongchuyen' class="col-xl-6 col-sm-6 col-12">
+            <div class="card shadow border-0">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col">
+                            <span class="h6 font-semibold text-muted text-sm d-block mb-2">THPT không chuyên</span>
+                            <span class="h3 font-bold mb-0">{{kochuyen}}</span>
+                        </div>
+                        <div class="col-auto">
+                            <div class="icon icon-shape bg-primary text-white text-lg rounded-circle">
+                                <i class="fa-solid fa-school"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <div class="mt-2 mb-0 text-sm">
+                        <span class="badge badge-pill bg-soft-success text-success me-2">
+                            <i class="bi bi-arrow-up me-1"></i>30%
+                        </span>
+                        <span class="text-nowrap text-xs text-muted">Since last month</span>
+                    </div> -->
+                </div>
+            </div>
+        </a>
+        <a  href='/tichop'class="col-xl-6 col-sm-6 col-12">
+            <div class="card shadow border-0">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col">
+                            <span class="h6 font-semibold text-muted text-sm d-block mb-2">THPT Tích hợp </span>
+                            <span class="h3 font-bold mb-0">{{tichop}}</span>
+                        </div>
+                        <div class="col-auto">
+                            <div class="icon icon-shape bg-tertiary text-white text-lg rounded-circle"
+                                style="background:#02562f !important ">
+                                <i class="fa-solid fa-language"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <div class="mt-2 mb-0 text-sm">
+                        <span class="badge badge-pill bg-soft-success text-success me-2">
+                            <i class="bi bi-arrow-up me-1"></i>13%
+                        </span>
+                        <span class="text-nowrap text-xs text-muted">Since last month</span>
+                    </div> -->
+                </div>
+            </div>
+        </a>
+        <a href="/adminposts"class="col-xl-6 col-sm-6 col-12">
+            <div class="card shadow border-0">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col">
+                            <span class="h6 font-semibold text-muted text-sm d-block mb-2">Số bài đăng trên diễn đàn</span>
+                            <span class="h3 font-bold mb-0">{{posts}}</span>
+                        </div>
+                        <div class="col-auto">
+                            <div class="icon icon-shape  text-white text-lg rounded-circle"  style="background:#ff3131 !important ">
+                                <i class="fa-solid fa-blog"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <div class="mt-2 mb-0 text-sm">
+                        <span class="badge badge-pill bg-soft-success text-success me-2">
+                            <i class="bi bi-arrow-up me-1"></i>30%
+                        </span>
+                        <span class="text-nowrap text-xs text-muted">Since last month</span>
+                    </div> -->
+                </div>
+            </div>
+        </a>
+        <!--         <div class="col-xl-3 col-sm-6 col-12">
+            <div class="card shadow border-0">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col">
+                            <span class="h6 font-semibold text-muted text-sm d-block mb-2">Work load</span>
+                            <span class="h3 font-bold mb-0">95%</span>
+                        </div>
+                        <div class="col-auto">
+                            <div class="icon icon-shape bg-warning text-white text-lg rounded-circle">
+                                <i class="bi bi-minecart-loaded"></i>
+                            </div>
+                        </div>
+                    </div>
+              <div class="mt-2 mb-0 text-sm">
+                        <span class="badge badge-pill bg-soft-success text-success me-2">
+                            <i class="bi bi-arrow-up me-1"></i>10%
+                        </span>
+                        <span class="text-nowrap text-xs text-muted">Since last month</span>
+                    </div> 
+                </div>
+            </div>
+        </div> -->
+    </div>
+    
+</div>
+<script>
+    function status() {
+        var status = document.getElementById("status")
+        if (status.innerHTML == "True") {
+            status.innerHTML = "Đã xác nhận"
+        } else {
+            status.innerHTML = "Chưa xác nhận"
+        }
+    }
+    setTimeout(function () { status() }, 1);
+
+</script>
+{% endblock content%}

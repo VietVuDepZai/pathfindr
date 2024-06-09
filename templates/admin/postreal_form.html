@@ -1,0 +1,270 @@
+{% extends 'admin/adminbase.html' %}
+{% block content %}
+{% load static %}
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    
+    <style type="text/css">
+      @import url(https://fonts.googleapis.com/css?family=Fira+Sans:200,400,500,600,700);
+ form {
+   margin: 0;
+
+}
+
+ .page-title {
+   margin-bottom: 20px;
+   font-size: 30px;
+   font-weight: normal;
+}
+ .settings-page {
+   width: 100%;
+   min-height: 90vh;
+   margin-top: -19px;
+    margin-bottom: -26px;
+}
+ .settings-page .settings-container {
+   width: 100%;
+   max-width: 850px;
+   margin: auto;
+   padding: 20px;
+   padding-top: 40px;
+}
+ .settings-page .settings-container .settings-title {
+   text-transform: uppercase;
+   font-weight: normal;
+   font-size: 20px;
+}
+ .settings-page .settings-container .settings-section {
+   width: 100%;
+   border-top: 2px solid #454545;
+   padding-top: 10px;
+   margin-bottom: 20px;
+}
+ .settings-page .settings-container .settings-section .my-form {
+   max-width: 400px;
+   width: 100%;
+   margin: 30px auto;
+}
+ .settings-page .settings-container .settings-section .my-form .form-submit.right {
+   justify-content: flex-end;
+}
+ .settings-page .settings-container .settings-section .my-form .form-submit {
+   display: flex;
+}
+ .settings-page .settings-container .settings-section .my-form .form-submit .btn {
+   width: 100%;
+}
+ .settings-page .settings-container .settings-section .my-form .form-group.editable .input-group {
+   display: flex;
+   align-items: center;
+   margin-bottom: 0.5rem;
+}
+ .settings-page .settings-container .settings-section .my-form .form-group.editable .input-group .form-control {
+   margin-bottom: 0;
+}
+ .settings-page .settings-container .settings-section .my-form .form-group.editable .input-group .btn {
+   height: 58px;
+   margin: 0 10px;
+   background-color: black;
+   transition: all 0.5s;
+}
+ .settings-page .settings-container .settings-section .my-form .form-group.editable .input-group .btn:hover {
+   color: white;
+   background-color: #e5dada;
+      height: 68px;
+
+}
+ .settings-page .settings-container .settings-section .my-form .form-group.editable .input-group i {
+   cursor: pointer;
+   color: #454545;
+   transition: all 0.5s;
+}
+ .settings-page .settings-container .settings-section .my-form .form-group.editable .input-group i:hover {
+   color: #e59500;
+}
+ .settings-page .settings-container .settings-section .non-active-form {
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+   margin-bottom: 0.5rem;
+}
+ .settings-page .settings-container .settings-section .non-active-form p {
+   padding: 7px 15px;
+   margin-bottom: 0;
+   font-size: 1rem;
+   cursor: default;
+}
+ .settings-page .settings-container .settings-section .non-active-form i {
+   cursor: pointer;
+   color: #454545;
+   transition: all 0.5s;
+   margin-right: 10px;
+}
+ .settings-page .settings-container .settings-section .non-active-form i:hover {
+   color: #e59500;
+   transform: scale(1.1);
+}
+ .img-upload-container {
+   width: 100%;
+   display: flex;
+   align-items: center;
+   margin-bottom: 1em;
+}
+ .img-upload-container label {
+   margin-bottom: 20px;
+   position: relative;
+   border-radius: 0.25rem;
+   height: 80px;
+   min-width: 80px;
+   cursor: pointer;
+   overflow: hidden;
+   background-color: white;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   margin-right: 20px;
+   background-size: contain;
+}
+ .img-upload-container h4 {
+   text-align: left;
+   font-size: 16px;
+   color: white;
+   cursor: pointer;
+   transition: all 0.5s;
+}
+ .img-upload-container h4:hover {
+   color: white;
+}
+ .img-upload-container .img-preview-container {
+   position: absolute;
+   border-radius: 0.25rem;
+   overflow: hidden;
+}
+ .img-upload-container .img-preview {
+   background: center center no-repeat;
+   background-size: cover;
+   height: 80px;
+   width: 80px;
+   border-radius: 0.25rem;
+   cursor: pointer;
+}
+ .img-upload-container .img-upload {
+   margin-bottom: 0;
+}
+ .img-upload-container input {
+   display: none;
+}
+ .img-upload-container .alert {
+   margin-top: 10px;
+   position: absolute;
+   bottom: 0px;
+   background-color: transparent;
+   border: 0;
+   color: #e59500;
+}
+ .my-form {
+   visibility: visible;
+}
+ .my-form .form-group .input-group {
+   border-radius: 0.25rem;
+   overflow: hidden;
+}
+ .my-form .form-group .input-group input.form-control {
+   border: none;
+   padding: 10px 15px;
+   background-color: #2e2e2e;
+   color: #e5dada;
+   font-family: 'Fira Sans', sans-serif;
+}
+ .my-form .form-group .alert-input {
+   color: #e59500;
+   font-weight: 100;
+   font-size: 13px;
+}
+ .my-form .form-submit {
+   width: 100%;
+}
+ .my-form .form-submit .btn {
+   width: 100%;
+   border-radius: 0.25rem;
+   background-color: grey;
+   color: #e5dada;
+   cursor: default;
+}
+input, select {
+    font-size: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    transition: border-color 0.3s;
+}
+ .my-form .form-submit .btn:disabled {
+   opacity: 0.75;
+}
+ .my-form .form-submit .btn:not(:disabled):not(.disabled) {
+   background-color: #e59500;
+}
+ .form-control{
+  height: calc(2em + .75rem + 2px);
+ }
+ input[type="text"]{
+  width: 100%;
+  border: 1px solid black;
+    border-radius: 5px;
+ }
+ textarea {
+  width: 100%;
+ }
+    </style>
+ 
+ 
+
+  </head>
+
+  <form method="POST" enctype="multipart/form-data">
+        {%csrf_token%}
+
+  <div class="settings-page">
+  <div class="settings-container">
+    <h1 class="page-title">Thêm / Sửa bài viết</h1>
+    <div class="settings-section">
+
+     <div>
+         {{form.media}}
+              {{form.as_p}}
+
+    </div>
+  </div>
+
+<div class="settings-section">
+  <div class="form my-form">
+
+   <div class="form-submit">
+     <button style="color:white;background:#18d26e;cursor: pointer;"class="form-control btn button full" type="submit">Lưu thay đổi</button>
+    </div>
+  </div>
+</div>
+</div>
+  </div>
+</form>
+
+
+
+<script src="http://netdna.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
+
+
+
+<script>
+    var label = document.getElementsByTagName("label")
+    label[0].innerHTML = "Tiêu đề"
+    label[1].innerHTML = "Tiêu đề phụ"
+    label[2].innerHTML = "Hình ảnh đại diện"
+    label[4].innerHTML = "Nội dung bài viết"
+
+</script>
+{% endblock content %}

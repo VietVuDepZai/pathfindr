@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>PathFindr</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+  <!-- Favicons -->
+  <link href="https://i.postimg.cc/jSNNWYds/logo-removebg-preview-1.png" rel="icon">
+  <link href="https://i.postimg.cc/jSNNWYds/logo-removebg-preview-1.png" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="https://cdn.jsdelivr.net/gh/linuxguist/bizpage@main/assets/vendor/animate.css/animate.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/gh/linuxguist/bizpage@main/assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/gh/linuxguist/bizpage@main/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/gh/linuxguist/bizpage@main/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/gh/linuxguist/bizpage@main/assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/gh/linuxguist/bizpage@main/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="https://cdn.jsdelivr.net/gh/linuxguist/bizpage@main/assets/css/style.css" rel="stylesheet">
+
+  <!-- Custom CSS -->
+  <style>
+    input {
+    width: 100%;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-dark);
+  padding: 0.5rem;
+  border: 2px solid var(--primary-lighter);
+  border-radius: 0.3rem;
+}
+ input:focus {
+  border: 2px solid #16164d;
+}
+
+.remember-forgot {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.875rem;
+  font-weight: 500;
+  margin-bottom: 1rem;
+}
+
+.remember-me {
+  display: grid;
+  grid-template-columns: 1rem auto;
+  gap: 0.6rem;
+}
+
+input[type="checkbox"] {
+  -webkit-appearance: none;
+  appearance: none;
+  display: grid;
+  place-content: center;
+}
+
+.remember-me input {
+  width: 1rem;
+  height: 1rem;
+  margin-right: 0.3rem;
+  border: 1px solid var(--text-light);
+  border-radius: 2px;
+}
+
+input[type="checkbox"]::before {
+  content: "";
+  width: 0.65em;
+  height: 0.65em;
+  background-color: white;
+  transform: scale(0);
+  transform-origin: bottom left;
+  clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+  transition: 120ms transform ease-in-out;
+  box-shadow: inset 1em 1em var(--form-control-color);
+}
+
+input[type="checkbox"]:checked::before {
+  transform: scale(1);
+}
+.remember-me input:checked {
+  background: var(--primary-gradient);
+}
+
+.remember-me label {
+  color: var(--text-dark);
+  user-select: none;
+}
+.remember-forgot a {
+  color: var(--primary);
+}
+.remember-forgot a:hover {
+  text-decoration: underline;
+  text-decoration-color: var(--primary);
+}
+
+.login-btn,
+.google-signin {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.6rem;
+
+  font-weight: 500;
+  padding: 0.5rem 0;
+  border-radius: 0.5rem;
+}
+
+.login-btn {
+  color: white;
+  background: var(--primary-gradient);
+}
+.login-btn:hover {
+  opacity: 0.9;
+}
+
+.or-divider {
+  width: 100%;
+  font-weight: 600;
+  color: var(--text-light);
+  margin-block: 1.5rem;
+  text-align: center;
+  position: relative;
+}
+.or-divider::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 0;
+  height: 1px;
+  width: 45%;
+  background-color: var(--text-light);
+}
+.or-divider::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 0;
+  height: 1px;
+  width: 45%;
+  background-color: var(--text-light);
+}
+
+.google-signin {
+  background-color: white;
+  border: 2px solid var(--primary-lighter);
+}
+.google-signin svg {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+    /* CSS for the form tag */
+    .custom-form-container {
+      background-image: url('your-background-image-url.jpg'); /* Background image */
+      background-size: cover; /* Make the background cover the entire container */
+      background-position: center; /* Center the background image */
+      display: flex;
+      justify-content: center; /* Center horizontally */
+    }
+    .custom-form {
+      margin: 58px 0px;
+      background-color: rgba(255, 255, 255, 0.8); /* Light white background with transparency */
+      padding: 40px; /* Padding around the form */
+      border-radius: 10px; /* Rounded corners */
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.2); /* Box shadow */
+      max-width: 600px; /* Maximum width of the form */
+      width: 100%; /* Full width */
+    }
+    .custom-form button {
+      background-color: #18d26e; /* Button background color */
+      color: white; /* Text color */
+      padding: 10px 20px; /* Padding inside the button */
+      border: none; /* Remove button border */
+      border-radius: 38px; /* Rounded corners */
+      cursor: pointer; /* Change cursor to pointer on hover */
+      display: block;
+      margin: 0 auto; /* Center the button horizontally */
+    }
+    .custom-form button:hover {
+      background-color: #15a558; /* Darker background color on hover */
+    }
+
+    /* CSS for the toast notification */
+    .toast-container {
+      position: fixed;
+      bottom: 1rem;
+      right: 1rem;
+      z-index: 9999;
+    }
+    .toast {
+      background-color: #333;
+      color: #fff;
+      padding: 1rem 1.5rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      margin-bottom: 0.5rem;
+    }
+    .toast-success {
+      background-color: #27ae60;
+    }
+    .toast-error {
+      background-color: #c0392b;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ======= Header ======= -->
+  <header id="header" style='background: black'class="fixed-top d-flex align-items-center header-transparent">
+    <div class="container-fluid">
+
+      <div class="row justify-content-center align-items-center">
+        <div class="col-xl-11 d-flex align-items-center justify-content-between">
+          <h1 class="logo"><a href="/">PathFindr</a></h1>
+          <!-- Uncomment below if you prefer to use an image logo -->
+          <!-- <a href="index.html" class="logo"><img src="https://cdn.jsdelivr.net/gh/linuxguist/bizpage@main/assets/img/logo.png" alt="" class="img-fluid"></a>-->
+
+          <nav id="navbar" class="navbar">
+            <ul>
+              <li><a class="nav-link scrollto" href="#hero">Trang chủ</a></li>
+              <li><a class="nav-link scrollto" href="/question">Tra cứu TS10</a></li>
+
+              <li><a class="nav-link scrollto" href="/posts">Review các trường THPT</a></li>
+
+              <li><a class="nav-link scrollto" href="#contact">Diễn đàn</a></li>
+              <li><a id="login" class="btn-get-started scrollto animate__animated animate__fadeInUp" style="" href="/signup">Đăng ký</a></li>
+
+            </ul>
+            <i class="bi bi-list mobile-nav-toggle"></i>
+          </nav><!-- .navbar -->
+        </div>
+      </div>
+
+    </div>
+  </header><!-- End Header -->
+<br><br>
+  <!-- Form Section -->
+  <section id="form" class="custom-form-container" style="background: url(https://nguyentuanhung.vn/wp-content/uploads/2019/07/4-nguyen-thi-minh-khai.jpg) !important; background-size: cover !important; background-repeat: no-repeat  !important;">
+    <form method="POST" onclick="saveAns()" autocomplete="off" enctype="multipart/form-data" class="form custom-form" id="form-1">
+      <h2>Chào mừng bạn! 👋🏻</h2>
+          <p>Điền thông tin đăng nhập dưới đây để truy cập vào tài khoản.</p>
+      {% csrf_token %}
+
+<p>
+<label for="id_username">Tên người dùng:</label>
+<input type="text" name="username" maxlength="150" required="" id="id_username">
+
+
+
+</p>
+<p>
+<label for="id_username">Mật khẩu:</label>
+<input type="password" name="password" maxlength="150" required="" id="id_password">
+
+
+
+</p>                   <div class="remember-forgot">
+    
+  <a href="/signup">Chưa có tài khoản, Đăng ký?</a>
+
+</div>
+            <button type="submit"class="login-btn">Đăng nhập</button>
+<div class="or-divider">hoặc</div>
+
+<a href="/accounts/google/login/?next=/googlesignup/home" class="google-signin" style="display:flex">
+  <svg xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 48 48" width="96px" height="96px"><path fill="#FFC107" d="M43.611,20.083H42V20H24v8h11.303c-1.649,4.657-6.08,8-11.303,8c-6.627,0-12-5.373-12-12c0-6.627,5.373-12,12-12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C12.955,4,4,12.955,4,24c0,11.045,8.955,20,20,20c11.045,0,20-8.955,20-20C44,22.659,43.862,21.35,43.611,20.083z"/><path fill="#FF3D00" d="M6.306,14.691l6.571,4.819C14.655,15.108,18.961,12,24,12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C16.318,4,9.656,8.337,6.306,14.691z"/><path fill="#4CAF50" d="M24,44c5.166,0,9.86-1.977,13.409-5.192l-6.19-5.238C29.211,35.091,26.715,36,24,36c-5.202,0-9.619-3.317-11.283-7.946l-6.522,5.025C9.505,39.556,16.227,44,24,44z"/><path fill="#1976D2" d="M43.611,20.083H42V20H24v8h11.303c-0.792,2.237-2.231,4.166-4.087,5.571c0.001-0.001,0.002-0.001,0.003-0.002l6.19,5.238C36.971,39.205,44,34,44,24C44,22.659,43.862,21.35,43.611,20.083z"/></svg>
+  <span> Đăng nhập với Google</span>
+</a>
+</form>
+  </section>
+  <!-- End Form Section -->
+
+  <!-- ======= Footer ======= -->
+  <footer id="footer">
+    <div class="footer-top">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12 col-md-6 footer-info">
+            <h3>PathFindr</h3>
+            <p style="font-size: 18px;">PathFindr là dịch vụ giúp tư vấn hướng nghiệp, hay hướng nghiệp khi đăng ký hồ sơ vào các trường cấp ba nhằm hỗ trợ một cá nhân nào đó trong việc lựa chọn ngành nghề phù hợp nhất với khả năng, sở thích của bản thân. Không chỉ là ngành nghề phù hợp, cá nhân đó cũng được tư vấn, hỗ trợ để chọn ngành nghề đáp ứng được nhu cầu nhân lực của xã hội lúc bấy giờ.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="copyright">
+        &copy; Copyright <strong><a href="https://3dviet.vercel.app">VietVu</a></strong>. All Rights Reserved
+      </div>
+    </div>
+  </footer><!-- End Footer -->
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+    class="bi bi-arrow-up-short"></i></a>
+    <a href="/chat" style="display: block; position: relative;">   <img style="    background: #fafafa;
+      box-shadow: 4px 6px 36px -6px rgba(1, 1, 1, 0.5);
+      margin: auto;
+      z-index: 199;
+      padding: 0px;
+      right: 7px;
+      border-radius: 50%;
+      bottom: 64px;
+      position: fixed;
+      margin: auto;"
+      width="60" height="60" src="https://i.ibb.co/SnbvPY7/Thi-t-k-ch-a-c-t-n-1.png" alt="LEVIOOSA"></a>
+  <!-- Vendor JS Files -->
+  <script src="https://cdn.jsdelivr.net/gh/linuxguist/bizpage@main/assets/vendor/purecounter/purecounter_vanilla.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/linuxguist/bizpage@main/assets/vendor/aos/aos.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/linuxguist/bizpage@main/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/linuxguist/bizpage@main/assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/linuxguist/bizpage@main/assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/linuxguist/bizpage@main/assets/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/linuxguist/bizpage@main/assets/vendor/waypoints/noframework.waypoints.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/linuxguist/bizpage@main/assets/vendor/php-email-form/validate.js"></script>
+
+
+
+</body>
+</html>

@@ -1,0 +1,146 @@
+{% extends 'admin/adminbase.html' %}
+{% block content %}
+{%load static%}
+<style>
+  input, select {
+    font-size: 1rem;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    transition: border-color 0.3s;
+  }
+  input[type="text"] {
+    width: 40%;
+  }
+  select {
+    width: 20%;
+  }
+  @media screen and (max-width: 991px) {
+    input, select { width: 100% !important}
+    form {display: block !important}
+    label {
+      width: 100% !important
+    }
+  }
+</style>
+<div class="container">
+    <div class="card shadow border-0">
+        <div class="card-body">
+            <div style="font-size: 2rem;">Chúc {{request.user}} một ngày tốt lành! 
+            </div>
+            <div class="brief"> <i>Hãy nhớ rằng: “Giáo dục là vũ khí mạnh nhất mà người ta có thể sử dụng để thay đổi cả thế giới.” - Nelson Mandela
+                </i> </div>
+        </div>
+    </div>
+    <br>
+    <form id="searchForm" method="GET" style="
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+">
+     {{myFilter.form|safe}}
+  
+      <input class="btn btn-primary" type="submit" value="Tìm kiếm">
+    </form>
+    <div class="card shadow border-0 mb-7">
+        <div class="card-header" style="    display: flex;
+        align-items: center;
+        justify-content: space-between;">
+            <h5 class="mb-0">THPT Chuyên</h5>
+            <a href="/addthpt" style="background-color: #18d26e;padding: 5px 10px"><i style="color:white" class="fa-solid fa-plus"></i></a>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-hover table-nowrap">
+                <thead class="thead-light">
+                    <tr>
+                        <th scope="col">Tên trường</th>
+                        <th scope="col">Ảnh đại diện </th>
+                        <th scope="col">Ngày tạo</th>
+                        <th scope="col">Môn chuyên</th>
+                        <!-- <th scope="col">Nội dung</th> -->
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for t in thpt %}
+
+                    <tr>
+                        <td>{{t.name}}</td>
+                        <td>
+                            <img style="background: #fafafa;
+    box-shadow: 4px 6px 36px -6px rgba(1, 1, 1, 0.5);
+    margin: auto;   
+    border-radius: 50%;
+    height: 50px;
+    object-fit: cover;
+    margin: auto;" width="50" height="50" alt="..." src="https://res.cloudinary.com/dyiesiahu/image/upload/v1/{{ t.profile_pic }}">
+                            
+                            </a>
+                        </td>
+                        <td>
+                            {{t.created_on}}
+                        </td>
+                        <td>
+
+                            <a id="status" class="text-heading font-semibold">
+                                {{t.khoihoc}}
+                            </a>
+                        </td>
+                        <!-- 
+                        <td>
+                            Chủ đề
+                        </td> -->
+                        <td class="text-end">
+                            <a href="/updatethpt/{{t.id}}/chuyen" class="btn btn-sm btn-neutral">Hiển thị thêm</a>
+                            <button type="button" class="btn btn-sm btn-square btn-neutral text-danger-hover">
+                                <i class="bi bi-trash"></i>
+                            </button>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+       
+    </div>
+    <div class="row">
+
+      {% if thpt.has_other_pages %}
+  
+          <ul class="pagination" style="justify-content: center;">
+  
+              {% if thpt.has_previous %}
+                  <li class="page-item">
+                      <a data-page="{{ thpt.previous_page_number }}" href="?page={{ thpt.previous_page_number }}&khoihoc={{ request.GET.khoihoc }}&name={{ request.GET.name }}" class="page-link">&laquo</a>
+                  </li>
+                  <li class="page-item">
+                      <a data-page="1" href="?page=1&khoihoc={{ request.GET.khoihoc }}&name={{ request.GET.name }}" class="page-link">Đầu tiên</a>
+                  </li>
+              {% endif %}
+  
+              {% for i in thpt.paginator.page_range %}
+                  {% if thpt.number == i %}
+                      <li class="page-item"><a class="active page-link">{{ i }}</a></li>
+                  {% else %}
+                      <li class="page-item">
+                          <a data-page="{{ i }}" href="?page={{ i }}&khoihoc={{ request.GET.khoihoc }}&name={{ request.GET.name }}" class="page-link">{{ i }}</a>
+                      </li>
+                  {% endif %}
+              {% endfor %}
+  
+              {% if thpt.has_next %}
+                  <li class="page-item">
+                      <a data-page="{{ thpt.paginator.num_pages }}" href="?page={{ thpt.paginator.num_pages }}&khoihoc={{ request.GET.khoihoc }}&name={{ request.GET.name }}" class="page-link">Cuối cùng</a>
+                  </li>
+                  <li class="page-item">
+                      <a data-page="{{ thpt.next_page_number }}" href="?page={{ thpt.next_page_number }}&khoihoc={{ request.GET.khoihoc }}&name={{ request.GET.name }}" class="page-link">&raquo</a>
+                  </li>
+              {% endif %}
+          </ul>
+  
+      {% endif %}
+  </div>
+  
+</div>
+
+{% endblock content %}

@@ -1,0 +1,736 @@
+{% load static %}
+{% load siu %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+  integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+  crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>PathFindr</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+  <!-- Favicons -->
+  <link href="https://i.postimg.cc/jSNNWYds/logo-removebg-preview-1.png" rel="icon">
+  <link href="https://i.postimg.cc/jSNNWYds/logo-removebg-preview-1.png" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
+  <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css'>
+  <style>
+    @charset "UTF-8";
+* {
+  box-sizing: border-box;
+}
+   
+.google-signin {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.6rem;
+
+  font-weight: 500;
+  padding: 0.5rem 0;
+  border-radius: 0.5rem;
+}
+
+.login-btn {
+  color: white;
+  background: var(--primary-gradient);
+}
+.login-btn:hover {
+  opacity: 0.9;
+}
+
+.or-divider {
+  width: 100%;
+  font-weight: 600;
+  color: var(--text-light);
+  margin-block: 1.5rem;
+  text-align: center;
+  position: relative;
+}
+.or-divider::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 0;
+  height: 1px;
+  width: 45%;
+  background-color: var(--text-light);
+}
+.or-divider::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 0;
+  height: 1px;
+  width: 45%;
+  background-color: var(--text-light);
+}
+
+.google-signin {
+  border: 2px solid var(--primary-lighter);
+}
+.google-signin svg {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+body {
+    background: linear-gradient(to right, #74ebd5, #acb6e5) !important
+}
+html {
+  color: #4d4d4d;
+  background-color: #ebeff1;
+  font-family: "Signika";
+  font-size: 16px;
+  font-weight: 300;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1 {
+  font-size: 26px;
+  font-weight: 700;
+}
+
+h2 {
+  font-size: 18px;
+  font-weight: 400;
+}
+
+h3 {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+h4 {
+  font-size: 12px;
+  font-weight: 400;
+  color: #89989c;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.comment-form__avatar,.post__avatar {
+    position: absolute;
+    top: 24px;
+    left: 11px;
+    height: 60px;
+    width: 60px;
+    background-color: #89989c;
+    border-radius: 50%;
+}
+
+.comment-form .comment-form__actions .button {
+  position: relative;
+  display: inline-block;
+  width: initial;
+  height: 35px;
+  padding: 0 10px;
+  margin-left: 15px;
+  background-color: white;
+  color: #4ab2d9;
+  line-height: 35px;
+  font-weight: 400;
+  text-align: center;
+  border-radius: 2px;
+  cursor: pointer;
+  border: 1px solid #4ab2d9;
+  -webkit-transition: all 0.1s;
+  -o-transition: all 0.1s;
+  transition: all 0.1s;
+}
+.comment-form .comment-form__actions .button:hover {
+  background-color: #4ab2d9;
+  color: #FFF;
+}
+
+.comment-form, .panel {
+  position: relative;
+  padding: 15px;
+  background-color: #FFF;
+  border-radius: 2px;
+  box-shadow: 0 2px 1px rgba(0, 0, 0, 0.15);
+}
+
+.container {
+  width: 90%;
+  max-width: 900px;
+  margin: 50px auto 100px;
+}
+
+.response-group {
+  position: relative;
+  width: 100%;
+  padding: 100px 15px 15px;
+  background-color: #fff;
+  border-radius: 2px;
+  box-shadow: 0 2px 1px rgba(0, 0, 0, 0.15);
+}
+.response-group > header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  padding: 5px 15px;
+  background-color: rgba(255, 255, 255, 0.75);
+  border-radius: 2px;
+  box-shadow: 0 2px 1px rgba(0, 0, 0, 0.15);
+  z-index: 100;
+}
+.response-group > header i {
+  margin: 0 10px 0 20px;
+}
+.response-group > header .header-dropdown-trigger {
+  border: 1px solid transparent;
+  padding: 10px;
+  border-radius: 2px;
+  cursor: pointer;
+}
+.response-group > header .header-dropdown-trigger:after {
+  content: "";
+  font-family: "FontAwesome";
+  font-size: 0.5em;
+  line-height: 2.5;
+  vertical-align: top;
+  margin-left: 5px;
+}
+.response-group > header .header-dropdown-trigger:hover, .response-group > header .header-dropdown-trigger.active {
+  border: 1px solid #cdd7dc;
+}
+.response-group > .header-dropdown {
+  display: none;
+  position: relative;
+  top: -38px;
+  left: -16px;
+  width: calc(100% + 32px);
+  padding: 15px 1px;
+  background: #ebeff1;
+}
+.response-group > .header-dropdown.expand {
+  display: block;
+}
+.response-group > .header-dropdown ul {
+  margin: -15px;
+}
+.response-group > .header-dropdown li {
+  padding: 1em 15px;
+  cursor: pointer;
+  border-bottom: 1px solid #ebeff1;
+}
+.response-group > .header-dropdown li h2 {
+  display: inline-block;
+  margin: 0;
+}
+.response-group > .header-dropdown li:hover h2 {
+  font-weight: 700;
+}
+.response-group > .header-dropdown li span {
+  float: right;
+  margin-left: 15px;
+  line-height: 1.25;
+}
+.response-group > .header-dropdown .progress {
+  float: right;
+  width: 50%;
+  margin: 0.25em 0;
+}
+
+.progress {
+  position: relative;
+  width: 100%;
+  height: 0.75em;
+  border-radius: 2px;
+  background-color: #ebeff1;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1) inset;
+}
+
+.progress__complete {
+  position: absolute;
+  top: 0;
+  width: 50%;
+  height: 0.75em;
+  background-color: #5fbc71;
+  border-radius: 2px;
+  box-shadow: 0 2px 1px rgba(0, 0, 0, 0.15);
+}
+
+.response {
+  position: relative;
+}
+
+.response__number {
+  position: absolute;
+  width: 2rem;
+  height: 2rem;
+  line-height: 1.8rem;
+  font-size: 1.2em;
+  font-weight: 700;
+  text-align: center;
+  color: #89989c;
+  border: 2px solid #cdd7dc;
+  border-radius: 50%;
+}
+
+.response__title {
+  margin-left: 3.25rem;
+  margin-bottom: 50px;
+}
+
+
+
+.post {
+  position: relative;
+  padding: 15px 15px 0 80px;
+  margin-bottom: 50px;
+  border: 1px solid #ebeff1;
+  border-bottom: none;
+  box-shadow: 1px -2px 11px 1px rgba(0, 0, 0, 0.3);
+  border-radius: 11px
+}
+
+.post__author {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.post__timestamp {
+  margin-top: 0;
+}
+
+.post__actions {
+  height: 40px;
+  width: calc(100% + 95px);
+  margin-left: -80px;
+  background-color: #ebeff1;
+  border-top: 1px solid #ebeff1;
+}
+.post__actions .button {
+  float: left;
+  height: 40px;
+  width: 40px;
+  line-height: 40px;
+  text-align: center;
+  vertical-align: top;
+  border-right: 1px solid #cdd7dc;
+}
+.post__actions .button i.solid {
+  display: none;
+}
+.post__actions .button:not(.comment):active i {
+  transform: scale(1.2);
+}
+.post__actions .button:not(.comment-trigger):hover, .post__actions .button:not(.comment-trigger).active {
+  background-color: #FFF;
+  cursor: pointer;
+}
+.post__actions .button:not(.comment-trigger):hover i.solid, .post__actions .button:not(.comment-trigger).active i.solid {
+  display: inline-block;
+}
+.post__actions .button:not(.comment-trigger):hover i:not(.solid), .post__actions .button:not(.comment-trigger).active i:not(.solid) {
+  display: none;
+}
+.post__actions .button:not(.comment-trigger):hover.button--approve, .post__actions .button:not(.comment-trigger).active.button--approve {
+  color: #5fbc71;
+}
+.post__actions .button:not(.comment-trigger):hover.button--deny, .post__actions .button:not(.comment-trigger).active.button--deny {
+  color: #f26f54;
+}
+.post__actions .button--flag {
+  width: 60px;
+  border-right: none;
+  font-weight: 400;
+}
+.post__actions .button--flag i {
+  margin-right: 5px;
+}
+.post__actions .button--fill {
+  width: calc(100% - 140px);
+  padding: 0 10px;
+  text-align: left;
+  font-size: 16px;
+  font-weight: 400;
+  color: #89989c;
+}
+
+.post__comments {
+  display: none;
+  padding: 15px;
+}
+
+.comment-group {
+  padding-bottom: 15px;
+}
+.comment-group .post {
+    padding: 15px 15px 1px 65px;
+    margin-bottom: 15px;
+    background: white;
+    border-radius: 11px;
+    box-shadow: 0 2px 1px rgba(0, 0, 0, 0.15);
+}
+
+
+.comment-group .post__avatar {
+  height: 35px;
+  width: 35px;
+}
+
+.comment-form {
+  padding: 15px 15px 15px 65px;
+}
+.comment-form textarea {
+  width: 100%;
+  height: 4em;
+  margin-bottom: 10px;
+  font-size: 16px;
+  border: 1px solid #cdd7dc;
+  border-radius: 2px;
+  box-shadow: 0 1px 1px #ebeff1 inset;
+}
+.comment-form textarea:focus {
+  outline: none;
+}
+
+.comment-form__avatar {
+  height: 50px;
+    width: 50px;
+}
+
+.comment-form .comment-form__actions {
+  text-align: right;
+}
+.comment-form .comment-form__actions .button {
+  float: none;
+}
+.comment-form .comment-form__actions .button--confirm {
+  border-color: #5fbc71;
+  color: #5fbc71;
+}
+.comment-form .comment-form__actions .button--confirm:hover {
+  background-color: #5fbc71;
+  color: #FFF;
+}
+.comment-form .comment-form__actions .button--light {
+  border-color: transparent;
+  color: #89989c;
+}
+.comment-form .comment-form__actions .button--light:hover {
+  background-color: #89989c;
+  color: #FFF;
+}
+
+.post--commenting .post__actions {
+  height: initial;
+}
+.post--commenting .button.comment-trigger span {
+  display: none;
+}
+.post--commenting .post__comments {
+  display: block;
+  margin-top: 40px;
+  border-top: 1px solid #cdd7dc;
+}
+  </style>
+  <!-- Vendor CSS Files -->
+  <link href="https://cdn.jsdelivr.net/gh/linuxguist/bizpage@main/assets/vendor/animate.css/animate.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/gh/linuxguist/bizpage@main/assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/gh/linuxguist/bizpage@main/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/gh/linuxguist/bizpage@main/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/gh/linuxguist/bizpage@main/assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/gh/linuxguist/bizpage@main/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="https://cdn.jsdelivr.net/gh/linuxguist/bizpage@main/assets/css/style.css" rel="stylesheet">
+
+  <!-- =======================================================
+  * Template Name: PathFindr
+  * Updated: Mar 10 2023 with Bootstrap v5.2.3
+  * Template URL: https://bootstrapmade.com/PathFindr-bootstrap-business-template/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+
+</head>
+
+<body>
+
+  <!-- ======= Header ======= -->
+  <header id="header" style="background-color: black;" class="fixed-top d-flex align-items-center header-transparent">
+    <div class="container-fluid">
+
+      <div class="row justify-content-center align-items-center">
+        <div class="col-xl-11 d-flex align-items-center justify-content-between">
+          <h1 class="logo" ><a href="/">PathFindr</a></h1>
+          <!-- Uncomment below if you prefer to use an image logo -->
+          <!-- <a href="index.html" class="logo"><img src="https://cdn.jsdelivr.net/gh/linuxguist/bizpage@main/assets/img/logo.png" alt="" class="img-fluid"></a>-->
+
+          <nav id="navbar" class="navbar">
+            <ul>
+              <li><a class="nav-link scrollto " href="/">Trang chủ</a></li>
+              <li><a class="nav-link scrollto" href="/question">Tra cứu TS10</a></li>
+
+              <li><a class="nav-link scrollto" href="/posts">Review Các trường THPT</a></li>
+
+              <li><a class="nav-link scrollto active"  href="/forums">Diễn đàn</a></li>
+              {% if request.user.is_authenticated %}
+              <div class="auth" style="
+                        margin-left: 16px;
+                ">
+                <style>
+                .account-icon {
+                  
+                            display: inline-block;
+                            cursor: pointer;
+                        }
+                        .account-icon img {
+                            width: 50px;
+                            height: 50px;
+                            border-radius: 50%;
+                        }
+                        .dropdown-menu {
+                            display: none;
+                            position: absolute;
+                            top: 60px;
+                            right: 0;
+                            background-color: white;
+                            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+                            z-index: 1;
+                            width: 200px;
+                        }
+                        .dropdown-menu a {
+                            color: black;
+                            padding: 12px 16px;
+                            text-decoration: none;
+                            display: block;
+                        }
+                        .dropdown-menu a:hover {
+                            background-color: #f1f1f1;
+                        }
+                      .auth .show {
+                            display: block;
+                        }
+                .auth button {
+                        border-radius: 4px;
+                        box-shadow: 0 2px 4px 0 rgba(0,0,0,0.2), 0 1.5px 5px 0 rgba(0,0,0,0.19);
+
+                        text-decoration: none;
+                    border: none;
+                    background: #0074d9;
+                    color: white !important;
+                    font-family: 'Varela Round';
+                }
+                .auth button a {
+                    color: white;
+                    text-decoration: none;
+                    display: block;
+                    color: white;
+                    text-decoration: none;
+                    padding: 8px 16px;
+                }
+
+                </style>
+
+
+                <div class="account-icon" onclick="toggleDropdown()">
+                  <img src="{{student.profile_pic.url}}" alt="Account Icon">
+                  <div class="dropdown-menu" id="dropdownMenu">
+                      <a href="/profile">Thông tin cá nhân</a>
+                      <a href="/history" style="    text-wrap: wrap;">Lịch sử tư vấn tuyển sinh 10</a>
+                      <a href="/logout">Đăng xuất</a>
+                  </div>
+                </div>
+                    
+
+                      
+                <script>
+                      function toggleDropdown() {
+                            var dropdownMenu = document.getElementById("dropdownMenu");
+                            dropdownMenu.classList.toggle("show");
+                        }
+
+                        // Close the dropdown if the user clicks outside of it
+                        window.onclick = function(event) {
+                            if (!event.target.matches('.account-icon img')) {
+                                var dropdowns = document.getElementsByClassName("dropdown-menu");
+                                for (var i = 0; i < dropdowns.length; i++) {
+                                    var openDropdown = dropdowns[i];
+                                    if (openDropdown.classList.contains('show')) {
+                                        openDropdown.classList.remove('show');
+                                    }
+                                }
+                            }
+                        }
+                </script>
+                </div>
+                {% else %}
+              <li><a id="login" class="btn-get-started scrollto animate__animated animate__fadeInUp" style="" href="/login">Đăng nhập</a></li>
+                {% endif %}
+            </ul>
+            <i class="bi bi-list mobile-nav-toggle"></i>
+          </nav><!-- .navbar -->
+        </div>
+      </div>
+
+    </div>
+  </header><!-- End Header -->
+<br><br><br>
+
+<div class="container">
+    <div class="response-group">
+      <header>
+        <h2 style="text-align: center;font-size: 30px;margin: 0 !important">
+            <strong>Diễn đàn</strong>
+          {% if request.user.is_authenticated %}
+          <a href="/newforum" style="background-color: #18d26e;
+          padding: 5px 10px;
+          right: 0;
+          top: 0;
+          position: absolute;"><i style="color:white;margin:0" class="fa-solid fa-plus"></i></a>
+          {% endif %}
+        </h2>
+      </header>
+      <div class="response">
+        
+        <div class="post-group">
+            {% for post in posts %}
+          <div class="post">
+            <div class="post__avatar"><img src="{% school_image_url post.author %}" alt="" style="width: 100%;
+              height: 100%;"></div>
+            <h3 class="post__author">
+              {{post.author.hoten}}
+            </h3>
+            <h4 class="post__timestamp">
+              {{post.author.created_on}}
+            </h4>
+            <p class="post__body">
+                {{post.body}}
+            </p>
+            <div class="post__actions">
+                <div class="button button--approve">
+                    <i class="fa fa-thumbs-o-up"></i><i class="fa fa-thumbs-up solid"></i>
+                  </div>
+              <div class="button button--fill comment-trigger">
+                <span>Bình luận ...</span>
+              </div>
+              <div class="button button--flag">
+                <i class="fa fa-comment-o"></i><i class="fa fa-comment solid"></i>{{post.diendancomment_set.all.count}}
+              </div>
+              <div class="post__comments">
+                <div class="comment-group">
+                    {% for comment in post.diendancomment_set.all %}
+                  <div class="post">
+                    <div class="post__avatar comment__avatar"><img src="{% school_image_url comment.author %}" alt="" style="width: 100%;
+                      height: 100%;"></div>
+                    <h3 class="post__author">
+                      {{comment.author.hoten}}
+                    </h3>
+                    <h4 class="post__timestamp">
+                      {{comment.created}}
+                    </h4>
+                    <p class="post__body">
+                      {{comment.body}}
+                    </p>
+                  </div>
+                  {% endfor %}
+                </div>
+                <div class="comment-form">
+                    <p>Tạo tài khoản để bình luận:</p>
+                    <a style='width: 100%' class="btn btn-primary" href="/login">Đăng ký/Đăng nhập</a>
+                    <a  href="/accounts/google/login/?next=/googlesignup/forums" class="google-signin" style="display:flex; color: black; text-decoration: none; border: 1px solid black !important">
+                      <svg xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 48 48" width="96px" height="96px"><path fill="#FFC107" d="M43.611,20.083H42V20H24v8h11.303c-1.649,4.657-6.08,8-11.303,8c-6.627,0-12-5.373-12-12c0-6.627,5.373-12,12-12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C12.955,4,4,12.955,4,24c0,11.045,8.955,20,20,20c11.045,0,20-8.955,20-20C44,22.659,43.862,21.35,43.611,20.083z"/><path fill="#FF3D00" d="M6.306,14.691l6.571,4.819C14.655,15.108,18.961,12,24,12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C16.318,4,9.656,8.337,6.306,14.691z"/><path fill="#4CAF50" d="M24,44c5.166,0,9.86-1.977,13.409-5.192l-6.19-5.238C29.211,35.091,26.715,36,24,36c-5.202,0-9.619-3.317-11.283-7.946l-6.522,5.025C9.505,39.556,16.227,44,24,44z"/><path fill="#1976D2" d="M43.611,20.083H42V20H24v8h11.303c-0.792,2.237-2.231,4.166-4.087,5.571c0.001-0.001,0.002-0.001,0.003-0.002l6.19,5.238C36.971,39.205,44,34,44,24C44,22.659,43.862,21.35,43.611,20.083z"/></svg>
+                      <span> Đăng nhập với Google</span>
+                    </a>
+                </div>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======= Footer ======= -->
+  <footer id="footer">
+    <div class="footer-top">
+      <div class="container" style="margin: 0 auto;">
+        <div class="row">
+          <div class="col-lg-12 col-md-6 footer-info">
+            <h3>PathFindr</h3>
+            <p style="font-size: 18px;">PathFindr là dịch vụ giúp tư vấn hướng nghiệp, hay hướng nghiệp khi đăng ký hồ sơ vào các trường cấp ba nhằm hỗ trợ một cá nhân nào đó trong việc lựa chọn ngành nghề phù hợp nhất với khả năng, sở thích của bản thân. Không chỉ là ngành nghề phù hợp, cá nhân đó cũng được tư vấn, hỗ trợ để chọn ngành nghề đáp ứng được nhu cầu nhân lực của xã hội lúc bấy giờ.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container
+
+" style="margin: 0 auto;">
+      <div class="copyright">
+        &copy; Copyright <strong><a href="https://3dviet.vercel.app">VietVu</a></strong>. All Rights Reserved
+      </div>
+    </div>
+  </footer><!-- End Footer -->
+
+
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+    class="bi bi-arrow-up-short"></i></a>
+    <a href="/chat" style="display: block; position: relative;">   <img style="    background: #fafafa;
+      box-shadow: 4px 6px 36px -6px rgba(1, 1, 1, 0.5);
+      margin: auto;
+      z-index: 199;
+      padding: 0px;
+      right: 7px;
+      border-radius: 50%;
+      bottom: 64px;
+      position: fixed;
+      margin: auto;"
+      width="60" height="60" src="https://i.ibb.co/SnbvPY7/Thi-t-k-ch-a-c-t-n-1.png" alt="LEVIOOSA"></a>
+  <!-- Vendor JS Files -->
+  <script src="https://cdn.jsdelivr.net/gh/linuxguist/bizpage@main/assets/vendor/purecounter/purecounter_vanilla.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/linuxguist/bizpage@main/assets/vendor/aos/aos.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/linuxguist/bizpage@main/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/linuxguist/bizpage@main/assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/linuxguist/bizpage@main/assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/linuxguist/bizpage@main/assets/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/linuxguist/bizpage@main/assets/vendor/waypoints/noframework.waypoints.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/linuxguist/bizpage@main/assets/vendor/php-email-form/validate.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="https://cdn.jsdelivr.net/gh/linuxguist/bizpage@main/assets/js/main.js"></script>
+
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+
+
+<script type="text/javascript">
+$( ".button--approve" ).click(function() {
+  $( this ).toggleClass( "active" );
+  $( this ).siblings( '.button--deny' ).removeClass( "active" );
+});
+
+
+
+$( ".comment-trigger" ).click(function() {
+  $( this ).parent().parent().toggleClass( "post--commenting" );
+});
+
+$( ".button--flag" ).click(function() {
+  $( this ).parent().parent().toggleClass( "post--commenting" );
+});
+
+
+</script>
+
+</body>
+</html>
+

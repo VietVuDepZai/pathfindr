@@ -1,0 +1,589 @@
+<!-- IMPORTANT:
+
+This Template Download URL and its Usage License URL is given further down below. Please visit these URLs for Free / Full Download of this Template For Local Hosting Purposes.
+
+This Codepen Project is meant for Learning Purposes only and must not be used for any deployments.
+
+-->
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@500;600&display=swap');
+section#testimonials {
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  background-color: #ecf2f8;
+  font-size: 0.85rem;
+  font-family: "Barlow Semi Condensed", sans-serif;
+  font-weight: 500;
+  padding: 1.7rem 1.7rem 0;
+}
+.testimonial {
+  height: 100%;
+}
+.testimonial:nth-child(1) {
+  background-color: #7541c8;
+}
+.testimonial:nth-child(2) {
+  background-color: #48556a;
+}
+.testimonial:nth-child(3) {
+  background-color: white;
+}
+.testimonial:nth-child(4) {
+  background-color: #eafffa;
+}
+.testimonial:nth-child(5) {
+  background-color: #a3fffa;
+}
+#testimonials {
+  display: inline-grid;
+  gap: 1.45rem;
+  grid-template-columns: 1fr;
+  grid-template-areas:
+        "daniel daniel daniel kira"
+        "patrick patrick patrick kira";}
+        @media (min-width: 5.65rem) {
+  #testimonials {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-areas: "daniel daniel" "jonathan  jonathan" "jeanette jeanette""patrick patrick" "kira kira";
+  }
+}
+@media (min-width: 35.65rem) {
+  #testimonials {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-areas: "daniel daniel" "jonathan  jonathan" "jeanette jeanette""patrick patrick" "kira kira";
+  }
+  #login {
+    text-align: center;
+    background: #18d26e;
+    color: white;
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+    margin-left: 0px;
+    border-radius: 38px;
+  }
+}
+@media (min-width: 53.35rem) {
+  #testimonials {
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-areas: "daniel daniel daniel" "jonathan jonathan jonathan" "jeanette jeanette jeanette" "patrick patrick patrick" "kira kira kira";
+  }
+  #login {
+    background: #18d26e;
+                color: white;
+                padding: 10px;
+                margin-left: 25px;
+                border-radius: 38px;
+                display:  block;
+  }
+}
+@media (min-width: 75rem) {
+  #testimonials {
+    grid-template-columns: repeat(4, 16.25rem);
+    grid-template-areas: "jonathan jonathan  kira kira"" daniel daniel daniel jeanette""patrick patrick patrick patrick  "
+  }
+  #login {
+    background: #18d26e;
+                color: white;
+                padding: 10px;
+                margin-left: 25px;
+                border-radius: 38px;
+                display:  block;
+  }
+}
+.testimonial {
+  padding: 1.6rem;
+  border-radius: 0.5rem;
+  box-shadow: 0.625rem 0.625rem 0.625rem rgba(207, 207, 207, 0.5);
+}
+.testimonial figcaption {
+  grid-template-columns: auto 1fr;
+  gap: 0.2rem 1.2rem;
+}
+.testimonial figcaption img {
+  grid-area: 0.1666666667;
+  align-self: center;
+  width: 2.1875rem;
+  height: auto;
+  border-radius: 50%;
+}
+.testimonial figcaption .name {
+  align-self: end;
+  font-weight: 600;
+}
+.testimonial .quote-part-1 {
+  font-size: 1.4rem;
+  line-height: 1.3em;
+  margin: 1.5rem 0;
+}
+.testimonial .quote-part-2 {
+  line-height: 1.5em;
+}
+.testimonial.daniel {
+  background-image: url("data:image/svg+xml,%3Csvg width='104' height='102' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M104 102V59.727H84.114c0-5.871.689-11.182 2.068-15.933 1.379-4.75 3.42-9.287 6.125-13.61C95.01 25.86 98.909 22.257 104 19.375V0c-9.758 4.27-17.712 9.874-23.864 16.813-6.151 6.939-10.712 14.545-13.681 22.818C63.485 47.904 62 59.941 62 75.74V102h42zm-62 0V59.727H22.114c0-5.871.689-11.182 2.068-15.933 1.379-4.75 3.42-9.287 6.125-13.61C33.01 25.86 36.909 22.257 42 19.375V0c-9.652 4.27-17.58 9.874-23.784 16.813C12.01 23.752 7.424 31.358 4.455 39.631 1.485 47.904 0 59.941 0 75.74V102h42z' fill='%23A775F1' fill-rule='nonzero'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: 95% 0%;
+  grid-area: daniel;
+}
+.testimonial.jonathan {
+  grid-area: jonathan;
+}
+.testimonial.jeanette {
+  grid-area: jeanette;
+}
+.testimonial.patrick {
+  grid-area: patrick;
+}
+.testimonial.kira {
+  grid-area: kira;
+}
+.testimonial.daniel .name, .testimonial.jonathan .name {
+  color: #cfcfcf;
+}
+.testimonial.patrick .name{
+  color : black
+}
+.testimonial.daniel .title, .testimonial.jonathan .title {
+  color: rgba(270, 270,270, 0.5);
+}
+.testimonial.daniel .quote-part-1, .testimonial.jonathan .quote-part-1, .testimonial.patrick .quote-part-1 {
+  color: white;
+}
+.testimonial.daniel .quote-part-2, .testimonial.jonathan .quote-part-2 {
+  color: rgba(270, 270,270, 0.7);
+}
+.testimonial.patrick .title {
+  color: rgba(0,0,0, 0.8);
+}
+.testimonial.patrick .quote-part-2 {
+  color: rgba(0,0,0, 0.96);
+}
+.testimonial.jeanette .name, .testimonial.kira .name {
+  color: #19212e;
+}
+.testimonial.jeanette .title, .testimonial.kira .title {
+  color: rgba(25, 33, 46, 0.5);
+}
+.testimonial.jeanette .quote-part-2, .testimonial.kira .quote-part-2 {
+  color: rgba(25, 33, 46, 0.7);
+}
+.attribution {
+  background-color: rgba(72, 85, 106, 0.1);
+  text-align: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 1.7rem 0;
+  padding: 0.3rem 0.5rem;
+  border-radius: 0.3rem;
+}
+.attribution p:first-of-type::after {
+  content: " ";
+  white-space: pre-wrap;
+}
+.attribution a {
+  color: rgba(117, 65, 200, 0.8);
+  font-weight: 700;
+}
+.attribution a:hover {
+  color: rgba(117, 65, 200, 0.6);
+}
+.attribution a:active {
+  color: rgba(117, 65, 200, 0.8);
+}
+
+</style>
+  <title>PathFindr</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+  <!-- Favicons -->
+  <link href="https://i.postimg.cc/jSNNWYds/logo-removebg-preview-1.png" rel="icon">
+  <link href="https://i.postimg.cc/jSNNWYds/logo-removebg-preview-1.png" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700"
+    rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="https://cdn.jsdelivr.net/gh/linuxguist/bizpage@main/assets/vendor/animate.css/animate.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/gh/linuxguist/bizpage@main/assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/gh/linuxguist/bizpage@main/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/gh/linuxguist/bizpage@main/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/gh/linuxguist/bizpage@main/assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/gh/linuxguist/bizpage@main/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="https://cdn.jsdelivr.net/gh/linuxguist/bizpage@main/assets/css/style.css" rel="stylesheet">
+
+  <!-- =======================================================
+  * Template Name: PathFindr
+  * Updated: Mar 10 2023 with Bootstrap v5.2.3
+  * Template URL: https://bootstrapmade.com/PathFindr-bootstrap-business-template/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+  <link href="https://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet">
+</head>
+
+<body>
+
+  <!-- ======= Header ======= -->
+  <header id="header" class="fixed-top d-flex align-items-center header-transparent">
+    <div class="container-fluid">
+
+      <div class="row justify-content-center align-items-center">
+        <div class="col-xl-11 d-flex align-items-center justify-content-between">
+          <h1 class="logo"><a href="/">PathFindr</a></h1>
+          <!-- Uncomment below if you prefer to use an image logo -->
+          <!-- <a href="index.html" class="logo"><img src="https://cdn.jsdelivr.net/gh/linuxguist/bizpage@main/assets/img/logo.png" alt="" class="img-fluid"></a>-->
+
+          <nav id="navbar" class="navbar">
+            <ul>
+              <li><a class="nav-link scrollto active" href="/">Trang chủ</a></li>
+              <li><a class="nav-link scrollto" href="/question">Tra cứu TS10</a></li>
+
+              <li><a class="nav-link scrollto" href="/posts">Review Các trường THPT</a></li>
+
+              <li><a class="nav-link scrollto" href="/forums">Diễn đàn</a></li>
+              {% if request.user.is_authenticated %}
+              <div class="auth" style="
+                        margin-left: 16px;
+                ">
+                <style>
+                .account-icon {
+                  
+                            display: inline-block;
+                            cursor: pointer;
+                        }
+                        .account-icon img {
+                            width: 50px;
+                            height: 50px;
+                            border-radius: 50%;
+                        }
+                        .dropdown-menu {
+                            display: none;
+                            position: absolute;
+                            top: 60px;
+                            right: 0;
+                            background-color: white;
+                            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+                            z-index: 1;
+                            width: 200px;
+                        }
+                        .dropdown-menu a {
+                            color: black;
+                            padding: 12px 16px;
+                            text-decoration: none;
+                            display: block;
+                        }
+                        .dropdown-menu a:hover {
+                            background-color: #f1f1f1;
+                        }
+                      .auth .show {
+                            display: block;
+                        }
+                .auth button {
+                        border-radius: 4px;
+                        box-shadow: 0 2px 4px 0 rgba(0,0,0,0.2), 0 1.5px 5px 0 rgba(0,0,0,0.19);
+
+                        text-decoration: none;
+                    border: none;
+                    background: #0074d9;
+                    color: white !important;
+                    font-family: 'Varela Round';
+                }
+                .auth button a {
+                    color: white;
+                    text-decoration: none;
+                    display: block;
+                    color: white;
+                    text-decoration: none;
+                    padding: 8px 16px;
+                }
+
+                </style>
+
+
+                <div class="account-icon" onclick="toggleDropdown()">
+                  <img src="{{student.profile_pic.url}}" alt="Account Icon">
+                  <div class="dropdown-menu" id="dropdownMenu">
+                      <a href="/profile">Thông tin cá nhân</a>
+                      <a href="/history" style="    text-wrap: wrap;">Lịch sử tư vấn tuyển sinh 10</a>
+                      <a href="/logout">Đăng xuất</a>
+                  </div>
+                </div>
+                    
+
+                      
+                <script>
+                      function toggleDropdown() {
+                            var dropdownMenu = document.getElementById("dropdownMenu");
+                            dropdownMenu.classList.toggle("show");
+                        }
+
+                        // Close the dropdown if the user clicks outside of it
+                        window.onclick = function(event) {
+                            if (!event.target.matches('.account-icon img')) {
+                                var dropdowns = document.getElementsByClassName("dropdown-menu");
+                                for (var i = 0; i < dropdowns.length; i++) {
+                                    var openDropdown = dropdowns[i];
+                                    if (openDropdown.classList.contains('show')) {
+                                        openDropdown.classList.remove('show');
+                                    }
+                                }
+                            }
+                        }
+                </script>
+                </div>
+                {% else %}
+              <li><a id="login" class="btn-get-started scrollto animate__animated animate__fadeInUp" style="" href="/login">Đăng nhập</a></li>
+                {% endif %}
+            </ul>
+            <i class="bi bi-list mobile-nav-toggle"></i>
+          </nav><!-- .navbar -->
+        </div>
+      </div>
+
+    </div>
+  </header><!-- End Header -->
+
+  <!-- ======= hero Section ======= -->
+  <section id="hero">
+    <div class="hero-container">
+      <div id="heroCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="5000">
+
+        <ol style="display: none !important;"id="hero-carousel-indicators" class="carousel-indicators"></ol>
+
+        <div class="carousel-inner" role="listbox">
+
+          <div class="carousel-item active" style="background-image: url(https://saomaiedu.com/wp-content/uploads/2021/05/Truong-thpt-chuyen-le-hong-phong.jpg)">
+            <div class="carousel-container">
+              <div class="container">
+                <h2 class="animate__animated animate__fadeInDown">PathFindr là gì?</h2>
+                <p class="animate__animated animate__fadeInUp" style="width: 80%;font-weight: 500; font-size: 108%;"> 
+                  PathFindr là dịch vụ giúp tư vấn hướng nghiệp, hay hướng
+                  nghiệp khi đăng ký hồ sơ vào các trường cấp ba
+                  nhằm hỗ trợ một cá nhân nào đó trong việc lựa chọn ngành nghề phù hợp nhất với khả năng, sở thích của
+                  bản thân. Không chỉ là ngành nghề phù hợp, cá nhân đó cũng được tư vấn, hỗ trợ để chọn ngành nghề đáp
+                  ứng được nhu cầu nhân lực của xã hội lúc bấy giờ.</p>
+                <a href="/question"class="btn-get-started scrollto animate__animated animate__fadeInUp">Tìm trường cấp 3 phù hợp với bạn ngay hôm nay</a>
+              </div>
+            </div>
+          </div>
+
+      </div>
+    </div>
+  </section>
+  <h3 style="background-color: #ecf2f8;
+  font-size: 2rem;
+  font-family: 'Varela Round';
+  font-weight: 500;
+  padding: 1.7rem 4.7rem 0;
+  margin-bottom: 0;
+  text-align: center;">Diễn đàn kinh nghiệm</h3>
+
+  <section id="testimonials">
+    <figure class="testimonial daniel">
+      <figcaption>
+       <h3  class="name">Trần Thị Ngọc Châu </h3>
+       <br>
+        <p class="title">          Hiện đang học Tích Hợp ở Chuyên Trần Đại Nghĩa:
+        </p>
+      </figcaption>
+      <blockquote>
+        <h3 class="quote-part-1">
+          Theo chị thì mình nên tập trung học 3 môn toán, văn, anh sao cho đều và tốt nhất, tuyệt đối không được học lệch nhé!
+          </h3>
+        <p class="quote-part-2"> Ta nên dành thời gian ôn tập, luyện đề thay vì đi chơi và không chủ quan vì tuyển sinh rất khắc nghiệt. “Thứ hai, trong suốt quá trình ôn chắc chắn sẽ có những điểm số không tốt (vd: làm thử đề thi, thi đánh giá năng lực,...) thì không nên nản nhé! Hãy trấn an bản thân với tiếp tục cố gắng, đừng vì vậy mà từ bỏ. Thứ ba, quan trọng là đặt nguyện vọng, tốt nhất nên tham khảo điểm số những năm trước , sự góp ý giáo viên chủ nhiệm, ba mẹ chứ không chạy theo số đông hay sở thích quá nhiều.
+          Thứ 4, tâm lý phòng thi cũng quan trọng không kém, giữ bình tĩnh và không nên dò điểm sau khi thi nha, sẽ bị tâm lý đó!”</p>
+      </blockquote>
+    </figure>
+    <figure class="testimonial jonathan">
+      <figcaption>
+        <h3  class="name">Nguyễn Phúc An Khang </h3>
+        <br>
+         <p class="title">          Hiện đang học Tích Hợp ở Chuyên Lê Hồng Phong:
+         </p>
+       </figcaption>
+       <blockquote>
+        <p class="quote-part-2">Lúc học tuyển sinh thì anh thường chú trọng vào môn mình yếu trong 3 môn chính được tổ chức thi là Toán, Văn và Anh. Đối với riêng anh đó là môn Văn, anh tập trung học các văn bản trong sách giáo khoa và viết nghị luận văn học thật nhiều để tạo nên cảm giác làm bài cho bản thân. Đồng thời, anh tham khảo thường xuyên ý kiến của các thầy cô để nâng cao chất lượng học tập và làm bài. Đối với Toán và Anh, anh đều bắt đầu ôn luyện từ hè, để tạo nhiều thời gian giải đề nhất có thể, anh chú trọng việc giải đề ở 2 môn này vì chỉ có giải nhiều đề mới nâng cao phản xạ và tư duy làm bài; nhất là ở Toán, khi làm bài nên chú ý tới các dạng, và ở Anh thì nên lưu ý xem phần nào mình cần luyện tập nhiều hơn... Quan trọng hơn cả, khi luyện thi em cần phải chắt lọc thông tin kĩ càng, tránh lan man và không được quá tin tưởng 100% vào thông tin được đăng trên mạng vì chưa có tính xác thực! Chúc các em thi tốt, luôn giữ vững phong độ và quyết tâm hết mình!</p>
+      </blockquote>
+    </figure>
+    <figure class="testimonial jeanette">
+      <figcaption>
+        <h3  class="name">Nguyễn Thái Hoàng Ngân
+        </h3>
+        <br>
+         <p class="title">        Hiện đang học tại THPT Bùi Thị Xuân:
+         </p>
+       </figcaption>
+       <blockquote>
+        <p class="quote-part-2">Ngủ đủ giấc và ăn uống đầy đủ: Sức khỏe tốt sẽ giúp bạn có đủ năng lượng để học tập và ôn thi hiệu quả. Chị thấy có nhiều bạn hay kiểu có động lực gì mà thức 2-3h sáng để học thì sai nha. Làm vậy đồn ép nhiều ngày là mệt lắm. Năng suất giảm nữa rồi nhiều khi dễ rơi trầm cảm, nhất mấy bạn tâm lý yếu mà hay gặp thầy cô</p>
+      </blockquote>
+    </figure>
+    <figure class="testimonial patrick">
+      <figcaption>
+        <h3  class="name">Phạm Quỳnh Anh </h3>
+        <br>
+         <p class="title">          Hiện đang học chuyên Lý ở PTNK:
+         </p>
+       </figcaption>
+      <blockquote>
+        <p class="quote-part-2">“Thật ra thi tuyển sinh 10 sẽ khá mệt và tốn sức của các em nhưng cũng không đến mức kinh khủng như các em tưởng tượng. Với đề thi tuyển sinh 10 thường, các đề sẽ căn bản là những gì thầy cô dạy em trên trường. Còn đối với đề thi tuyển sinh 10 chuyên, nội dung sẽ là những kiến thức chuyên sâu mà các em cần tập trung 200% vì nội dung các đề chuyên rất khó kèm theo tỉ lệ chọi rất cao. Nhưng điểm chung là dù thi thường hay chuyên, tinh thần tự học là thứ rất quan trọng, việc nghe thầy cô giảng là để em tiếp thu kiến thức nhưng nếu không vận dụng vào trong giải bài tập thì sẽ dễ nhanh quên, điều này đặc biệt nguy hiểm nếu xảy ra trong trường hợp ôn chuyên vì rất dễ khiến các bạn bị mất gốc phần chuyên ấy. Khi các bạn bắt tay vào ôn thi tuyển sinh 10, nên chọn cho mình hướng đi cụ thể (thi chuyên, thi thường hoặc thi tích hợp) việc lựa chọn mục tiêu rõ ràng ngay từ ban đầu sẽ giúp em có những sự sắp xếp và tìm hiểu kĩ hơn về hướng mình đi theo, tránh mất sức vô ích cũng như học tập trung vào những phần không cần thiết. Ngoài ra, một đặc điểm chung mà học sinh thường hay gặp trong quá trình ôn thi là cảm giác chán nản, mệt mỏi. Tuyển sinh 10 là một cuộc thi khốc liệt, các em phải vượt qua thử thách mà nó mang đến thì mới có thể đạt được mục tiêu mà em mong muốn. Tổng kết lại, để đạt được mục tiêu em mong muốn, em phải đánh đổi thời gian, công sức và kiên trì với quyết tâm cao độ.
+          ”</p>
+      </blockquote>
+    </figure>
+    <figure class="testimonial kira">
+      <figcaption>
+        <h3 class="name">Nguyễn La Minh Đức</h3>
+        <p class="title">Hiện đang học Tích Hợp ở Chuyên Trần Đại Nghĩa:
+
+        </p>
+      </figcaption>
+      <blockquote>
+        <p class="quote-part-2">Chắc quan trọng nhất anh sẽ nói về vấn đề nguyện vọng. Nhưng với anh, anh nghĩ các em sẽ có 2 cách lựa chọn cho bản thân mình. Đầu tiên dựa vào lực học của bản thân em, do gvcn hay cô giáo ba mẹ khuyên thì đo cũng chỉ là một phần thôi. Em có thể chọn đặt theo những nguyện vọng đó nhưng nếu thi ra điểm em lại rất cao và có thể đậu vào các trường top tốt hơn thì lại không được do em đã đậu trường khác rồi thì rất tiếc. Còn cách thứ 2 anh nghĩ là em cứ đặt theo sở thích vì dù gì lần này cũng chỉ có một trong đời thôi ấy, bạn anh có rất nhiều đứa đủ điểm đậu Lê Quý Đôn hay Gia Định nhưng cuối cùng vì đặt nguyện vọng thấp nên bỏ lỡ và tiếc vô cùng nên nói thật nếu em cảm thấy em thích một ngôi trường nào đó quá thì em vẫn có thể đặt.</p>
+      </blockquote>
+    </figure>
+  </section>
+  <section id="contact" class="section-bg">
+    <div class="container" data-aos="fade-up">
+
+      <div class="section-header">
+        <h3 style="text-transform: none !important;">Liên hệ </h3>
+        <p>Nếu bạn có bất cứ vấn đề gì với Pathfindr, hoặc đang cần được hỗ trợ, góp ý thì có thể liên hệ tại đây:</p>
+      </div>
+
+   
+
+      <div class="form">
+        <form action="/fd" method="post" role="form" class="php-email-form">
+          <div class="row">
+            <div class="form-group col-md-6">
+              <input type="text" name="name" class="form-control" id="name" placeholder="Họ tên" required>
+            </div>
+            <div class="form-group col-md-6">
+              <input type="email" class="form-control" name="email" id="email" placeholder="Email" required>
+            </div>
+          </div>
+          <div class="form-group">
+            <input type="text" class="form-control" name="subject" id="subject" placeholder="Tiêu đề" required>
+          </div>
+          <div class="form-group">
+            <textarea class="form-control" name="message" rows="5" placeholder="Nội dung" required></textarea>
+          </div>
+          <div class="my-3">
+            <div class="loading">Loading</div>
+            <div class="error-message"></div>
+            <div class="sent-message">Mail của bạn đã được gửi đi</div>
+          </div>
+          <div class="text-center"><button type="submit">Gửi</button></div>
+        </form>
+      </div>
+
+    </div>
+  </section>
+  <!-- ======= Footer ======= -->
+  <footer id="footer">
+    <div class="footer-top">
+      <div class="container">
+        <div class="row">
+
+          <div class="col-lg-12 footer-info">
+            <h3>PathFindr</h3>
+            <p style="font-size: 18px;">PathFindr là dịch vụ giúp tư vấn hướng nghiệp, hay hướng nghiệp khi đăng ký hồ sơ vào các trường cấp ba nhằm hỗ trợ một cá nhân nào đó trong việc lựa chọn ngành nghề phù hợp nhất với khả năng, sở thích của bản thân. Không chỉ là ngành nghề phù hợp, cá nhân đó cũng được tư vấn, hỗ trợ để chọn ngành nghề đáp ứng được nhu cầu nhân lực của xã hội lúc bấy giờ.
+
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="copyright">
+        &copy; Copyright <strong><a href="https://pathfindr.help/admin/login/?next=/adminmain/">VietVu</a></strong>. All Rights Reserved
+      </div>
+ 
+    </div>
+  </footer><!-- End Footer -->
+
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+      class="bi bi-arrow-up-short"></i></a>
+      <a href="/chat" style="display: block; position: relative;">   <img style="    background: #fafafa;
+        box-shadow: 4px 6px 36px -6px rgba(1, 1, 1, 0.5);
+        margin: auto;
+        z-index: 199;
+        padding: 0px;
+        right: 7px;
+        border-radius: 50%;
+        bottom: 64px;
+        position: fixed;
+        margin: auto;"
+        width="60" height="60" src="https://i.ibb.co/SnbvPY7/Thi-t-k-ch-a-c-t-n-1.png" alt="LEVIOOSA"></a>
+  <!-- Uncomment below i you want to use a preloader -->
+  <!-- <div id="preloader"></div> -->
+
+  <!-- Vendor JS Files -->
+  <script src="https://cdn.jsdelivr.net/gh/linuxguist/bizpage@main/assets/vendor/purecounter/purecounter_vanilla.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/linuxguist/bizpage@main/assets/vendor/aos/aos.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/linuxguist/bizpage@main/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/linuxguist/bizpage@main/assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/linuxguist/bizpage@main/assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/linuxguist/bizpage@main/assets/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/linuxguist/bizpage@main/assets/vendor/waypoints/noframework.waypoints.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/linuxguist/bizpage@main/assets/vendor/php-email-form/validate.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="https://cdn.jsdelivr.net/gh/linuxguist/bizpage@main/assets/js/main.js"></script>
+
+  <script type="text/javascript">
+    document.addEventListener('DOMContentLoaded', function () {
+      // Get the current URL, removing any fragment
+      var documentUrl = document.location.href.replace(/#.*$/, '')
+
+      // Iterate through all links
+      var linkEls = document.getElementsByTagName('A')
+      for (var linkIndex = 0; linkIndex < linkEls.length; linkIndex++) {
+        var linkEl = linkEls[linkIndex]
+
+        // Ignore links that don't begin with #
+        if (!linkEl.getAttribute('href').match(/^#/)) {
+          continue;
+        }
+
+        // Convert to an absolute URL
+        linkEl.setAttribute('href', documentUrl + linkEl.getAttribute('href'))
+      }
+    })    
+    
+  </script>
+
+<script>
+  // Function to clear all cookies
+  function clearAllCookies() {
+      var cookies = document.cookie.split(";");
+
+      for (var i = 0; i < cookies.length; i++) {
+          var cookie = cookies[i];
+          var eqPos = cookie.indexOf("=");
+          var name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+          document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
+      }
+  }
+
+  // Call the function when the page loads
+  window.onload = function() {
+      clearAllCookies();
+  };
+</script>
+</body>
+
+</html>

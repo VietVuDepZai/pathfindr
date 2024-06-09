@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+        }
+
+        canvas {
+            display: block;
+        }
+    </style>
+    <title>MyPhysicsLab</title>
+</head>
+<body>
+    <canvas id="physicsCanvas"></canvas>
+
+    <script>
+        const canvas = document.getElementById('physicsCanvas');
+        const ctx = canvas.getContext('2d');
+
+        // Set canvas size
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        // Particle object
+        class Particle {
+            constructor(x, y, radius, color, mass) {
+                this.x = x;
+                this.y = y;
+                this.radius = radius;
+                this.color = color;
+                this.mass = mass;
+                this.velocity = {
+                    x: (Math.random() - 0.5) * 5,
+                    y: (Math.random() - 0.5) * 5
+                };
+            }
+
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
+                ctx.fillStyle = this.color;
+                ctx.fill();
+                ctx.closePath();
+            }
+
+            applyForce(force) {
+                // Using F = ma (Newton's second law) to calculate acceleration
+                const acceleration = {
+                    x: force.x / this.mass,
+                    y: force.y / this.mass
+                };
+
+                // Updating velocity based on acceleration
+                this.velocity.x += acceleration.x;
+                this.velocity.y += acceleration.y;
+            }
+
+            update() {
+                this.draw();
+
+                // Bounce off walls
+                if (this.x - this.radius <= 0 || this.x + this.radius >= canvas.width) {
+                    this.velocity.x = -this.velocity.x;
+                }
+
+                if (this.y - this.radius <= 0 || this.y + this.radius >= canvas.height) {
+                    this.velocity.y = -this.velocity.y;
+                }
+
+                // Update position
+                this.x += this.velocity.x;
+                this.y += this.velocity.y;
+            }
+        }
+
+        // Create particles
+        const particles = [];
+        for (let i = 0; i < 50; i++) {
+            const radius = Math.random() * 20 + 10;
+            const x = Math.random() * (canvas.width - radius * 2) + radius;
+            const y = Math.random() * (canvas.height - radius * 2) + radius;
+            const color = 'rgba(' +
+                Math.random() * 255 + ',' +
+                Math.random() * 255 + ',' +
+                Math.random() * 255 + ',' +
+                '0.8)';
+            const mass = radius / 5; // Mass proportional to the radius
+
+            particles.push(new Particle(x, y, radius, color, mass));
+        }
+
+        // Mouse interaction
+        canvas.addEventListener('mousemove', (event) => {
+            mouse.x = event.x;
+            mouse.y = event.y;
+        });
+
+        canvas.addEventListener('click', () => {
+            applyUserForce();
+        });
+
+        // Apply force to particles based on user interaction
+        function applyUserForce() {
+            const forceStrength = 10;
+
+            for (const particle of particles) {
+                const force = {
+                    x: (mouse.x - particle.x) * forceStrength,
+                    y: (mouse.y - particle.y) * forceStrength
+                };
+
+                particle.applyForce(force);
+            }
+        }
+
+        // Animation loop
+        function animate() {
+            requestAnimationFrame(animate);
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            for (const particle of particles) {
+                // Apply a small gravitational force to simulate attraction to the center
+                const gravitationalForce = {
+                    x: 0,
+                    y: 0.1 * particle.mass
+                };
+
+                particle.applyForce(gravitationalForce);
+                particle.update();
+            }
+        }
+
+        animate();
+    </script>
+</body>
+</html>

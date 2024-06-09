@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>PathFindr</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+  <!-- Favicons -->
+  <link href="https://i.postimg.cc/jSNNWYds/logo-removebg-preview-1.png" rel="icon">
+  <link href="https://i.postimg.cc/jSNNWYds/logo-removebg-preview-1.png" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="https://cdn.jsdelivr.net/gh/linuxguist/bizpage@main/assets/vendor/animate.css/animate.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/gh/linuxguist/bizpage@main/assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/gh/linuxguist/bizpage@main/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/gh/linuxguist/bizpage@main/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/gh/linuxguist/bizpage@main/assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/gh/linuxguist/bizpage@main/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="https://cdn.jsdelivr.net/gh/linuxguist/bizpage@main/assets/css/style.css" rel="stylesheet">
+
+  <!-- Custom CSS -->
+  <style>
+   section.container {
+    border-radius: 10px;
+    max-width: 800px;
+    margin:  auto;
+    margin-bottom: 20px;
+  
+    font-family: 'Varela Round', sans-serif;
+  }
+  
+  .section-heading {
+    font-size: 2.5rem;
+    color: #0074d9;
+    text-align: center;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+  }
+  
+  .section-paragraph {
+    font-size: 1.2rem;
+    color: #333;
+    text-align: center;
+    margin-bottom: 40px;
+    line-height: 1.6;
+  }
+  
+  .custom-form {
+    max-width: 800px;
+    margin: 10px auto;
+}
+  
+
+
+.custom-form {
+    background-color: #f9f9f9;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 40px !important; }
+  
+  .custom-form h2 {
+    font-size: 2rem;
+    color: #0074d9;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .custom-form p {
+    font-size: 1rem;
+    color: #333;
+    text-align: center;
+    margin-bottom: 40px;
+    line-height: 1.6;
+  }
+  
+  .form p {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+  }
+  
+  .form label {
+    font-size: 1rem;
+    color: #333;
+    margin-bottom: 5px;
+  }
+  
+  .form input[type="text"],
+  .form input[type="password"],
+  .form input[type="email"], textarea,
+  input, select {
+    font-size: 1rem;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    transition: border-color 0.3s;
+  }
+  
+  .form input[type="text"]:focus,
+  .form input[type="password"]:focus,
+  .form input[type="email"]:focus, textarea:focus,
+  input:focus, select:focus  {
+    border-color: #0074d9;
+  }
+  
+  .remember-forgot {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.9rem;
+    color: #0074d9;
+    margin-bottom: 20px;
+  }
+  
+  .remember-forgot a {
+    color: #0074d9;
+    text-decoration: none;
+  }
+  
+  .remember-forgot a:hover {
+    text-decoration: underline;
+  }
+  
+  .login-btn {
+    background-color: #2ecc40;
+    border: none;
+    width: 100%;
+  
+    border-radius: 5px;
+    color: white;
+    font-size: 1.2rem;
+    padding: 10px 20px;
+    cursor: pointer;
+    display: block;
+    margin: 0 auto 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s;
+  }
+  
+  .login-btn:hover {
+    background-color: #28a745;
+  }
+  
+  .or-divider {
+    text-align: center;
+    margin: 20px 0;
+    color: #999;
+    font-size: 0.9rem;
+  }
+   /* Checkbox styling */
+   #show_password {
+      margin-right: 10px;
+    }
+  
+    #show_password + label {
+      display: inline-block;
+      cursor: pointer;
+    }
+  .google-signin {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    border: 3px solid #ddd;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+  }
+  
+  .google-signin svg {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+  }
+  .custom-form label {
+    display: flex;
+  }
+  .google-signin:hover {
+    background-color: #f1f1f1;
+  }
+              #imagePreview {
+                position: absolute;
+    right: 12%;
+    object-fit: cover;
+    display: none;
+    border-radius: 50%;
+    border: 1px solid;
+    width: 100px;
+    height: 100px;
+    margin-top: -78px
+              }
+              @media screen  and (max-width: 661px) {
+                #imagePreview {
+                  right: 4%;
+                }
+              }
+              @media screen  and (max-width: 420px) {
+                #imagePreview {
+                  width: 50px;
+                  height: 50px;
+                  margin-top: -64px;
+                }
+              }
+
+    /* CSS for the toast notification */
+    .toast-container {
+      position: fixed;
+      bottom: 1rem;
+      right: 1rem;
+      z-index: 9999;
+    }
+    .toast {
+      background-color: #333;
+      color: #fff;
+      padding: 1rem 1.5rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      margin-bottom: 0.5rem;
+    }
+    .toast-success {
+      background-color: #27ae60;
+    }
+    .toast-error {
+      background-color: #c0392b;
+    }
+    
+  </style>
+</head>
+
+<body>
+  
+  <!-- ======= Header ======= -->
+  <header id="header" style="background-color: black !important;" class="fixed-top d-flex align-items-center header-transparent">
+    <div class="container-fluid">
+
+      <div class="row justify-content-center align-items-center">
+        <div class="col-xl-11 d-flex align-items-center justify-content-between">
+          <h1 class="logo"><a href="/">PathFindr</a></h1>
+          <!-- Uncomment below if you prefer to use an image logo -->
+          <!-- <a href="index.html" class="logo"><img src="https://cdn.jsdelivr.net/gh/linuxguist/bizpage@main/assets/img/logo.png" alt="" class="img-fluid"></a>-->
+
+          <nav id="navbar" class="navbar">
+            <ul>
+              <li><a class="nav-link scrollto" href="#hero">Trang chủ</a></li>
+              <li><a class="nav-link scrollto" href="/question">Tra cứu TS10</a></li>
+              <li><a class="nav-link scrollto" href="/posts">Review Các trường THPT</a></li>
+
+              <li><a class="nav-link scrollto" href="/forums">Diễn đàn</a></li>
+              <li><a id="login" class="btn-get-started scrollto animate__animated animate__fadeInUp" style="" href="/login">Đăng nhập</a></li>
+
+            </ul>
+            <i class="bi bi-list mobile-nav-toggle"></i>
+          </nav><!-- .navbar -->
+        </div>
+      </div>
+
+    </div>
+  </header><!-- End Header -->
+<br><br>
+  <!-- Form Section -->
+  <section id="form" class="custom-form-container" style="background: url(https://nguyentuanhung.vn/wp-content/uploads/2019/07/4-nguyen-thi-minh-khai.jpg) !important; background-size: cover !important; background-repeat: no-repeat  !important;">
+    <form method="POST" onsubmit="return authdate()" autocomplete="off" enctype="multipart/form-data" class="form custom-form" id="form-1">
+      {% csrf_token %}
+      <h3 style="text-align: center;">Đăng ký tài khoản</h3>
+      <p>
+        <label for="id_username">Tài khoản:</label>
+        <input type="text" name="username" maxlength="30" id="id_username">
+        
+        
+      </p>
+    
+      
+      <p>
+        <label for="id_email">Email:</label>
+        <input type="email" name="email" id="id_email">
+        
+        
+      </p>
+    
+      
+      <p>
+        <label for="id_password1">Mật khẩu:</label>
+        <input type="password" name="password1" id="id_password1">
+        
+        
+      </p>
+    
+      
+      <p>
+        <label for="id_password2">Nhập lại mật khẩu:</label>
+        <input type="password" name="password2" id="id_password2">
+        
+        
+          
+        
+      </p>
+      <p>
+        <label for="id_hoten">Họ và tên:</label>
+        <input type="text" name="hoten" maxlength="100" id="id_hoten">
+        
+        
+      </p>
+          <p>
+        <label for="id_profile_pic">Hình ảnh đại diện:</label>
+        <input type="file" name="profile_pic" accept="image/*" id="id_profile_pic">
+        
+        
+      </p>
+    
+      
+      <p>
+        <label for="id_mobile">Số điện thoại:</label>
+        <input type="text" name="mobile" maxlength="20" id="id_mobile">
+        
+        
+      </p>
+    
+      
+      <p style="display: none;">
+        <label for="id_khoihoc">Khoihoc:</label>
+        <input type="text" name="khoihoc" maxlength="200" id="id_khoihoc">
+        
+        
+      </p>
+    
+      
+      <p>
+        <label for="id_school">Hiện bạn đang học trường nào?</label>
+        <select name="school" id="id_school">
+          <option value="" selected="">---------</option>
+        {% for post in posts %}
+          <option value="{{post.headline}}">{{post.headline}}</option>
+        {% endfor %}
+        
+        </select>  </p>    
+
+      <button type="submit" class="login-btn">Đăng ký</button>
+    </form>
+  </section>
+  <!-- End Form Section -->
+
+  <!-- ======= Footer ======= -->
+  <footer id="footer">
+    <div class="footer-top">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12 col-md-6 footer-info">
+            <h3>PathFindr</h3>
+            <p style="font-size: 18px;">PathFindr là dịch vụ giúp tư vấn hướng nghiệp, hay hướng nghiệp khi đăng ký hồ sơ vào các trường cấp ba nhằm hỗ trợ một cá nhân nào đó trong việc lựa chọn ngành nghề phù hợp nhất với khả năng, sở thích của bản thân. Không chỉ là ngành nghề phù hợp, cá nhân đó cũng được tư vấn, hỗ trợ để chọn ngành nghề đáp ứng được nhu cầu nhân lực của xã hội lúc bấy giờ.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="copyright">
+        &copy; Copyright <strong><a href="https://3dviet.vercel.app">VietVu</a></strong>. All Rights Reserved
+      </div>
+    </div>
+  </footer><!-- End Footer -->
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+    class="bi bi-arrow-up-short"></i></a>
+    <a href="/chat" style="display: block; position: relative;">   <img style="    background: #fafafa;
+      box-shadow: 4px 6px 36px -6px rgba(1, 1, 1, 0.5);
+      margin: auto;
+      z-index: 199;
+      padding: 0px;
+      right: 7px;
+      border-radius: 50%;
+      bottom: 64px;
+      position: fixed;
+      margin: auto;"
+      width="60" height="60" src="https://i.ibb.co/SnbvPY7/Thi-t-k-ch-a-c-t-n-1.png" alt="LEVIOOSA"></a>
+<script>
+    function getCookie(cname) {
+        let name = cname + "=";
+        let decodedCookie = decodeURIComponent(document.cookie);
+        let ca = decodedCookie.split(';');
+        for(let i = 0; i <ca.length; i++) {
+            let c = ca[i];
+            while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+            }
+            if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+            }
+        }
+        return "";
+        }    
+    var id_school = document.getElementById('id_school')
+    id_school.removeAttribute("multiple");
+    var id_khoihoc = document.getElementById('id_khoihoc')
+    var diemtichop = getCookie("tichhop")
+    if (getCookie("subject") != "") {id_khoihoc.value = getCookie("subject")}
+    else {
+      if (diemtichop == "yes") {
+        id_khoihoc.value = "Tích hợp"
+      } else {
+        id_khoihoc.value = "Không chuyên"
+      }
+    }
+    var label = document.getElementsByTagName('label')
+    var p = document.getElementsByTagName('p')
+    p[7].style.display = 'none'
+    label[5].innerText = 'Hình ảnh đại diện:'
+    label[6].innerText = 'Số điện thoại:'
+    label[8].innerText = 'Hiện bạn đang học trường nào?'
+    function authdate() {
+    var username = document.getElementById('id_username').value;
+    var email = document.getElementById('id_email').value;
+    var password1 = document.getElementById('id_password1').value;
+    var password2 = document.getElementById('id_password2').value;
+    var mobile = document.getElementById('id_mobile').value;
+    var profilePic = document.getElementById('id_profile_pic').files[0];
+
+    // Basic validation for empty fields
+    if (username === "" || email === "" || password1 === "" || password2 === "" || mobile === "") {
+        swal("Lỗi", "Vui lòng điền vào tất cả các trường.", "error");
+        return false;
+    }
+
+    // Password match validation
+    if (password1 !== password2) {
+        swal("Lỗi", "Mật khẩu và nhập lại mật khẩu không khớp.", "error");
+        return false;
+    }
+
+    // Password complexity validations
+    if (password1.length < 8) {
+        swal("Lỗi", "Mật khẩu phải chứa ít nhất 8 ký tự.", "error");
+        return false;
+    }
+
+    if (password1.toLowerCase().includes(username.toLowerCase())) {
+        swal("Lỗi", "Mật khẩu không được quá giống với thông tin cá nhân khác.", "error");
+        return false;
+    }
+
+    var commonPasswords = ["123456", "password", "123456789", "12345678", "12345", "1234567", "1234567890"];
+    if (commonPasswords.includes(password1)) {
+        swal("Lỗi", "Mật khẩu không được là một mật khẩu thông dụng.", "error");
+        return false;
+    }
+
+    if (/^\d+$/.test(password1)) {
+        swal("Lỗi", "Mật khẩu không được chỉ chứa số.", "error");
+        return false;
+    }
+
+    // Mobile number validation (basic example, customize as needed)
+    var mobilePattern = /^[0-9]{10,15}$/;
+    if (!mobilePattern.test(mobile)) {
+        swal("Lỗi", "Số điện thoại không hợp lệ.", "error");
+        return false;
+    }
+
+    // Email validation (basic example, customize as needed)
+    var emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+    if (!emailPattern.test(email)) {
+        swal("Lỗi", "Email không hợp lệ.", "error");
+        return false;
+    }
+
+    // Profile picture validation (optional)
+    if (profilePic && !profilePic.type.startsWith("image/")) {
+        swal("Lỗi", "File ảnh không hợp lệ.", "error");
+        return false;
+    }
+
+    // Age validation
+   
+
+    // If all validations pass
+    return true;
+}
+</script>
+
+  <!-- Vendor JS Files -->
+  <script src="https://cdn.jsdelivr.net/gh/linuxguist/bizpage@main/assets/vendor/purecounter/purecounter_vanilla.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/linuxguist/bizpage@main/assets/vendor/aos/aos.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/linuxguist/bizpage@main/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/linuxguist/bizpage@main/assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/linuxguist/bizpage@main/assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/linuxguist/bizpage@main/assets/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/linuxguist/bizpage@main/assets/vendor/waypoints/noframework.waypoints.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/linuxguist/bizpage@main/assets/vendor/php-email-form/validate.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="https://cdn.jsdelivr.net/gh/linuxguist/bizpage@main/assets/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,365 @@
+{% extends 'patient/patientbase.html' %}
+{% block content %}
+{%load static%}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+crossorigin="anonymous" referrerpolicy="no-referrer" />
+<style>
+    * {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --color-bg: rgb(0 0 0 / 3%);
+  --color-blue: #2196F3;
+  --color-yellow: #FDD835;
+  --color-red: #E53935;
+  --color-green: #388E3C;
+
+  --card-width: 320px;
+  --card-aspect-ratio: 16 / 9;
+  
+  --arrow-size: 2.5rem;
+  --arrow-icon-size: 1.75rem;
+  --arrow-icon-color: rgb(0 0 0 / 50%);
+  --arrow-icon-color-hover: rgb(0 0 0 / 75%);
+  --arrow-bg-color: transparent;
+  --arrow-bg-color-hover: rgb(0 0 0 / 10%);
+  
+  --bullet-size: .5rem;
+  
+  --transition-speed: .5s;
+  --transition-bezier: cubic-bezier(0.55, -0.85, 0.2, 1.85);
+  
+  --icon-arrow: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZD0iTTIwLDExVjEzSDhMMTMuNSwxOC41TDEyLjA4LDE5LjkyTDQuMTYsMTJMMTIuMDgsNC4wOEwxMy41LDUuNUw4LDExSDIwWiIgLz48L3N2Zz4=");
+}
+
+.container {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.slider {
+  position: relative;
+  width: calc(var(--card-width) + calc(var(--arrow-size) * 2) + 2rem);
+}
+
+.slider__cards {
+  width: var(--card-width);
+  aspect-ratio: var(--card-aspect-ratio);
+  position: relative;
+  margin-inline: auto;
+}
+
+.slider__card {
+  width: var(--card-width);
+  aspect-ratio: var(--card-aspect-ratio);
+  border-radius: .5rem;
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  transition: opacity var(--transition-speed) ease-in-out;
+}
+
+.slider__card[active] {
+  opacity: 1;
+}
+
+.slider__card--blue {
+  background-color: var(--color-blue);
+}
+
+.slider__card--green {
+  background-color: var(--color-green);
+}
+
+.slider__card--yellow {
+  background-color: var(--color-yellow);
+}
+
+.slider__card--red {
+  background-color: var(--color-red);
+}
+
+.slider__arrows {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.slider__arrow {
+  height: var(--arrow-size);
+  width: var(--arrow-size);
+  background-color: var(--arrow-bg-color);
+  border-radius: 50%;
+  border: none;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.slider__arrow[disabled] {
+  opacity: .25;
+  pointer-events: none;
+}
+
+.slider__arrow:is(:hover, :focus-visible) {
+  background-color: var(--arrow-bg-color-hover);
+}
+
+.slider__arrow::after {
+  content: '';
+  display: block;
+  height: var(--arrow-icon-size);
+  width: var(--arrow-icon-size);
+  mask-position: center;
+  -webkit-mask-position: center;
+  mask-size: contain;
+  -webkit-mask-size: contain;
+  mask-repeat: no-repeat;
+  -webkit-mask-repeat: no-repeat;
+  mask-image: var(--icon-arrow);
+  -webkit-mask-image: var(--icon-arrow);
+  background-color: var(--arrow-icon-color);
+}
+
+.slider__arrow:is(:hover, :focus-visible)::after {
+  background-color: var(--arrow-icon-color-hover);
+}
+
+.slider__arrow--next::after {
+  transform: rotate(180deg);
+}
+
+.slider__bullets {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: .5rem;
+  position: absolute;
+  pointer-events: none;
+  margin-top: 157px
+}
+
+.slider__bullet {
+  display: block;
+  height: var(--bullet-size);
+  width: var(--bullet-size);
+  background-color: black;
+  border: none;
+  border-radius: 2rem;
+  transition: width var(--transition-speed) var(--transition-bezier);
+}
+
+.slider__bullet[active] {
+  width: calc(var(--bullet-size) * 3);
+}
+.slider__card img {
+    width: 100%;
+    margin-top: -50%;
+    z-index: 1;
+    position: relative;
+}
+.sound {
+    right: -259px;
+    top: 65px;
+    position: relative;
+    color: black;
+    z-index: 99;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    background: #94ff96;
+}
+</style>
+<h2 style="    margin-top: -28px; text-align: center;padding-top: 20px;color:#103F5E">Bộ thẻ ghi nhớ kèm phát âm động vật</h2>
+
+<div class="container" style="margin: -24px 0px">
+    <div class="slider">
+      <div class="slider__cards">
+        <div class="slider__card"><button class="sound"><i class="fa-solid fa-volume-high"></i></button><img src="https://www.autistichub.com/wp-content/uploads/h5p/content/27/images/image-6492dec25bfa6.png" alt=""></div>
+        <div class="slider__card"><button class="sound"><i class="fa-solid fa-volume-high"></i></button><img src="https://www.autistichub.com/wp-content/uploads/h5p/content/27/images/image-6492dea6bba40.png" alt=""></div>
+        <div class="slider__card"><button class="sound"><i class="fa-solid fa-volume-high"></i></button><img src="https://www.autistichub.com/wp-content/uploads/h5p/content/27/images/image-6492dee08fb15.png" alt=""></div>
+        <div class="slider__card"><button class="sound"><i class="fa-solid fa-volume-high"></i></button><img src="https://www.autistichub.com/wp-content/uploads/h5p/content/27/images/image-6492deec6c6e5.png" alt=""></div>
+        <div class="slider__card"><button class="sound"><i class="fa-solid fa-volume-high"></i></button><img src="https://www.autistichub.com/wp-content/uploads/h5p/content/27/images/image-6492defb3bdee.png" alt=""></div>  
+        <div class="slider__card"><button class="sound"><i class="fa-solid fa-volume-high"></i></button><img src="https://www.autistichub.com/wp-content/uploads/h5p/content/27/images/image-6492df0bb86df.png" alt=""></div>
+        <div class="slider__card"><button class="sound"><i class="fa-solid fa-volume-high"></i></button><img src="https://www.autistichub.com/wp-content/uploads/h5p/content/27/images/image-6492df19c2972.png" alt=""></div>
+        <div class="slider__card"><button class="sound"><i class="fa-solid fa-volume-high"></i></button><img src="https://www.autistichub.com/wp-content/uploads/h5p/content/27/images/image-6492df2814395.png" alt=""></div>
+        <div class="slider__card"><button class="sound"><i class="fa-solid fa-volume-high"></i></button><img src="https://www.autistichub.com/wp-content/uploads/h5p/content/27/images/image-6492df37e0cac.png" alt=""></div>
+        <div class="slider__card"><button class="sound"><i class="fa-solid fa-volume-high"></i></button><img src="https://www.autistichub.com/wp-content/uploads/h5p/content/27/images/image-6492df4af18ab.png" alt=""></div>
+        <div class="slider__card"><button class="sound"><i class="fa-solid fa-volume-high"></i></button><img src="https://www.autistichub.com/wp-content/uploads/h5p/content/27/images/image-6492df5b1ec9f.png" alt=""></div>
+        <div class="slider__card"><button class="sound"><i class="fa-solid fa-volume-high"></i></button><img src="https://www.autistichub.com/wp-content/uploads/h5p/content/27/images/image-6492df6a2fa1f.png" alt=""></div>
+        <div class="slider__card"><button class="sound"><i class="fa-solid fa-volume-high"></i></button><img src="https://www.autistichub.com/wp-content/uploads/h5p/content/27/images/image-6492df79d62e3.png" alt=""></div>
+        <div class="slider__card"><button class="sound"><i class="fa-solid fa-volume-high"></i></button><img src="https://www.autistichub.com/wp-content/uploads/h5p/content/27/images/image-6492df922f0a9.png" alt=""></div>
+        <div class="slider__card"><button class="sound"><i class="fa-solid fa-volume-high"></i></button><img src="https://www.autistichub.com/wp-content/uploads/h5p/content/27/images/image-6492df9fec8fc.png" alt=""></div>
+        <div class="slider__card"><button class="sound"><i class="fa-solid fa-volume-high"></i></button><img src="https://www.autistichub.com/wp-content/uploads/h5p/content/27/images/image-6492df9fec8fc.png" alt=""></div>
+    </div>
+      <div class="slider__arrows">
+        <button class="slider__arrow slider__arrow--prev" title="Previous slide"></button>
+        <button class="slider__arrow slider__arrow--next" title="Next slide"></button>
+      </div>
+      <div class="slider__bullets"></div>
+    </div>
+  </div>
+  <script>
+    console.clear();
+
+/**
+ * Class to manage the slider element (events, state, ...) 
+ */
+class Slider {
+  constructor(sliderEl) {
+    this.sliderEl = sliderEl;
+    this.slides = this.sliderEl.querySelectorAll('.slider__card');
+    this.slideCount = this.slides.length;
+    this.bulletsContainer = this.sliderEl.querySelector('.slider__bullets');
+    this.arrows = {
+      prev: this.sliderEl.querySelector('.slider__arrow--prev'),
+      next: this.sliderEl.querySelector('.slider__arrow--next'),
+    }
+    this.bullets = [];
+
+    this.activeIndex = 0;
+
+    this._initializeSlider();
+  }
+
+  /* Initialize the slider by creating necessary elements and updating the UI */
+  _initializeSlider = () => {
+    this._createBullets();
+    this._addBulletsToSlider();
+    this._addEventListeners();
+
+    this._updateUI();
+  }
+
+  /************ SETUP FUNCTIONS *****/
+
+  /* Add event listeners to the slider arrows */
+  _addEventListeners = () => {
+    this.arrows.prev.addEventListener('click', this._onPrevArrowClick);
+    this.arrows.next.addEventListener('click', this._onNextArrowClick);
+  }
+
+  /* Go to previous slide on the prev arrow is clicked */
+  _onPrevArrowClick = () => {
+    this.activeIndex = this.activeIndex - 1;
+    if (this.activeIndex < 0) {
+      this.activeIndex = this.slideCount - 1;
+    }
+
+    this._updateUI();
+  }
+
+  /* Go to next slide when the next arrow is clicked */
+  _onNextArrowClick = () => {
+    this.activeIndex = (this.activeIndex + 1) % this.slideCount;
+    this._updateUI();
+  }
+
+  /* Create one bullet element corresponding to each of the slides */
+  _createBullets = () => {
+    this.slides.forEach((slide) => {
+      const bullet = document.createElement('button');
+      bullet.classList.add('slider__bullet');
+      this.bullets.push(bullet);
+    })
+  }
+
+  /* Add the bullet elements to the slider */
+  _addBulletsToSlider = () => {
+    this.bullets.forEach((bullet) => {
+      this.bulletsContainer.appendChild(bullet);
+    })
+  }
+
+  /************ UPDATE FUNCTIONS *****/
+  
+  /* Update the whole UI accordion to the current state */
+  _updateUI = () => {
+    this._updateActiveBullet();
+    this._updateArrowsUI();
+    this._updateSlidesUI();
+  }
+
+  /* Update the active bullet attribute */
+  _updateActiveBullet = () => {
+    this.bullets.forEach((bullet, index) => {
+      index === this.activeIndex
+        ? bullet.setAttribute('active', '')
+      : bullet.removeAttribute('active');
+    })
+  }
+  
+  /* Update the arrows disabled attribute so they are only clickable when relevant */
+  _updateArrowsUI = () => {
+    this.activeIndex === 0
+      ? this.arrows.prev.setAttribute('disabled', '')
+      : this.arrows.prev.removeAttribute('disabled');
+    
+    this.activeIndex === this.slideCount - 1
+      ? this.arrows.next.setAttribute('disabled', '')
+      : this.arrows.next.removeAttribute('disabled');
+  }
+  
+  /* Update the active slide */
+  _updateSlidesUI = () => {
+    this.slides.forEach((slide, index) => {
+      index === this.activeIndex
+        ? slide.setAttribute('active', '')
+        : slide.removeAttribute('active');
+    })
+  }
+}
+
+
+function init() {
+    const slider = document.querySelector('.slider');
+
+    if (!slider) {
+      console.warn('Could not get slider element!')
+      return;
+    }
+
+    new Slider(slider);
+
+    // Event listeners for sound buttons
+    const soundButtons = document.querySelectorAll('.sound');
+    soundButtons.forEach((button, index) => {
+      button.addEventListener('click', () => {
+        playSound(index); // Call function to play sound with index as parameter
+      });
+    });
+  }
+
+  function playSound(index) {
+    // List of sound sources corresponding to each button
+    const soundSources = [
+      '/static/images/bear.mp3',
+      'path_to_alligator_sound.mp3',
+      // Add more sounds for other buttons if needed
+    ];
+
+    // Creating an audio element
+    const audio = new Audio(soundSources[index]);
+
+    // Playing the sound
+    audio.play();
+  }
+
+
+init();
+  </script>
+  {% endblock content%}

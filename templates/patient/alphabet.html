@@ -1,0 +1,139 @@
+{% extends 'patient/patientbase.html' %}
+{% block content %}
+{%load static%}
+<link href="https://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet">
+
+   <style>
+body {
+  background-color: #fff6f0;
+  text-align: center;
+  color: #264653;
+  font-family: 'Varela Round', sans-serif;
+
+}
+
+h1 {
+  font-family: "Open Sans", sans-serif;
+  text-transform: uppercase;
+  color: #2a9d8f;
+  font-size: 3em;
+}
+
+.subheading {
+  font-size: 1.5em;
+}
+
+.grid {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.block {
+  margin: 0.5em;
+  width: 120px;
+  height: 120px;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  cursor: pointer; /* Add cursor style */
+}
+
+.block:nth-child(2n) .letter {
+  color: #e9c46a;
+}
+.block:nth-child(3n) .letter {
+  color: #264653;
+}
+.block:nth-child(5n) .letter {
+  color: #2a9d8f;
+}
+.block:nth-child(7n) .letter {
+  color: #f4a261;
+}
+
+.letter {
+  font-weight: bold;
+  font-size: 4em;
+  color: #e76f51;
+  text-transform: uppercase;
+}
+
+.selectedLetter {
+  background-color: #eed9cb;
+  border-radius: 50%;
+}
+
+   </style>
+
+<body>
+    <h1>Bảng chữ cái ABC</h1>
+    <p class="subheading">Nhấn vào chữ và đọc theo nhé!<p>
+    <div id="alphabet" style=""></div>
+</body>
+<script>
+    const app = document.getElementById("alphabet");
+
+    const letterGrid = document.createElement("div");
+    letterGrid.setAttribute("class", "grid");
+
+    /* Create divs with paragraphs for each letter in the alphabet */
+    const alphabet = "aăâbcdđeêghijklmnopqrstuưvxy".split("");
+    alphabet.map((current) => {
+        const letterBlock = document.createElement("div");
+        letterBlock.setAttribute("class", "block");
+        letterBlock.setAttribute("id", current);
+        const letter = document.createElement("p");
+        letter.setAttribute("class", "letter");
+
+        letter.textContent = current;
+        letterBlock.append(letter);
+        letterGrid.append(letterBlock);
+    });
+
+    app.append(letterGrid);
+
+    /* Set up sound */
+    const context = new window.AudioContext();
+    function playFile(file) {
+        fetch(file)
+            // read into memory as an arryBuffer
+            .then((response) => response.arrayBuffer())
+            // turn it into raw audio data
+            .then((arrayBuffer) => context.decodeAudioData(arrayBuffer))
+            .then((audioBuffer) => {
+                // play the music
+                const soundSource = context.createBufferSource();
+                soundSource.buffer = audioBuffer;
+                soundSource.connect(context.destination);
+                soundSource.start();
+            });
+    }
+
+    /* Listen to click events and play sound */
+    letterGrid.addEventListener("click", function (event) {
+        if (event.target.classList.contains("letter")) {
+            const letter = event.target.textContent.toLowerCase();
+            switch (letter) {
+                case 'a':
+                    playFile("/static/images/a.mp3");
+                    break;
+                case 'b':
+                    playFile("Shapeofyou.mp3");
+                    break;
+                // Add more cases for other letters if needed
+                default:
+                    // If no song assigned to the letter, play a default sound
+                    playFile("DefaultSound.mp3");
+                    break;
+            }
+            const prevSelection = document.getElementsByClassName("selectedLetter");
+            if (prevSelection.length) {
+                prevSelection[0].classList.remove("selectedLetter");
+            }
+            event.target.parentNode.classList.add("selectedLetter");
+            setTimeout(() => event.target.parentNode.classList.remove("selectedLetter"), 200);
+        }
+    });
+</script>
+
+{% endblock content%}

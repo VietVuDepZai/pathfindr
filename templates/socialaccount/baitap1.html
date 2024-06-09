@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Toast Notification</title>
+<style>
+#toast {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  /* opacity: 0; */
+  transition: opacity 0.3s ease-in-out;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.hidden {
+  display: none !important;
+}
+
+.icon {
+  margin-right: 10px;
+  font-size: 24px; /* Increased the icon size */
+}
+
+.message {
+  font-size: 18px;
+}
+
+</style>
+
+</head>
+<body>
+<button onclick="showToast()">Show Notification</button>
+<div id="toast" class="hidden">
+  <span class="icon">&#128077;</span> <!-- Icon for thumbs up -->
+  <span class="message">This is a toast notification!</span>
+</div>
+<script>function showToast() {
+    var toast = document.getElementById("toast");
+    toast.classList.remove("hidden");
+    setTimeout(function() {
+      toast.classList.add("hidden");
+    }, 3000); // Hide after 3 seconds
+  }
+  </script></body>
+</html>

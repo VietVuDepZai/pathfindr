@@ -1,0 +1,85 @@
+{% extends 'doctor/doctorbase.html' %}
+{% block content %}
+{%load static%}
+<div class="container">
+    <div class="card shadow border-0">
+        <div class="card-body">
+            <div style="font-size: 2rem;">Chúc {{request.user}} một ngày tốt lành! - Thông tin thêm về các bệnh nhân
+            </div>
+            <div class="brief"> <i>Hãy nhớ rằng: “Lương y như từ mẫu” – Hồ Chí Minh.
+                </i> </div>
+        </div>
+    </div>
+    <br>
+    <div class="card shadow border-0 mb-7">
+        <div class="card-header">
+            <h5 class="mb-0">Bệnh nhân</h5>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-hover table-nowrap">
+                <thead class="thead-light">
+                    <tr>
+                        <th scope="col">Họ tên</th>
+                        <th scope="col">Ảnh đại diện </th>
+                        <th scope="col">Ngày tạo</th>
+                        <th scope="col">Trạng thái</th>
+                        <!-- <th scope="col">Nội dung</th> -->
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for t in patient %}
+
+                    <tr>
+                        <td>{{t}}</td>
+                        <td>
+                            <img style="background: #fafafa;
+    box-shadow: 4px 6px 36px -6px rgba(1, 1, 1, 0.5);
+    margin: auto;   
+    border-radius: 50%;
+    height: 50px;
+    object-fit: cover;
+    margin: auto;" width="50" height="50" alt="..." src="https://res.cloudinary.com/dyiesiahu/image/upload/v1/{{ t.profile_pic }}">
+                            
+                            </a>
+                        </td>
+                        <td>
+                            {{t.created_on}}
+                        </td>
+                        <td>
+
+                            <a id="status" class="text-heading font-semibold">
+                                {{t.status}}
+                            </a>
+                        </td>
+                        <!-- 
+                        <td>
+                            Chủ đề
+                        </td> -->
+                        <td class="text-end">
+                            <a href="#" class="btn btn-sm btn-neutral">Hiển thị thêm</a>
+                            <button type="button" class="btn btn-sm btn-square btn-neutral text-danger-hover">
+                                <i class="bi bi-trash"></i>
+                            </button>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>
+<script>
+    function status() {
+        var status = document.getElementById("status")
+        if (status.innerHTML == "True") {
+            status.innerHTML = "Đã xác nhận"
+        } else {
+            status.innerHTML = "Chưa xác nhận"
+        }
+    }
+    setTimeout(function () { status() }, 1);
+
+</script>
+{% endblock content %}

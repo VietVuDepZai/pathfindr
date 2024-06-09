@@ -1,0 +1,839 @@
+{% extends 'patient/patientbase.html' %}
+{% block content %}
+{%load static%}
+<!doctype html>
+<html lang = "en">
+
+<head>
+    <meta charset = "utf-8">
+    <title>Memory Game</title>
+    <meta name = "description" content = "">
+    <meta name = "viewport" content = "width=device-width, initial-scale=1">
+    <link rel = "stylesheet prefetch" href = "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel = "stylesheet" href = "https://fonts.googleapis.com/css?family=Coda">
+    <link rel = "stylesheet" href = "https://fonts.googleapis.com/css?family=Alegreya+Sans+SC:900">
+    <link rel = "stylesheet" href = "https://fonts.googleapis.com/css?family=Exo:200">
+    <style>
+        html {
+	box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+	box-sizing: inherit;
+}
+
+html, body {
+    height: 100%;
+}
+
+
+
+body {
+	background: #292c3b;
+	color: #66FCF1;
+}
+
+section {
+    margin:-1%;
+    padding:20px;
+}
+
+.container {
+	display: block;
+	justify-content: center;
+	align-items: center;
+	flex-wrap: wrap;
+    background: #292c3b;
+    margin-top: -24px;
+}
+
+h1 {
+    font-family: 'Alegreya Sans SC', sans-serif;
+    font-size: 40px;
+    text-align: center;
+    color: #66FCF1;
+}
+
+ul li {
+    display: inline;
+    list-style-type: none;
+}
+
+#footer {
+    padding: 1em;
+    background-color: #292c3b;
+    color: #66FCF1;
+	text-align: center;
+	font-size: 0.9rem;
+}
+   
+.grid {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+}
+
+
+/*************** SCORE PANEL ***************/
+
+
+.score-panel {
+	text-align: center;
+	margin-bottom: 10px;
+}
+
+.score-panel .stars .restart {
+    position: absolute;
+	text-align: center;
+    top:35%;
+    left: 50%;
+}
+
+.score-panel .stars {
+	margin: 0;
+	padding: 0;
+}
+
+.score-panel .restart {
+    display: inline-block;
+	cursor: pointer;
+}
+
+.fa-star .stars {
+    display: flex;
+    padding: 0;
+    animation-name: blink;
+}
+
+.timer {
+	display: inline-block;
+	margin: 0 1rem;
+}
+
+.restart:hover {
+	text-shadow: 0 0 2px #66FCF1,
+              0 0 4px #66FCF1,
+              0 0 6px #99adbde3,
+              0 0 8px #99adbde3,
+              0 0 10px #99adbde3;
+}
+
+
+/*************** BOARD STYLING ***************/
+
+
+.deck {
+    margin: auto;
+    height: 24vw;
+    width: 23%;
+	background: #0B0C10;
+	padding: 1rem;
+	border-radius: 4px;
+	box-shadow: 8px 9px 26px 0 #2e3d4980;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-around;
+	align-items: center;
+}
+
+.deck .card {
+	margin: 0.2rem 0.2rem;
+	background: #1F2833;;
+	font-size: 0;
+	color: #ffffff;
+	border-radius: 5px;
+	cursor: pointer;
+    display: flex;
+    flex-wrap: wrap;
+	justify-content: center;
+	align-items: center;
+	box-shadow: 5px 2px 20px 0 #2e3d4980;
+}
+
+.deck .card.open {
+	transform: rotateY(0);
+	background: #02b3e4;
+	cursor: default;
+	animation-name: flipCardIn;
+	-webkit-backface-visibility: visible !important;
+	backface-visibility: visible !important;
+    animation-duration: .75s;
+    font-size: 33px;
+}
+
+.card {
+	vertical-align: middle;
+	transform: perspective(1px) translateZ(0);
+	box-shadow: 0 0 1px #00000000;
+}
+
+.card:hover, .card:focus, .card:active {
+	animation-name: hvr-bounce-float, hvr-float;
+	animation-duration: .3s, 1.5s;
+	animation-delay: 0s, .3s;
+	animation-timing-function: ease-out, ease-in-out;
+	animation-iteration-count: 1, infinite;
+	animation-fill-mode: forwards;
+	animation-direction: normal, alternate;
+	box-shadow: 5px 2px 20px 0 #02b3e473;
+}
+
+.deck .card.match {
+	cursor: default;
+	background: #66fcf2b0;
+	font-size: 33px;
+	animation-name: boing;
+	-webkit-backface-visibility: visible !important;
+	backface-visibility: visible !important;
+	animation-duration: .75s;
+}
+
+.deck .card.unmatched {
+	animation-name: pushOut;
+	-webkit-backface-visibility: visible !important;
+	backface-visibility: visible !important;
+	animation-duration: .75s;
+	background: #b10e37;
+}
+
+.deck .card.disabled {
+	pointer-events: none;
+	opacity: 0.9;
+}
+
+
+/*************** WINNER BOX ***************/
+
+
+.overlay {
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	background: #000000b3;
+	transition: opacity 500ms;
+	visibility: hidden;
+	opacity: 0;
+}
+
+.overlay:target {
+	visibility: visible;
+	opacity: 1;
+}
+  
+.popup {
+	margin: 70px auto;
+	padding: 20px;
+	background: #524b4b;
+	border-radius: 5px;
+	width: 50%;
+	position: relative;
+	transition: all 5s ease-in-out;
+	font-family: 'Exo', sans-serif;
+	opacity: 0.85;
+	transition: opacity 0.4s linear 0s;
+}
+  
+.popup h2 {
+	margin-top: 0;
+	color: #66FCF1;
+	font-family: 'Alegreya Sans SC', sans-serif;
+}
+
+.popup .close {
+	position: absolute;
+	top: 20px;
+	right: 30px;
+	transition: all 200ms;
+	font-size: 30px;
+	font-weight: bold;
+	text-decoration: none;
+	color: #66FCF1;
+}
+
+.popup .congratulations,
+.gamestats {
+	max-height: 20%;
+	overflow: auto;
+	text-align: center;
+}
+
+.show {
+	visibility: visible !important;
+	opacity: 100 !important;
+}
+
+#starRating li {
+	display: inline-block;
+}
+
+
+/*************** BUTTON PROPERTIES ***************/
+
+
+#btn {
+	background-color: #524b4b;
+	padding: 0.7rem 1rem;
+	font-size: 0.8rem;
+	display: block;
+	margin: 0 auto;
+	width: 50%;
+	border: 2px solid #66FCF1;
+	font-family: 'Exo', sans-serif;
+	color: #ffffff;
+	cursor: pointer;
+	transition: background-color 0.5s, color 0.3s ease-out;
+	overflow: hidden;
+	/*border-radius: 5px;*/
+}
+
+#btn::before {
+	margin: auto;
+	content: '';
+	border-radius: 50%;
+	width: 50%;
+	transition: box-shadow 0.6s ease-out;
+	z-index: -1;
+}
+
+#btn:hover {
+	background-color: #66FCF1;
+	color: #524b4b;
+}
+
+#btn:hover::before {
+	box-shadow: inset 0 0 0 160px #66FCF1;
+}
+
+/*************** CARD ANIMATIONS ***************/
+
+
+@keyframes flipCardIn {
+	from {
+		transform: perspective(400px) rotate3d(0, 1, 0, 90deg);
+		animation-timing-function: ease-in;
+		opacity: 0;
+	}
+
+	40% {
+		transform: perspective(400px) rotate3d(0, 1, 0, -20deg);
+		animation-timing-function: ease-in;
+	}
+
+	60% {
+		transform: perspective(400px) rotate3d(0, 1, 0, 10deg);
+		opacity: 1;
+	}
+
+	80% {
+		transform: perspective(400px) rotate3d(0, 1, 0, -5deg);
+	}
+
+	to {
+		transform: perspective(400px);
+	}
+}
+
+@keyframes boing {
+	from {
+		transform: scale3d(2, 2, 2);
+	}
+
+	30% {
+		transform: scale3d(1.25, 0.75, 1);
+	}
+
+	40% {
+		transform: scale3d(0.75, 1.25, 1);
+	}
+
+	50% {
+		transform: scale3d(1.15, 0.85, 1);
+	}
+
+	65% {
+		transform: scale3d(.95, 1.05, 1);
+	}
+
+	75% {
+		transform: scale3d(1.05, .95, 1);
+	}
+
+	to {
+		transform: scale3d(1, 1, 1);
+	}
+}
+
+@keyframes pushOut {
+	from {
+		transform: scale3d(1, 1, 1);
+	}
+
+	50% {
+		transform: scale3d(1.2, 1.2, 1.2);
+	}
+
+	to {
+		transform: scale3d(1, 1, 1);
+	}
+}
+
+@keyframes hvr-float {
+	0% {
+		-webkit-transform: translateY(-6px);
+		transform: translateY(-6px);
+	}
+	50% {
+		-webkit-transform: translateY(-3px);
+		transform: translateY(-3px);
+	}
+	100% {
+		-webkit-transform: translateY(-6px);
+		transform: translateY(-6px);
+	}
+}
+
+@keyframes hvr-bounce-float {
+	100% {
+		-webkit-transform: translateY(-6px);
+		transform: translateY(-6px);
+  	}
+}
+
+
+/*************** RESPONSIVE MEDIA QUERIES ***************/
+
+
+@media (max-width: 490px) {
+
+    .container {
+        display: block;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+
+    .deck {
+        width: 300px;
+        height: 300px;
+        padding: 1rem;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+    }   
+    
+    .deck .card {
+		height: 20%;
+        width: 20%;
+    	margin: 0.2rem;
+        border-radius: 5px;
+        cursor: pointer;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+	}
+
+	#footer {
+		background-color: #292c3b;
+		color: #66FCF1;
+		text-align: center;
+		font-size: 0.6rem;
+	}
+	
+	.grid {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+	}
+}
+
+@media (min-width: 491px) and (max-width: 767px) {
+
+    .container {
+        display: block;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+ 
+    .deck {
+        width: 425px;
+        height: 425px;
+        padding: 1rem;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+    }   
+     
+    .deck .card {
+		height: 22%;
+        width: 22%;
+    	margin: 0.36rem;
+        border-radius: 5px;
+        cursor: pointer;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+@media (min-width: 768px) {
+
+	.deck {
+		width: 500px;
+		height: 500px;
+	}
+
+	.deck .card {
+		height: 100px;
+        width: 100px;
+	}
+
+	.popup {
+		width: 60%;
+	}
+}
+a:hover {
+    color: #66FCF1 !important
+}
+    </style>
+</head>
+
+<body>
+
+    <div class = "container" style="display: table;">
+        <header style="padding-top: 30px;">
+            <h1>Trò chơi ghi nhớ thành viên gia đình</h1>
+        </header>
+
+        <section class = "score-panel">
+
+            <span class = "moves">0</span> Move(s)
+
+            <div class = "timer">
+            </div>
+
+            <div class = "restart" onclick = startGame()>
+                <i class = "fa fa-repeat"></i>
+            </div>
+        </section>
+
+        <ul class = "deck" id = "card-deck">
+            <li class = "card" type = "tumblr">
+                <i class = "fa fa-tumblr"></i>
+            </li>
+            <li class = "card" type = "instagram">
+                <i class = "fa fa-instagram"></i>
+            </li>
+            <li class = "card match" type = "youtube">
+                <i class = "fa fa-youtube-play"></i>
+            </li>
+            <li class = "card" type = "apple">
+                <i class = "fa fa-apple"></i>
+            </li>
+            <li class = "card" type = "windows">
+                <i class = "fa fa-windows"></i>
+            </li>
+            <li class = "card match" type = "youtube">
+                <i class = "fa fa-youtube-play"></i>
+            </li>
+            <li class = "card" type = "android">
+                <i class = "fa fa-android"></i>
+            </li>
+            <li class = "card" type = "reddit">
+                <i class = "fa fa-reddit"></i>
+            </li>
+            <li class = "card" type = "tumblr">
+                <i class = "fa fa-tumblr"></i>
+            </li>
+            <li class = "card" type = "linux">
+                <i class = "fa fa-linux"></i>
+            </li>
+            <li class = "card" type = "android">
+                <i class = "fa fa-android"></i>
+            </li>
+            <li class = "card" type = "linux">
+                <i class = "fa fa-linux"></i>
+            </li>
+            <li class = "card" type = "apple">
+                <i class = "fa fa-apple"></i>
+            </li>
+            <li class = "card" type = "reddit">
+                <i class = "fa fa-reddit"></i>
+            </li>
+            <li class = "card" type = "instagram">
+                <i class = "fa fa-instagram"></i>
+            </li>
+            <li class = "card" type = "windows">
+                <i class = "fa fa-windows"></i>
+            </li>
+        </ul>
+
+        <div id = "popup1" class = "overlay">
+            <div class = "popup">
+                <a class = "close" href = #>×</a><br>
+                <h2>Congratulations!!</h2>
+                <div class = "congratulations">
+                    You beat the game!
+                </div>
+                <div class = "gamestats">
+                    <p>You made <strong><span id = finalMove> </span></strong> moves </p>
+                    <p>in <strong><span id = totalTime> </span></strong> </p>
+                    <p>Rating: <span id = starRating></span></p>
+                </div>
+                <button id = "btn" onclick = "playAgain()">
+                    Play again?</a>
+                </button>
+            </div>
+        </div>
+
+    </div>
+
+    <footer style="margin-bottom: -24px;" id="footer" class="grid">
+        <div>Lấy cảm hứng từ MEMORY GAME của Ralph H. Baer</div>
+        <a href="https://3dviet.vercel.app/" style="color: #66FCF1">Một sản phẩm của Việt Vũ</a>
+    </footer>
+    <script>
+        // DECK OF CARDS SETUP & CONTROLS
+let card = document.getElementsByClassName("card");
+let cards = [...card]
+let moves = 0;
+let counter = document.querySelector(".moves");
+let matchedCard = document.getElementsByClassName("match");
+let closeicon = document.querySelector(".close");
+let modal = document.getElementById("popup1")
+let starsList = document.querySelectorAll(".stars li");
+
+const deck = document.getElementById("card-deck");
+const stars = document.querySelectorAll(".fa-star");
+
+var openedCards = [];
+
+
+// SHUFFLE CARDS
+function shuffle(array) {
+    var currentIndex = array.length, temporaryValue, randomIndex;
+
+    while (currentIndex !== 0) {
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex -= 1;
+        temporaryValue = array[currentIndex];
+        array[currentIndex] = array[randomIndex];
+        array[randomIndex] = temporaryValue;
+    }
+
+    return array;
+};
+
+
+// STARTS GAME AND SHUFFLES CARDS UPON RESTART
+document.body.onload = startGame();
+
+
+function startGame() {
+    cards = shuffle(cards);
+    
+    for (var i = 0; i < cards.length; i++) {
+        deck.innerHTML = "";
+        [].forEach.call(cards, function (item) {
+            deck.appendChild(item);
+        });
+        cards[i].classList.remove("show", "open", "match", "disabled");
+        openedCards = [];
+    }
+
+    // RESET BOARD
+    moves = 0;
+    counter.innerHTML = moves;
+
+    for (var i = 0; i < stars.length; i++) {
+        stars[i].style.color = "#66FCF1";
+        stars[i].style.visibility = "visible";
+    }
+
+    second = 0;
+    minute = 0;
+    hour = 0;
+    var timer = document.querySelector(".timer");
+    timer.innerHTML = "00 mins 00 secs";
+    clearInterval(interval);
+}
+
+
+// DISPLAYS CARD SWITCHES BETWEEN OPEN AND SHOW CLASS
+var displayCard = function () {
+    this.classList.toggle("open");
+    this.classList.toggle("show");
+    this.classList.toggle("disabled");
+};
+
+
+// CHECK IF OPENED CARDS ARE MATCH
+function cardOpen() {
+    openedCards.push(this);
+    var len = openedCards.length;
+    if (len === 2) {
+        moveCounter();
+        if (openedCards[0].type === openedCards[1].type) {
+            matched();
+        } else {
+            unmatched();
+        }
+    }
+}
+
+
+// WHEN CARDS MATCH
+function matched() {
+    openedCards[0].classList.add("match", "disabled");
+    openedCards[1].classList.add("match", "disabled");
+    openedCards[0].classList.remove("show", "open", "no-event");
+    openedCards[1].classList.remove("show", "open", "no-event");
+    openedCards = [];
+}
+
+
+// CARDS MISMATCH
+function unmatched() {
+    openedCards[0].classList.add("unmatched");
+    openedCards[1].classList.add("unmatched");
+    disable();
+    setTimeout(function () {
+        openedCards[0].classList.remove("show", "open", "no-event", "unmatched");
+        openedCards[1].classList.remove("show", "open", "no-event", "unmatched");
+        cardActivity();
+        openedCards = [];
+    }, 1100);
+}
+
+
+// TEMPORARILY DISABLE CARDS
+function disable() {
+    Array.prototype.filter.call(cards, function (card) {
+        card.classList.add('disabled');
+    });
+}
+
+
+// DISABLE MATCHED CARDS
+function cardActivity() {
+    Array.prototype.filter.call(cards, function (card) {
+        card.classList.remove('disabled');
+        for (var i = 0; i < matchedCard.length; i++) {
+            matchedCard[i].classList.add("disabled");
+        }
+    });
+}
+
+
+// START CLOCK & COUNT MOVES
+function moveCounter() {
+    moves++;
+    counter.innerHTML = moves;
+
+    // START TIMER ON FIST MOVE SET
+    if (moves == 1) {
+        second = 0;
+        minute = 0;
+        hour = 0;
+        startTimer();
+    }
+
+    // STARS COLLAPSE BASED OFF MOVES SET, BLINKING STAR WITHIN 2 MOVES
+    if (moves > 9 && moves < 12) {
+        for (i = 0; i < 3; i++) {
+            if (i > 1) {
+                stars[i].style.visibility = "collapse";
+            }
+        }
+    }
+
+    else if (moves > 13) {
+        for (i = 0; i < 3; i++) {
+            if (i > 0) {
+                stars[i].style.visibility = "collapse";
+            }
+        }
+    }
+}
+
+function warningStar (){
+    let blinkingStar = document.getElementById('blinkingStar');
+    blinkingStar.innerHTML = "&#xf005;";
+
+    setTimeout(function(){
+        blinkingStar.innerHTML = "&#xf006;";
+    }, 1500);
+} 
+
+
+// TIMER SETUP
+var second = 0, minute = 0; hour = 0;
+var timer = document.querySelector(".timer");
+var interval;
+function startTimer() {
+    interval = setInterval(function () {
+        timer.innerHTML = minute + "mins " + second + "secs";
+        second++;
+        if (second == 60) {
+            minute++;
+            second = 0;
+        }
+        if (minute == 60) {
+            hour++;
+            minute = 0;
+        }
+    }, 1000);
+}
+
+
+// POPUP WHEN ALL CARDS MATCHED: DISPLAY TIME, MOVES, STARS
+function congratulations() {
+    if (matchedCard.length == 16) {
+        clearInterval(interval);
+        finalTime = timer.innerHTML;
+
+        modal.classList.add("show");
+
+        var starRating = document.querySelector(".stars").innerHTML;
+
+        document.getElementById("finalMove").innerHTML = moves;
+        document.getElementById("starRating").innerHTML = starRating;
+        document.getElementById("totalTime").innerHTML = finalTime;
+
+        closeModal();
+    };
+}
+
+
+// ALLOWS CLOSING POPUP
+function closeModal() {
+    closeicon.addEventListener("click", function (e) {
+        modal.classList.remove("show");
+    });
+}
+
+
+// PLAY AGAIN BUTTON
+function playAgain() {
+    modal.classList.remove("show");
+    startGame();
+}
+
+
+// ADD LISTENERS TO CARDS
+for (var i = 0; i < cards.length; i++) {
+    card = cards[i];
+    card.addEventListener("click", displayCard);
+    card.addEventListener("click", cardOpen);
+    card.addEventListener("click", congratulations);
+};
+    </script>
+</body>
+</html>
+{% endblock content%}

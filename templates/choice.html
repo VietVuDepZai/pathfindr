@@ -1,0 +1,165 @@
+{% load static %}
+<!doctype html>
+<html x-data="{colorMode: localStorage.getItem('colorMode') || localStorage.setItem('colorMode', 'light')}" x-init="$watch('colorMode', val => localStorage.setItem('colorMode', val))" x-bind:class="{'dark': colorMode === 'dark' || (colorMode === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches)}" class="scroll-smooth h-full overflow-y-auto">
+<title>{{request.user}}</title>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- The Play CDN is designed for development purposes only, and is not the best choice for production. -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script>
+  <title>Autism</title>
+  <link rel="icon"
+      href="{% static 'images/heart.png' %}">
+  <link id="heading-font" rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700;800;900&display=swap" media="all" />
+  <style>
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      font-family: "DM Sans", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    }
+  </style>
+<script>
+    window.tailwind.config = {
+      "darkMode": "class",
+      "theme": {
+        "fontFamily": {
+          "heading": ["DM Sans", "ui-sans-serif", "system-ui", "-apple-system", "BlinkMacSystemFont", "\"Segoe UI\"", "Roboto", "\"Helvetica Neue\"", "Arial", "\"Noto Sans\"", "sans-serif", "\"Apple Color Emoji\"", "\"Segoe UI Emoji\"", "\"Segoe UI Symbol\"", "\"Noto Color Emoji\""],
+          "body": ["DM Sans", "ui-sans-serif", "system-ui", "-apple-system", "BlinkMacSystemFont", "\"Segoe UI\"", "Roboto", "\"Helvetica Neue\"", "Arial", "\"Noto Sans\"", "sans-serif", "\"Apple Color Emoji\"", "\"Segoe UI Emoji\"", "\"Segoe UI Symbol\"", "\"Noto Color Emoji\""]
+        },
+        "extend": {
+          "borderRadius": {
+            "global": "5px"
+          },
+          "colors": {
+            "primary": {
+              "50": "#f8f5ff",
+              "100": "#eee6fe",
+              "200": "#ddcefd",
+              "300": "#c1a6fc",
+              "400": "#844df9",
+              "500": "#4d07e4",
+              "600": "#3705a3",
+              "700": "#280477",
+              "800": "#170245",
+              "900": "#0c0123",
+              "950": "#070114",
+              "DEFAULT": "#570df8"
+            },
+            "secondary": {
+              "50": "#fff5fd",
+              "100": "#ffe6f9",
+              "200": "#fecdf3",
+              "300": "#fea4e9",
+              "400": "#fd49d3",
+              "500": "#e802b3",
+              "600": "#a70280",
+              "700": "#79015d",
+              "800": "#470136",
+              "900": "#23001b",
+              "950": "#140010",
+              "DEFAULT": "#f002b8"
+            }
+          }
+        }
+      },
+      "plugins": [window.tailwind.plugin.withOptions(({
+        prefix = "ui"
+      } = {}) => {
+        return ({
+          addVariant
+        }) => {
+          for (let state of ["open", "checked", "selected", "active", "disabled"]) {
+            addVariant(`${prefix}-${state}`, [
+              `&[data-headlessui-state~="${state}"]`,
+              `:where([data-headlessui-state~="${state}"]) &`,
+            ]);
+
+            addVariant(`${prefix}-not-${state}`, [
+              `&[data-headlessui-state]:not([data-headlessui-state~="${state}"])`,
+              `:where([data-headlessui-state]:not([data-headlessui-state~="${state}"])) &:not([data-headlessui-state])`,
+            ]);
+          }
+        };
+      }), ]
+    };
+  </script>
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+<style>
+  @media (max-width: 594px) {
+    .grid-cols-3 {
+    grid-template-columns: none !important;
+}
+  }
+</style>
+</head>
+
+<body x-data="{'openDialogId': ''}" x-on:keydown.escape="openDialogId=''" class='font-body antialiased h-full font-body antialiased text-[#000000] bg-[#fcfcfc] dark:text-[#ffffff] dark:bg-[#031022]'>
+  <div class="py-11">
+    <div class="text-center flex flex-col gap-y-3 px-2 sm:mx-auto sm:max-w-xl">
+      <p class="dark:text-gray-300">Bạn là ai?</p>
+      <h1 class="font-bold text-3xl text-slate-900 dark:text-gray-100 sm:text-4xl">Bạn sẽ biết được bác sĩ và bệnh nhân làm được gì?</h1>
+      <p class="text-base dark:text-gray-400 sm:text-lg">Bạn có thể tìm hiểu các thông tin  của mình dưới đây sau khi tạo tài khoản xong</p>
+    </div>
+    <div class="grid grid-cols-3 mt-5 gap-y-5 sm:gap-y-0 lg:mx-auto lg:max-w-4xl">
+      <div class="col-span-2 sm:col-span-1"><img class="w-full bg-gray-50" alt="No alt" src="{% static 'images/doctor.png'%}" /></div>
+      <div class="col-span-2 px-3 pb-3 dark:border-slate-700 border-gray-50 sm:col-span-2 sm:flex sm:flex-col sm:justify-center sm:pl-7 sm:border-t lg:border-r">
+        <h1 class="font-semibold text-gray-700 tracking-tight text-xl dark:text-gray-200 dark:divide-undefined sm:mb-2 md:my-1">Bác sĩ</h1>
+        <p class="text-base font-normal tracking-tight leading-relaxed dark:divide-undefined dark:text-gray-300">Ở đây, Bác sĩ sẽ có thể hỗ trợ bệnh nhân thông qua các việc như sau: <ul>
+          <li>- Liên lạc với bệnh nhân thông qua VideoCall, Chat</li>
+          <li>- Tư vấn được thuốc phù hợp với bệnh nhân</li>
+          <li>- Thống kê được dữ liệu bệnh nhân</li>
+          <li>- Đặt lịch hẹn khám bệnh</li>
+          <li>- Có sự hỗ trợ nữa từ AI (cho các trường hợp tự kỷ nhẹ)</li>
+
+        </ul></p>
+<div class="">
+          <a href="doctor-signup" class="relative inline-flex items-center justify-start py-3 pl-4 pr-12 overflow-hidden font-semibold shadow text-indigo-600 transition-all duration-150 ease-in-out rounded hover:pl-10 hover:pr-6 bg-gray-50 group">
+            <span class="absolute bottom-0 left-0 w-full h-1 transition-all duration-150 ease-in-out bg-indigo-600 group-hover:h-full"></span>
+            <span class="absolute right-0 pr-4 duration-200 ease-out group-hover:translate-x-12">
+              <svg class="w-5 h-5 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+              </svg>
+            </span>
+            <span class="absolute left-0 pl-2.5 -translate-x-12 group-hover:translate-x-0 ease-out duration-200">
+              <svg class="w-5 h-5 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+              </svg>
+            </span>
+            <span class="relative w-full text-left transition-colors duration-200 ease-in-out group-hover:text-white">Click vào đây để tiếp tục đăng ký tài khoản Bác sĩ </span>
+          </a>
+        </div>      </div>
+      <div class="col-span-2 px-3 pb-3 order-3 dar:k:border-slate-700 border-gray-50 sm:col-span-2 sm:flex sm:flex-col sm:justify-center sm:pl-7 sm:order-none sm:border-b lg:border-l">
+        <h1 class="font-semibold text-gray-700 tracking-tight text-xl dark:text-gray-200 dark:divide-undefined sm:mb-2 md:my-1">Bệnh nhân</h1>
+        <p class="text-base font-normal tracking-tight leading-relaxed dark:divide-undefined dark:text-gray-300">Bệnh nhân sẽ nhận được sự giúp đỡ từ:
+          <ul><li>- Sự hỗ trợ từ AI (cho các trường hợp tự kỷ nhẹ)</li>
+            <li>- Hẹn được lịch khám với Bác sĩ</li>
+            <li>- Trò chuyện với Bác sĩ qua VideoCall, Chat</li>
+            <li>- AI sẽ liệt kê được các hình thức giải trí (cho các trường hợp tự kỷ nhẹ)</li>
+</ul></p>
+<div class="">
+          <a href="/patient-signup" class="relative inline-flex items-center justify-start py-3 pl-4 pr-12 overflow-hidden font-semibold shadow text-indigo-600 transition-all duration-150 ease-in-out rounded hover:pl-10 hover:pr-6 bg-gray-50 group">
+            <span class="absolute bottom-0 left-0 w-full h-1 transition-all duration-150 ease-in-out bg-indigo-600 group-hover:h-full"></span>
+            <span class="absolute right-0 pr-4 duration-200 ease-out group-hover:translate-x-12">
+              <svg class="w-5 h-5 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+              </svg>
+            </span>
+            <span class="absolute left-0 pl-2.5 -translate-x-12 group-hover:translate-x-0 ease-out duration-200">
+              <svg class="w-5 h-5 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+              </svg>
+            </span>
+            <span class="relative w-full text-left transition-colors duration-200 ease-in-out group-hover:text-white">Click vào đây để tiếp tục đăng ký tài khoản Bệnh nhân </span>
+          </a>
+        </div>    
+      </div>
+      <div class="col-span-2 order-2 sm:col-span-1 sm:order-none"><img class="w-full bg-gray-50" alt="No alt" src="{% static 'images/patient.png'%}" /></div>
+    </div>
+  </div>
+
+</body>
+</html>

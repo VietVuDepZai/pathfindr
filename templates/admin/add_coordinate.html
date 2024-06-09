@@ -1,0 +1,170 @@
+<!-- add_coordinate.html -->
+{% extends 'doctor/doctorbase.html' %}
+{% block content %}
+{% load widget_tweaks %}
+{% load static %}
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Coordinate</title>
+    <!-- Import CSS của Leaflet -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <style>
+        #map { /* Đảm bảo rằng bản đồ sẽ chiếm toàn bộ không gian của trang */
+            width: 100%;
+            height: 400px;
+        }
+        #hu {
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div id="hu">
+        <h1>Thêm địa chỉ</h1>
+        <div>
+            <label for="address">Nhập thử địa chỉ:</label>
+            <input style="    border: 1px solid black; width: 100%;border-radius: 2px" type="text" id="address" name="address">
+            <button onclick="geocodeAddress()" style="margin: 10px 0px; width: 100%;background: #ff84c2; color: white; border-radius: 2px">Tìm kiếm trên bản đồ</button>
+        </div>
+        <div id="map"></div>
+
+        <!-- Import các thư viện JavaScript của Leaflet -->
+        <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+        <script>
+            var map = L.map('map').setView([16.4637, 107.5909], 6); // Set center and zoom level for Vietnam
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            }).addTo(map);
+
+            var marker;
+
+            // Function to geocode address and add marker on map
+            function geocodeAddress() {
+                var address = document.getElementById('address').value;
+
+                if (address) {
+                    fetch('https://nominatim.openstreetmap.org/search?format=json&q=' + encodeURIComponent(address))
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data && data.length > 0) {
+                                var lat = data[0].lat;
+                                var lon = data[0].lon;
+                                var displayName = data[0].display_name;
+
+                                if (marker) {
+                                    map.removeLayer(marker);
+                                }
+                                marker = L.marker([lat, lon]).addTo(map);
+                                map.setView([lat, lon], 12); // Set view to the geocoded location
+                                document.getElementById('latitude').value = lat; // Update latitude input
+                                document.getElementById('longitude').value = lon; // Update longitude input
+                            } else {
+                                alert('No results found for the address.');
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Error:', error);
+                        });
+                } else {
+                    alert('Please enter an address.');
+                }
+            }
+
+            // Function to add marker when user clicks on the map
+            function onMapClick(e) {
+                if (marker) {
+                    map.removeLayer(marker); // Remove existing marker
+                }
+                marker = L.marker(e.latlng).addTo(map); // Add new marker
+                document.getElementById('latitude').value = e.latlng.lat.toFixed(6); // Update latitude input
+                document.getElementById('longitude').value = e.latlng.lng.toFixed(6); // Update longitude input
+            }
+
+            // Add marker when user clicks on the map
+            map.on('click', onMapClick);
+
+            // Function to open Google Maps with marker's latitude and longitude
+            function openGoogleMaps() {
+                var lat = marker.getLatLng().lat.toFixed(6);
+                var lng = marker.getLatLng().lng.toFixed(6);
+                var googleMapsUrl = 'https://www.google.com/maps/search/?api=1&query=' + lat + ',' + lng;
+                window.open(googleMapsUrl, '_blank');
+            }
+
+            // Attach event listener to marker
+            if (marker) {
+                marker.on('click', openGoogleMaps);
+            }
+
+            // Function to submit form
+            function submitForm() {
+                var lat = document.getElementById('latitude').value;
+                var lng = document.getElementById('longitude').value;
+                var address = document.getElementById('address').value;
+                if (lat && lng && address) {
+                    // Create a form and submit it with the coordinates
+                    var form = document.createElement('form');
+                    form.method = 'POST';
+                    form.action = '{% url "save_coordinate" %}'; // Replace 'save_coordinate' with the URL of your view to save coordinates
+
+                    var csrfInput = document.createElement('input');
+                    csrfInput.type = 'hidden';
+                    csrfInput.name = 'csrfmiddlewaretoken';
+                    csrfInput.value = '{{ csrf_token }}';
+                    form.appendChild(csrfInput);
+                    
+                    var addInput = document.createElement('input');
+                    addInput.type = 'hidden';
+                    addInput.name = 'address';
+                    addInput.value = address;
+                    form.appendChild(addInput);
+
+                    var latInput = document.createElement('input');
+                    latInput.type = 'hidden';
+                    latInput.name = 'latitude';
+                    latInput.value = lat;
+                    form.appendChild(latInput);
+
+                    var lngInput = document.createElement('input');
+                    lngInput.type = 'hidden';
+                    lngInput.name = 'longitude';
+                    lngInput.value = lng;
+                    form.appendChild(lngInput);
+
+                    
+
+                    document.body.appendChild(form);
+                    form.submit();
+                } else {
+                    alert('Please select a location on the map.');
+                }
+            }
+
+            // Function to accept location and submit form
+            function acceptLocation() {
+                var lat = document.getElementById('latitude').value;
+                var lng = document.getElementById('longitude').value;
+
+                if (lat && lng) {
+                    submitForm(); // Submit form if coordinates are available
+                } else {
+                    alert('Please select a location on the map.');
+                }
+            }
+        </script>
+        <input type="hidden" id="latitude" name="latitude">
+        <input type="hidden" id="longitude" name="longitude">
+        <div>
+        <button style="    color: white;
+        background: #ff84c2;
+        margin: 10px auto;
+        width: 400px;
+        display: block;
+        border-radius: 4px;
+        padding: 5px;"onclick="acceptLocation()">Lưu thay đổi</button>
+    </div>
+</div>
+</body>
+{% endblock content %}

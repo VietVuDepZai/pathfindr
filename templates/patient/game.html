@@ -1,0 +1,190 @@
+{% extends 'patient/patientbase.html' %}
+{% block content %}
+{%load static%}
+
+<div class="container-fluid">
+    <!-- Card stats -->
+    <div class="card shadow border-0">
+        <div class="card-body">
+            <div style="font-size: 2rem;">Chúc {{request.user}} một ngày tốt lành!</div>
+            <div class="brief"> <i>“Lương y như từ mẫu” – Hồ Chí Minh.
+                </i> </div>
+        </div>
+    </div>
+    <br>
+    <div class="row g-6 mb-6">
+        <div class="col-xl-6 col-sm-6 col-12">
+            <div class="card shadow border-0">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col">
+                            <span class="h6 font-semibold text-muted text-sm d-block mb-2">Hoạt động xả stress</span>
+                            <span class="h3 font-bold mb-0">Sắp có</span>
+                        </div>
+                        <div class="col-auto">
+                            <div class="icon icon-shape bg-tertiary text-white text-lg rounded-circle"
+                                style="background:#e34269 !important ">
+                                <i class="fa-solid fa-person-running"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <div class="mt-2 mb-0 text-sm">
+                        <span class="badge badge-pill bg-soft-success text-success me-2">
+                            <i class="bi bi-arrow-up me-1"></i>13%
+                        </span>
+                        <span class="text-nowrap text-xs text-muted">Since last month</span>
+                    </div> -->
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-6 col-sm-6 col-12">
+            <div class="card shadow border-0">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col">
+                            <span class="h6 font-semibold text-muted text-sm d-block mb-2">Bác sĩ</span>
+                            <span class="h3 font-bold mb-0">{{numpatient}}</span>
+                        </div>
+                        <div class="col-auto">
+                            <div class="icon icon-shape bg-primary text-white text-lg rounded-circle">
+                                <i class="fa-solid fa-user-doctor"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <div class="mt-2 mb-0 text-sm">
+                        <span class="badge badge-pill bg-soft-success text-success me-2">
+                            <i class="bi bi-arrow-up me-1"></i>30%
+                        </span>
+                        <span class="text-nowrap text-xs text-muted">Since last month</span>
+                    </div> -->
+                </div>
+            </div>
+        </div>
+        <!--         <div class="col-xl-3 col-sm-6 col-12">
+            <div class="card shadow border-0">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col">
+                            <span class="h6 font-semibold text-muted text-sm d-block mb-2">Work load</span>
+                            <span class="h3 font-bold mb-0">95%</span>
+                        </div>
+                        <div class="col-auto">
+                            <div class="icon icon-shape bg-warning text-white text-lg rounded-circle">
+                                <i class="bi bi-minecart-loaded"></i>
+                            </div>
+                        </div>
+                    </div>
+              <div class="mt-2 mb-0 text-sm">
+                        <span class="badge badge-pill bg-soft-success text-success me-2">
+                            <i class="bi bi-arrow-up me-1"></i>10%
+                        </span>
+                        <span class="text-nowrap text-xs text-muted">Since last month</span>
+                    </div> 
+                </div>
+            </div>
+        </div> -->
+    </div>
+    <div class="card shadow border-0 mb-7">
+        <div class="card-header">
+            <h5 class="mb-0">Bác sĩ</h5>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-hover table-nowrap">
+                <thead class="thead-light">
+                    <tr>
+                        <th scope="col">Trò chơi</th>
+                        <th scope="col">Mô tả ngắn</th>
+                        <!-- <th scope="col">Nội dung</th> -->
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                    <tr>
+                        <td>
+                            <img style="background: #fafafa;
+                            box-shadow: 4px 6px 36px -6px rgba(1, 1, 1, 0.5);
+                            margin: auto;   
+                            border-radius: 50%;
+                            height: 50px;
+                            object-fit: cover;
+                            margin: auto;" width="50" height="50" alt="..." src="/static/images/abc.png">
+                        </td>
+
+                        <td>Trò chơi giúp phát triển kỹ năng đọc, viết bảng chữ cái cho trẻ em một cách thú vị.</td>
+                        <!-- 
+                        <td>
+                            Chủ đề
+                        </td> -->
+                        <td class="text-end">
+                            <a href="/alphabet" class="btn btn-sm btn-neutral">Bắt đầu chơi</a>
+                           
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <img style="background: #fafafa;
+                            box-shadow: 4px 6px 36px -6px rgba(1, 1, 1, 0.5);
+                            margin: auto;   
+                            border-radius: 50%;
+                            height: 50px;
+                            object-fit: cover;
+                            margin: auto;" width="50" height="50" alt="..." src="/static/images/memory.png">
+                        </td>
+
+                        <td>Trò chơi giúp ghi nhớ các thành viên trong gia đình cho trẻ em một cách thú vị.</td>
+                        <!-- 
+                        <td>
+                            Chủ đề
+                        </td> -->
+                        <td class="text-end">
+                            <a href="/memory" class="btn btn-sm btn-neutral">Bắt đầu chơi</a>
+                           
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <img style="background: #fafafa;
+                            box-shadow: 4px 6px 36px -6px rgba(1, 1, 1, 0.5);
+                            margin: auto;   
+                            border-radius: 50%;
+                            height: 50px;
+                            object-fit: cover;
+                            margin: auto;" width="50" height="50" alt="..." src="https://th.bing.com/th/id/OIP.scBRXrdfuJEAytVVq-ov8QAAAA?w=320&h=302&rs=1&pid=ImgDetMain">
+                        </td>
+
+                        <td>Trò chơi giúp ghi nhớ các tên tiếng anh của động vật</td>
+                        <!-- 
+                        <td>
+                            Chủ đề
+                        </td> -->
+                        <td class="text-end">
+                            <a href="/animals" class="btn btn-sm btn-neutral">Bắt đầu chơi</a>
+                           
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="card-footer border-0 py-5">
+            <a style="color: gray" class=" text-sm">Hiển thị thêm</a>
+        </div>
+    </div>
+</div>
+
+<script>
+    function status() {
+        var status = document.getElementsByClassName("status")
+        for (let index = 0; index < status.length; index++) {
+            if (status[index].innerHTML == "True") {
+                status[index].innerHTML = "Đã xác nhận"
+            } else {
+                status[index].innerHTML = "Chưa xác nhận"
+            }
+        }
+
+    }
+    setTimeout(function () { status() }, 1);
+
+</script>
+{% endblock content%}

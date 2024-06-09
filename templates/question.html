@@ -1,0 +1,830 @@
+<!-- IMPORTANT:
+
+This Template Download URL and its Usage License URL is given further down below. Please visit these URLs for Free / Full Download of this Template For Local Hosting Purposes.
+
+This Codepen Project is meant for Learning Purposes only and must not be used for any deployments.
+
+-->
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <style>
+    	input[type="text"] {
+			min-width: 20%;
+			font-family: Poppins;
+			padding: 10px;
+			border: none;
+			outline: none;
+			border-bottom: 2px solid #ccc;
+			border-radius: 5px;
+			transition: 0.5s;
+    display: inline-block;
+    margin: auto !important;
+    }
+ 
+   #upshort:hover {
+    background: #fff !important;
+    color: #18d26e !important;
+   }
+   .active {
+    background: #fff !important;
+    color: #18d26e !important;
+   }
+ 
+  </style>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>PathFindr</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="https://i.postimg.cc/jSNNWYds/logo-removebg-preview-1.png" rel="icon">
+  <link href="https://i.postimg.cc/jSNNWYds/logo-removebg-preview-1.png" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700"
+    rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="https://cdn.jsdelivr.net/gh/linuxguist/bizpage@main/assets/vendor/animate.css/animate.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/gh/linuxguist/bizpage@main/assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/gh/linuxguist/bizpage@main/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/gh/linuxguist/bizpage@main/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/gh/linuxguist/bizpage@main/assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/gh/linuxguist/bizpage@main/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="https://cdn.jsdelivr.net/gh/linuxguist/bizpage@main/assets/css/style.css" rel="stylesheet">
+
+  <!-- =======================================================
+  * Template Name: PathFindr
+  * Updated: Mar 10 2023 with Bootstrap v5.2.3
+  * Template URL: https://bootstrapmade.com/PathFindr-bootstrap-business-template/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+</head>
+
+<body>
+
+  <!-- ======= Header ======= -->
+  <header id="header" class="fixed-top d-flex align-items-center header-transparent">
+    <div class="container-fluid">
+
+      <div class="row justify-content-center align-items-center">
+        <div class="col-xl-11 d-flex align-items-center justify-content-between">
+          <h1 class="logo"><a href="/">PathFindr</a></h1>
+          <!-- Uncomment below if you prefer to use an image logo -->
+          <!-- <a href="index.html" class="logo"><img src="https://cdn.jsdelivr.net/gh/linuxguist/bizpage@main/assets/img/logo.png" alt="" class="img-fluid"></a>-->
+
+          <nav id="navbar" class="navbar">
+            <ul>
+              <li><a class="nav-link scrollto " href="/">Trang chủ</a></li>
+              <li><a class="nav-link scrollto" style='color: #18d26e !important;'href="/question">Tra cứu TS10</a></li>
+
+              <li><a class="nav-link scrollto" href="/posts">Review Các trường THPT</a></li>
+
+              <li><a class="nav-link scrollto" href="/forums">Diễn đàn</a></li>
+              {% if request.user.is_authenticated %}
+              <div class="auth" style="
+                        margin-left: 16px;
+                ">
+                <style>
+                .account-icon {
+                  
+                            display: inline-block;
+                            cursor: pointer;
+                        }
+                        .account-icon img {
+                            width: 50px;
+                            height: 50px;
+                            border-radius: 50%;
+                        }
+                        .dropdown-menu {
+                            display: none;
+                            position: absolute;
+                            top: 60px;
+                            right: 0;
+                            background-color: white;
+                            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+                            z-index: 1;
+                            width: 200px;
+                        }
+                        .dropdown-menu a {
+                            color: black;
+                            padding: 12px 16px;
+                            text-decoration: none;
+                            display: block;
+                        }
+                        .dropdown-menu a:hover {
+                            background-color: #f1f1f1;
+                        }
+                      .auth .show {
+                            display: block;
+                        }
+                .auth button {
+                        border-radius: 4px;
+                        box-shadow: 0 2px 4px 0 rgba(0,0,0,0.2), 0 1.5px 5px 0 rgba(0,0,0,0.19);
+
+                        text-decoration: none;
+                    border: none;
+                    background: #0074d9;
+                    color: white !important;
+                    font-family: 'Varela Round';
+                }
+                .auth button a {
+                    color: white;
+                    text-decoration: none;
+                    display: block;
+                    color: white;
+                    text-decoration: none;
+                    padding: 8px 16px;
+                }
+
+                </style>
+
+
+                <div class="account-icon" onclick="toggleDropdown()">
+                  <img src="{{student.profile_pic.url}}" alt="Account Icon">
+                  <div class="dropdown-menu" id="dropdownMenu">
+                      <a href="/profile">Thông tin cá nhân</a>
+                      <a href="/history" style="    text-wrap: wrap;">Lịch sử tư vấn tuyển sinh 10</a>
+                      <a href="/logout">Đăng xuất</a>
+                  </div>
+                </div>
+                    
+
+                      
+                <script>
+                      function toggleDropdown() {
+                            var dropdownMenu = document.getElementById("dropdownMenu");
+                            dropdownMenu.classList.toggle("show");
+                        }
+
+                        // Close the dropdown if the user clicks outside of it
+                        window.onclick = function(event) {
+                            if (!event.target.matches('.account-icon img')) {
+                                var dropdowns = document.getElementsByClassName("dropdown-menu");
+                                for (var i = 0; i < dropdowns.length; i++) {
+                                    var openDropdown = dropdowns[i];
+                                    if (openDropdown.classList.contains('show')) {
+                                        openDropdown.classList.remove('show');
+                                    }
+                                }
+                            }
+                        }
+                </script>
+                </div>
+                {% else %}
+              <li><a id="login" class="btn-get-started scrollto animate__animated animate__fadeInUp" style="" href="/login">Đăng nhập</a></li>
+                {% endif %}
+            </ul>
+            <i class="bi bi-list mobile-nav-toggle"></i>
+          </nav><!-- .navbar -->
+        </div>
+      </div>
+
+    </div>
+  </header><!-- End Header -->
+
+  <!-- ======= hero Section ======= -->
+  <section id="hero">
+    <div class="hero-container">
+      <div id="heroCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="5000">
+
+        <ol id="hero-carousel-indicators" class="carousel-indicators" style="display:none" ></ol>
+
+        <div class="carousel-inner" role="listbox">
+
+          <div class="carousel-item active" style="background-image: url(https://toquoc.mediacdn.vn/2018/12/20/thpt-chuyen-tran-dai-nghia-15452927060821767694180.jpg) !important; background-size: cover !important; background-repeat: no-repeat  !important;">
+            <div class="carousel-container">
+              <div class="container">
+                <h2 class="animate__animated animate__fadeInDown">Bạn có dự định thi chuyên hay không</h2>
+                <a onclick="yesBtn()"id="yes" data-bs-slide="next"style="width: 100px; font-size: 108%"  class="btn-get-started scrollto animate__animated animate__fadeInUp" href="#heroCarousel" style="    font-weight: 900; font-size: 98%;">Có</a>
+                <a onclick="noBtn()"id="no" data-bs-slide="next" style="width: 144px; font-size: 108%"class="btn-get-started scrollto animate__animated animate__fadeInUp" href="#heroCarousel"style="    font-weight: 900; font-size: 98%">Không</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="carousel-item" style="background-image: url(https://images2.thanhnien.vn/528068263637045248/2023/5/17/anh-ptnk-16843219049222010397389.jpg) !important; background-size: cover !important; background-repeat: no-repeat  !important;">
+            <div class="carousel-container">
+              <div class="container">
+                <h2 class="animate__animated animate__fadeInDown" id="titlefdf">Chọn môn chuyên</h2>
+                <div id="choosing">
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="carousel-item" style="background-image: url(https://r73troypb4obj.vcdn.cloud/website02/uploads/images/6204c5311a1b851bec303e52/danh-gia-truong-thpt-bui-thi-xuan-co-tot-khong-2.jpg) !important; background-size: cover !important; background-repeat: no-repeat  !important;">
+            <div class="carousel-container">
+              <div class="container">
+                <h2 class="animate__animated animate__fadeInDown">Nhập tổng điểm cuối học kì I hoặc II dưới đây</h2>
+               <div style="display: none;">
+                <h3  style="color: white; font-size: 16px;">Lớp:  <select style="width: 200px;" name="cars" id="cars">
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                </select></h3>
+              </div>
+                <div id="vuchanhung">
+      
+            </div>
+            <div style='width: 100%'> <a href="#" id="submitall"onclick="submit()" style="width: 310px; display:  block; margin: 20px auto" class="btn-get-started scrollto animate__animated animate__fadeInUp">Tiếp tục</a>
+     </div>         </div>
+            </div>
+          </div>
+        </div>
+
+        <a class="carousel-control-prev" href="#heroCarousel" role="button" style="display:none" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon bi bi-chevron-left" aria-hidden="true"></span>
+        </a>
+
+        <a class="carousel-control-next" href="#heroCarousel" role="button" style="display:none" data-bs-slide="next">
+          <span class="carousel-control-next-icon bi bi-chevron-right" aria-hidden="true"></span>
+        </a>
+
+      </div>
+    </div>
+  </section><!-- End Hero Section -->
+  <!-- ======= Footer ======= -->
+  <footer id="footer">
+    <div class="footer-top">
+      <div class="container">
+        <div class="row">
+
+        
+          <div class="col-lg-12 col-md-6 footer-info">
+            <h3>PathFindr</h3>
+            <p style="font-size: 18px;">PathFindr là dịch vụ giúp tư vấn hướng nghiệp, hay hướng nghiệp khi đăng ký hồ sơ vào các trường cấp ba nhằm hỗ trợ một cá nhân nào đó trong việc lựa chọn ngành nghề phù hợp nhất với khả năng, sở thích của bản thân. Không chỉ là ngành nghề phù hợp, cá nhân đó cũng được tư vấn, hỗ trợ để chọn ngành nghề đáp ứng được nhu cầu nhân lực của xã hội lúc bấy giờ.
+
+            </p>
+          </div>
+
+       
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="copyright">
+        &copy; Copyright <strong><a href="https://3dviet.vercel.app">VietVu</a></strong>. All Rights Reserved
+      </div>
+     
+    </div>
+  </footer><!-- End Footer -->
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+    class="bi bi-arrow-up-short"></i></a>
+    <a href="/chat" style="display: block; position: relative;">   <img style="    background: #fafafa;
+      box-shadow: 4px 6px 36px -6px rgba(1, 1, 1, 0.5);
+      margin: auto;
+      z-index: 199;
+      padding: 0px;
+      right: 7px;
+      border-radius: 50%;
+      bottom: 64px;
+      position: fixed;
+      margin: auto;"
+      width="60" height="60" src="https://i.ibb.co/SnbvPY7/Thi-t-k-ch-a-c-t-n-1.png" alt="LEVIOOSA"></a>
+  <!-- Uncomment below i you want to use a preloader -->
+  <!-- <div id="preloader"></div> -->
+
+  <!-- Vendor JS Files -->
+  <script src="https://cdn.jsdelivr.net/gh/linuxguist/bizpage@main/assets/vendor/purecounter/purecounter_vanilla.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/linuxguist/bizpage@main/assets/vendor/aos/aos.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/linuxguist/bizpage@main/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/linuxguist/bizpage@main/assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/linuxguist/bizpage@main/assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/linuxguist/bizpage@main/assets/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/linuxguist/bizpage@main/assets/vendor/waypoints/noframework.waypoints.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/linuxguist/bizpage@main/assets/vendor/php-email-form/validate.js"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+  <!-- Template Main JS File -->
+<script type="text/javascript">
+  var arrayans = [];
+  var titlefdf = document.getElementById('titlefdf');
+  let currentIndex = 0;
+    const items = document.querySelectorAll('.carousel-item');
+
+    function showItem(index) {
+        items.forEach((item, i) => {
+            if (i === index) {
+                item.classList.add('active');
+            } else {
+                item.classList.remove('active');
+            }
+        });
+    }
+
+  function setCookie(cname, cvalue, exdays) {
+    var d = new Date();
+    d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+    var expires = "expires=" + d.toUTCString();
+    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+  }
+
+  function getCookie(cname) {
+    var name = cname + "=";
+    var decodedCookie = decodeURIComponent(document.cookie);
+    var ca = decodedCookie.split(';');
+    for (var i = 0; i < ca.length; i++) {
+      var c = ca[i];
+      while (c.charAt(0) == ' ') {
+        c = c.substring(1);
+      }
+      if (c.indexOf(name) == 0) {
+        return c.substring(name.length, c.length);
+      }
+    }
+    return "";
+  }
+
+  function yesBtn() {
+    var choosing = document.getElementById('choosing');
+    choosing.innerHTML = `
+      <button data-bs-slide="next" onclick="Iamhandsome(0)" class="btn-get-started scrollto animate__animated subject animate__fadeInUp">Toán</button>
+      <button data-bs-slide="next" onclick="Iamhandsome(1)" class="btn-get-started scrollto animate__animated subject animate__fadeInUp">Văn</button>
+      <button data-bs-slide="next" onclick="Iamhandsome(2)" class="btn-get-started scrollto animate__animated subject animate__fadeInUp">Anh</button>
+      <button data-bs-slide="next" onclick="Iamhandsome(3)" class="btn-get-started scrollto animate__animated subject animate__fadeInUp">Tin học</button>
+      <button data-bs-slide="next" onclick="Iamhandsome(4)" class="btn-get-started scrollto animate__animated subject animate__fadeInUp">Lý</button>
+      <button data-bs-slide="next" onclick="Iamhandsome(5)" class="btn-get-started scrollto animate__animated subject animate__fadeInUp">Hóa</button>
+      <button data-bs-slide="next" onclick="Iamhandsome(6)" class="btn-get-started scrollto animate__animated subject animate__fadeInUp">Sinh</button>
+      <button data-bs-slide="next" onclick="Iamhandsome(7)" class="btn-get-started scrollto animate__animated subject animate__fadeInUp">KHTN</button>
+ <div style='width: 100%'>     <a id="nextsub" onclick="final()" style="width: 300px;" class="btn-get-started scrollto animate__animated animate__fadeInUp" href="#heroCarousel" style="font-weight: 900;">Xác nhận</a> </div>
+    `;
+    currentIndex = (currentIndex + 1) % items.length;
+    showItem(currentIndex);
+    setCookie("answer", "yes", 30); // Set cookie for 30 days
+  }
+
+  function noBtn() {
+    titlefdf.innerHTML = "Hiện tại bạn đang học tích hợp đúng không?";
+    var choosing = document.getElementById('choosing');
+    choosing.innerHTML = `
+      <a id="yes"  onclick="final1()" data-bs-slide="next"  style="width: 100px;  font-size: 108%"" class="btn-get-started scrollto animate__animated animate__fadeInUp" href="#heroCarousel" style="font-weight: 900; font-size: 98%">Có</a>
+      <a id="no" onclick="final2()" data-bs-slide="next"  style="width: 144px; font-size: 108%"" class="btn-get-started scrollto animate__animated animate__fadeInUp" href="#heroCarousel" style="font-weight: 900; font-size: 98%">Không</a>
+    `;
+    currentIndex = (currentIndex + 1) % items.length;
+    showItem(currentIndex);
+    setCookie("answer", "no", 30); // Set cookie for 30 days
+
+  }
+
+  function Iamhandsome(index) {
+    var subjects = document.getElementsByClassName('subject');
+    var active = document.getElementsByClassName('active');
+
+    if (subjects[index].className.includes('active')) {
+      subjects[index].classList.remove("active");
+      const ele = arrayans.indexOf(subjects[index].innerHTML);
+      arrayans.splice(ele, 1);
+    } else if (active.length < 2) {
+      subjects[index].classList.add("active");
+      arrayans.push(subjects[index].innerHTML);
+    } else {
+      alert("Click tối đa 1 môn");
+    }
+
+    setCookie("subject", subjects[index].innerHTML, 30); // Set cookie for 30 days
+  }
+
+  function final() {
+    var nextsub = document.getElementById('nextsub')
+    var vuchanhung = document.getElementById('vuchanhung');
+   // Set cookie for 30 days
+
+    vuchanhung.innerHTML = `<input type="text" name="" placeholder="Điểm Toán" id="diemToan">
+              <input type="text" name="" placeholder="Điểm Văn" id="diemVan">
+              <input type="text" name="" placeholder="Điểm Anh" id="diemAnh">
+              <input type="text" name="" style="margin-left: 3px !important;" placeholder="Điểm môn ${arrayans[0]}" id="diemchuyen"> `;
+    if (arrayans[0] == "Văn" || arrayans[0] == "Toán" || arrayans[0] == "Anh") {
+      vuchanhung.innerHTML = `<input type="text" name="" placeholder="Điểm Toán" id="diemToan">
+              <input type="text" name="" placeholder="Điểm Văn" id="diemVan">
+              <input type="text" name="" placeholder="Điểm Anh" id="diemAnh">`;
+    } 
+    var active = document.getElementsByClassName('active');
+    if (active.length >= 2) {
+      document.getElementById("nextsub").setAttribute("data-bs-slide", "next");
+      document.getElementById("nextsub").innerText = "Tiếp tục"
+      currentIndex = (currentIndex + 1) % items.length;
+    showItem(currentIndex);
+    } else {
+      document.getElementById("nextsub").innerText = "Vui lòng chọn muôn chuyên để tiếp tục"
+
+    }
+  }
+  
+  function final1() {
+    var vuchanhung = document.getElementById('vuchanhung');
+   // Set cookie for 30 days
+    
+    vuchanhung.innerHTML = `<input type="text" name="" placeholder="Điểm Toán" id="diemToan">
+              <input type="text" name="" placeholder="Điểm Văn" id="diemVan">
+              <input type="text" name="" placeholder="Điểm Anh" id="diemAnh">
+              <input type="text" name="" style="margin-left: 3px !important;" placeholder="Điểm tiếng Anh tích hợp" id="diemchuyen"> `;
+              currentIndex = (currentIndex + 1) % items.length;
+    showItem(currentIndex);
+              setCookie("tichhop", "yes", 30); // Set cookie for 30 days
+
+  }
+  function final2() {
+    var vuchanhung = document.getElementById('vuchanhung');
+   // Set cookie for 30 days
+    
+    vuchanhung.innerHTML = `<input type="text" name="" placeholder="Điểm Toán" id="diemToan">
+              <input type="text" name="" placeholder="Điểm Văn" id="diemVan">
+              <input type="text" name="" placeholder="Điểm Anh" id="diemAnh">`;
+              currentIndex = (currentIndex + 1) % items.length;
+    showItem(currentIndex);
+              setCookie("tichhop", "no", 30); // Set cookie for 30 days
+
+  }
+  function convertCommaToPeriod(str) {
+    return str.replace(/,/g, '.');
+  }
+  function submit() {
+    var diemToanInput = document.getElementById('diemToan');
+    var diemVanInput = document.getElementById('diemVan');
+    var diemAnhInput = document.getElementById('diemAnh');
+    
+    // Get the scores from the input fields
+    var diemToan = diemToanInput.value;
+    var diemVan = diemVanInput.value;
+    var diemAnh = diemAnhInput.value;
+    var diemchuyen = 0
+    try {
+      var monchuyen = arrayans[0]
+
+      var diemchuyenInput = document.getElementById('diemchuyen');
+      var diemchuyen = diemchuyenInput.value
+      setCookie( monchuyen, diemchuyen, 30); 
+    } catch (error) {}
+    
+    // // Validate if the input fields are not empty
+    // if (diemToan.value === null || diemVan.value === null || diemAnh.value === null) {
+    //   alert("Vui lòng nhập điểm cho mỗi môn!");
+    //   return;
+    // }
+    var monchuyen = arrayans[0]
+    // Store the scores in the arrayans array
+    arrayans.push({ "Toán": diemToan, "Văn": diemVan, "Anh": diemAnh, monchuyen : diemchuyen});
+    var carsSelect = document.getElementById('cars');
+    // Set cookies for arrayans
+    setCookie( "Toán", diemToan, 30); 
+    setCookie( "Văn", diemVan, 30); 
+    setCookie( "Anh", diemAnh, 30); 
+    setCookie("tiếng Anh tích hợp", diemchuyen)
+    var selectedClass = carsSelect.value;
+    setCookie("class", selectedClass, 30);
+    var active = document.getElementsByClassName('active');
+    var regex = /^(10|\d(?:\.\d{1,2})?)$/;
+
+    // Check each input field against the regular expression
+    var diemToanValid = regex.test(convertCommaToPeriod(diemToan));
+    var diemVanValid = regex.test(convertCommaToPeriod(diemVan));
+    var diemAnhValid = regex.test(convertCommaToPeriod(diemAnh));
+    try {
+      var diemchuyenValid = regex.test(convertCommaToPeriod(diemchuyen));
+    } catch {
+      var diemchuyenValid = false;
+    }
+
+    // Check if any of the scores are 0
+    var diemToanIsZero = convertCommaToPeriod(diemToan) === '0';
+    var diemVanIsZero = convertCommaToPeriod(diemVan) === '0';
+    var diemAnhIsZero = convertCommaToPeriod(diemAnh) === '0';
+    var diemchuyenIsZero = diemchuyenValid && convertCommaToPeriod(diemchuyen) === '0';
+
+    // If all inputs are valid, enable the submit button
+    if (diemchuyenValid) {
+      if (diemToanValid && diemVanValid && diemAnhValid) {
+        if (diemToanIsZero || diemVanIsZero || diemAnhIsZero || diemchuyenIsZero) {
+          document.getElementById("submitall").innerText = 'Điểm liệt vui lòng nhập lại';
+        } else {
+          swal({
+            title: "Lưu ý",
+            text: "*Thông tin này chỉ mang tính chất tham khảo không mang tính quyết định",
+            icon: "warning",
+            buttons: {
+              confirm: {
+                text: "Xác nhận",
+                value: true
+              }
+            }
+          }).then((value) => {
+            if (value) {
+              window.location.href = window.location.protocol + '//' + window.location.host + "/result" // thay đổi đường dẫn này thành trang web bạn muốn chuyển hướng
+            }
+          }); 
+           document.getElementById("submitall").innerText = "Tiếp tục";
+          // document.getElementById("submitall").setAttribute("href", "/result");
+        }
+      } else {
+        document.getElementById("submitall").innerText = "Vui lòng nhập lại điểm";
+      }
+    } else {
+      if (diemToanValid && diemVanValid && diemAnhValid) {
+        if (diemToanIsZero || diemVanIsZero || diemAnhIsZero) {
+          document.getElementById("submitall").innerText = 'Điểm liệt vui lòng nhập lại';
+        } else {
+          swal({
+            title: "Lưu ý",
+            text: "*Thông tin này chỉ mang tính chất tham khảo không mang tính quyết định",
+            icon: "warning",
+            buttons: {
+              confirm: {
+                text: "Xác nhận",
+                value: true
+              }
+            }
+          }).then((value) => {
+            if (value) {
+              window.location.href = window.location.protocol + '//' + window.location.host + "/result" // thay đổi đường dẫn này thành trang web bạn muốn chuyển hướng
+            }
+          }); 
+          document.getElementById("submitall").innerText = "Tiếp tục";
+          // document.getElementById("submitall").setAttribute("href", "/result");
+        }
+      } else {
+        document.getElementById("submitall").innerText = "Vui lòng nhập lại điểm";
+      }
+    }
+  }
+ 
+
+
+
+</script>
+<script>
+  /**
+* Template Name: BizPage
+* Updated: Mar 10 2023 with Bootstrap v5.2.3
+* Template URL: https://bootstrapmade.com/bizpage-bootstrap-business-template/
+* Author: BootstrapMade.com
+* License: https://bootstrapmade.com/license/
+*/
+(function() {
+  "use strict";
+
+  /**
+   * Easy selector helper function
+   */
+  const select = (el, all = false) => {
+    el = el.trim()
+    if (all) {
+      return [...document.querySelectorAll(el)]
+    } else {
+      return document.querySelector(el)
+    }
+  }
+
+  /**
+   * Easy event listener function
+   */
+  const on = (type, el, listener, all = false) => {
+    let selectEl = select(el, all)
+    if (selectEl) {
+      if (all) {
+        selectEl.forEach(e => e.addEventListener(type, listener))
+      } else {
+        selectEl.addEventListener(type, listener)
+      }
+    }
+  }
+
+  /**
+   * Easy on scroll event listener 
+   */
+  const onscroll = (el, listener) => {
+    el.addEventListener('scroll', listener)
+  }
+
+  /**
+   * Navbar links active state on scroll
+   */
+  let navbarlinks = select('#navbar .scrollto', true)
+  const navbarlinksActive = () => {
+    let position = window.scrollY + 200
+    navbarlinks.forEach(navbarlink => {
+      if (!navbarlink.hash) return
+      let section = select(navbarlink.hash)
+      if (!section) return
+      if (position >= section.offsetTop && position <= (section.offsetTop + section.offsetHeight)) {
+        navbarlink.classList.add('active')
+      } else {
+        navbarlink.classList.remove('active')
+      }
+    })
+  }
+  window.addEventListener('load', navbarlinksActive)
+  onscroll(document, navbarlinksActive)
+
+  /**
+   * Scrolls to an element with header offset
+   */
+  const scrollto = (el) => {
+    let header = select('#header')
+    let offset = header.offsetHeight
+
+    if (!header.classList.contains('header-scrolled')) {
+      offset -= 20
+    }
+
+    let elementPos = select(el).offsetTop
+    window.scrollTo({
+      top: elementPos - offset,
+      behavior: 'smooth'
+    })
+  }
+
+  /**
+   * Toggle .header-scrolled class to #header when page is scrolled
+   */
+  let selectHeader = select('#header')
+  if (selectHeader) {
+    const headerScrolled = () => {
+      if (window.scrollY > 100) {
+        selectHeader.classList.add('header-scrolled')
+      } else {
+        selectHeader.classList.remove('header-scrolled')
+      }
+    }
+    window.addEventListener('load', headerScrolled)
+    onscroll(document, headerScrolled)
+  }
+
+  /**
+   * Hero carousel indicators
+   */
+  // let heroCarouselIndicators = select("#hero-carousel-indicators")
+  // let heroCarouselItems = select('#heroCarousel .carousel-item', true)
+
+  // heroCarouselItems.forEach((item, index) => {
+  //   (index === 0) ?
+  //   heroCarouselIndicators.innerHTML += "<li data-bs-target='#heroCarousel' style='display:none' data-bs-slide-to='" + index + "' class='active'></li>":
+  //     heroCarouselIndicators.innerHTML += "<li data-bs-target='#heroCarousel'style='display:none' data-bs-slide-to='" + index + "'></li>"
+  // });
+
+  /**
+   * Back to top button
+   */
+  let backtotop = select('.back-to-top')
+  if (backtotop) {
+    const toggleBacktotop = () => {
+      if (window.scrollY > 100) {
+        backtotop.classList.add('active')
+      } else {
+        backtotop.classList.remove('active')
+      }
+    }
+    window.addEventListener('load', toggleBacktotop)
+    onscroll(document, toggleBacktotop)
+  }
+
+  /**
+   * Mobile nav toggle
+   */
+  on('click', '.mobile-nav-toggle', function(e) {
+    select('#navbar').classList.toggle('navbar-mobile')
+    this.classList.toggle('bi-list')
+    this.classList.toggle('bi-x')
+  })
+
+  /**
+   * Mobile nav dropdowns activate
+   */
+  on('click', '.navbar .dropdown > a', function(e) {
+    if (select('#navbar').classList.contains('navbar-mobile')) {
+      e.preventDefault()
+      this.nextElementSibling.classList.toggle('dropdown-active')
+    }
+  }, true)
+
+  /**
+   * Scrool with ofset on links with a class name .scrollto
+   */
+  on('click', '.scrollto', function(e) {
+    if (select(this.hash)) {
+      e.preventDefault()
+
+      let navbar = select('#navbar')
+      if (navbar.classList.contains('navbar-mobile')) {
+        navbar.classList.remove('navbar-mobile')
+        let navbarToggle = select('.mobile-nav-toggle')
+        navbarToggle.classList.toggle('bi-list')
+        navbarToggle.classList.toggle('bi-x')
+      }
+      scrollto(this.hash)
+    }
+  }, true)
+
+  /**
+   * Scroll with ofset on page load with hash links in the url
+   */
+  window.addEventListener('load', () => {
+    if (window.location.hash) {
+      if (select(window.location.hash)) {
+        scrollto(window.location.hash)
+      }
+    }
+  });
+
+  /**
+   * Preloader
+   */
+  let preloader = select('#preloader');
+  if (preloader) {
+    window.addEventListener('load', () => {
+      preloader.remove()
+    });
+  }
+
+  /**
+   * Skills animation
+   */
+  let skilsContent = select('.skills-content');
+  if (skilsContent) {
+    new Waypoint({
+      element: skilsContent,
+      offset: '80%',
+      handler: function(direction) {
+        let progress = select('.progress .progress-bar', true);
+        progress.forEach((el) => {
+          el.style.width = el.getAttribute('aria-valuenow') + '%'
+        });
+      }
+    })
+  }
+
+  /**
+   * Porfolio isotope and filter
+   */
+  window.addEventListener('load', () => {
+    let portfolioContainer = select('.portfolio-container');
+    if (portfolioContainer) {
+      let portfolioIsotope = new Isotope(portfolioContainer, {
+        itemSelector: '.portfolio-item',
+        layoutMode: 'fitRows'
+      });
+
+      let portfolioFilters = select('#portfolio-flters li', true);
+
+      on('click', '#portfolio-flters li', function(e) {
+        e.preventDefault();
+        portfolioFilters.forEach(function(el) {
+          el.classList.remove('filter-active');
+        });
+        this.classList.add('filter-active');
+
+        portfolioIsotope.arrange({
+          filter: this.getAttribute('data-filter')
+        });
+        portfolioIsotope.on('arrangeComplete', function() {
+          AOS.refresh()
+        });
+      }, true);
+    }
+
+  });
+
+  /**
+   * Initiate portfolio lightbox 
+   */
+  const portfolioLightbox = GLightbox({
+    selector: '.portfolio-lightbox'
+  });
+
+  /**
+   * Portfolio details slider
+   */
+ 
+
+  /**
+  /**
+   * Animation on scroll
+   */
+  window.addEventListener('load', () => {
+    AOS.init({
+      duration: 1000,
+      easing: 'ease-in-out',
+      once: true,
+      mirror: false
+    })
+  });
+
+  /**
+   * Initiate Pure Counter 
+   */
+
+})()
+</script>
+</body>
+
+</html>

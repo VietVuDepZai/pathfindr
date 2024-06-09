@@ -1,0 +1,431 @@
+{% load static %}
+{% load siu %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+  integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+  crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+  integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+  crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>PathFindr</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+  <!-- Favicons -->
+  <link href="https://i.postimg.cc/jSNNWYds/logo-removebg-preview-1.png" rel="icon">
+  <link href="https://i.postimg.cc/jSNNWYds/logo-removebg-preview-1.png" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
+  <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css'>
+  <style>
+
+a {
+  cursor: pointer;
+}
+.form-control:focus {
+  box-shadow: none;
+  border-color: #BA68C8;
+}
+tr {
+  background: white !important;
+}
+.profile-button {
+  background: #BA68C8;
+  box-shadow: none;
+  border: none;
+}
+
+.profile-button:hover {
+  background: #682773;
+}
+
+.profile-button:focus {
+  background: #682773;
+  box-shadow: none;
+}
+
+.profile-button:active {
+  background: #682773;
+  box-shadow: none;
+}
+
+.back:hover {
+  color: #682773;
+  cursor: pointer;
+}
+.table-container{
+    overflow: auto; 
+    border-radius: .8rem; 
+    box-shadow: 0 0 0.5rem rgba(39, 38, 38, 0.1);
+    display: none;
+}
+
+@media (min-width: 768px) {
+    .table-container {
+        display: block;
+    }
+}
+
+
+table {
+    width: 100%;
+}
+
+.table-header{
+    background-color: #f9fafb; 
+    border-bottom-width: 0.125rem; 
+    border-color: #edf2f7;
+}
+
+.table-header-row{
+    background-color: #4bffae !important; 
+    border-bottom-width: 0.125rem; 
+    border-color: #edf2f7;
+}
+
+.key-heading{
+    width: 3.75rem; 
+    padding: 0.75rem; 
+    font-size: 0.875rem; 
+    font-weight: 600; 
+    letter-spacing: 0.025em; 
+    text-align: left;
+}
+
+.details-heading{
+    padding: 0.75rem; 
+    font-size: 0.875rem; 
+    font-weight: 600; 
+    letter-spacing: 0.025em; 
+    text-align: left;
+}
+
+.status-heading{
+    width: 6rem; 
+    padding: 0.75rem; 
+    font-size: 0.875rem; 
+    font-weight: 600; 
+    letter-spacing: 0.025em; 
+    text-align: left;
+}
+
+.date-heading{
+    /* padding: 1.5rem;  */
+    padding: 0.75rem; 
+    font-size: 0.875rem; 
+    font-weight: 600; 
+    letter-spacing: 0.025em; 
+    text-align: left;
+}
+
+.price-heading{
+    /* padding: 2rem;  */
+    padding: 0.75rem; 
+    font-size: 0.875rem; 
+    font-weight: 600; 
+    letter-spacing: 0.025em; 
+    text-align: left;
+}
+
+tbody{
+    border-color: #edf2f7;  
+}
+
+.container {
+  width: 90%;
+  max-width: 900px;
+  margin: 50px auto 100px;
+}
+tr{
+    background-color: #ffffff;
+}
+
+.tr-even{
+    background-color: #f9fafb;
+}
+body {
+    background: linear-gradient(to right, #74ebd5, #acb6e5) !important
+}
+td{
+    padding: 0.75rem; 
+    font-size: 0.875rem; 
+    color: #4a5568; 
+    white-space: nowrap;
+}
+
+.response-group {
+  position: relative;
+  width: 100%;
+  padding: 100px 15px 15px;
+  background-color: #fff;
+  border-radius: 2px;
+  box-shadow: 0 2px 1px rgba(0, 0, 0, 0.15);
+}
+.response-group > header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  padding: 5px 15px;
+  background-color: rgba(255, 255, 255, 0.75);
+  border-radius: 2px;
+  box-shadow: 0 2px 1px rgba(0, 0, 0, 0.15);
+  z-index: 100;
+}
+  </style>
+  <!-- Vendor CSS Files -->
+  <link href="https://cdn.jsdelivr.net/gh/linuxguist/bizpage@main/assets/vendor/animate.css/animate.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/gh/linuxguist/bizpage@main/assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/gh/linuxguist/bizpage@main/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/gh/linuxguist/bizpage@main/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/gh/linuxguist/bizpage@main/assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/gh/linuxguist/bizpage@main/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="https://cdn.jsdelivr.net/gh/linuxguist/bizpage@main/assets/css/style.css" rel="stylesheet">
+
+  <!-- =======================================================
+  * Template Name: PathFindr
+  * Updated: Mar 10 2023 with Bootstrap v5.2.3
+  * Template URL: https://bootstrapmade.com/PathFindr-bootstrap-business-template/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+
+</head>
+
+<body>
+
+  <!-- ======= Header ======= -->
+  <header id="header" style="background-color: black;" class="fixed-top d-flex align-items-center header-transparent">
+    <div class="container-fluid">
+
+      <div class="row justify-content-center align-items-center">
+        <div class="col-xl-11 d-flex align-items-center justify-content-between">
+          <h1 class="logo" ><a href="/">PathFindr</a></h1>
+          <!-- Uncomment below if you prefer to use an image logo -->
+          <!-- <a href="index.html" class="logo"><img src="https://cdn.jsdelivr.net/gh/linuxguist/bizpage@main/assets/img/logo.png" alt="" class="img-fluid"></a>-->
+
+          <nav id="navbar" class="navbar">
+            <ul>
+              <li><a class="nav-link scrollto active" href="/">Trang chủ</a></li>
+              <li><a class="nav-link scrollto" href="/question">Tra cứu TS10</a></li>
+              <li><a class="nav-link scrollto" href="/posts">Review Các trường THPT</a></li>
+
+              <li><a class="nav-link scrollto" href="/forums">Diễn đàn</a></li>
+              {% if request.user.is_authenticated %}
+              <div class="auth" style="
+                        margin-left: 16px;
+                ">
+                <style>
+                .account-icon {
+                  
+                            display: inline-block;
+                            cursor: pointer;
+                        }
+                        .account-icon img {
+                            width: 50px;
+                            height: 50px;
+                            border-radius: 50%;
+                        }
+                        .dropdown-menu {
+                            display: none;
+                            position: absolute;
+                            top: 60px;
+                            right: 0;
+                            background-color: white;
+                            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+                            z-index: 1;
+                            width: 200px;
+                        }
+                        .dropdown-menu a {
+                            color: black;
+                            padding: 12px 16px;
+                            text-decoration: none;
+                            display: block;
+                        }
+                        .dropdown-menu a:hover {
+                            background-color: #f1f1f1;
+                        }
+                      .auth .show {
+                            display: block;
+                        }
+                .auth button {
+                        border-radius: 4px;
+                        box-shadow: 0 2px 4px 0 rgba(0,0,0,0.2), 0 1.5px 5px 0 rgba(0,0,0,0.19);
+
+                        text-decoration: none;
+                    border: none;
+                    background: #0074d9;
+                    color: white !important;
+                    font-family: 'Varela Round';
+                }
+                .auth button a {
+                    color: white;
+                    text-decoration: none;
+                    display: block;
+                    color: white;
+                    text-decoration: none;
+                    padding: 8px 16px;
+                }
+
+                </style>
+
+
+                <div class="account-icon" onclick="toggleDropdown()">
+                  <img src="{{student.profile_pic.url}}" alt="Account Icon">
+                  <div class="dropdown-menu " id="dropdownMenu">
+                      <a href="/profile">Thông tin cá nhân</a>
+                      <a href="/history" style="    text-wrap: wrap;">Lịch sử tư vấn tuyển sinh 10</a>
+                      <a href="/logout">Đăng xuất</a>
+                  </div>
+                </div>
+                    
+
+                      
+                <script>
+                      function toggleDropdown() {
+                            var dropdownMenu = document.getElementById("dropdownMenu");
+                            dropdownMenu.classList.toggle("show");
+                        }
+
+                        // Close the dropdown if the user clicks outside of it
+                        window.onclick = function(event) {
+                            if (!event.target.matches('.account-icon img')) {
+                                var dropdowns = document.getElementsByClassName("dropdown-menu");
+                                for (var i = 0; i < dropdowns.length; i++) {
+                                    var openDropdown = dropdowns[i];
+                                    if (openDropdown.classList.contains('show')) {
+                                        openDropdown.classList.remove('show');
+                                    }
+                                }
+                            }
+                        }
+                </script>
+                </div>
+                {% else %}
+              <li><a id="login" class="btn-get-started scrollto animate__animated animate__fadeInUp" style="" href="/login">Đăng nhập</a></li>
+                {% endif %}
+            </ul>
+            <i class="bi bi-list mobile-nav-toggle"></i>
+          </nav><!-- .navbar -->
+        </div>
+      </div>
+
+    </div>
+  </header><!-- End Header -->
+<br><br><br>
+
+<div class="container">
+    <div class="response-group">
+      <header>
+        <h2 style="text-align: center;font-size: 30px;">
+            <strong><i class="fa-solid fa-clock-rotate-left"></i> Lịch sử khảo sát</strong>
+        </h2>
+      </header>
+      <div class="response">
+        
+        <div class="table-container">
+          <table class="table">
+              <thead class="table-header">
+                  <tr class="table-header-row">
+                      <th>Môn chuyên</th>
+                      <th class="details-heading">Số điểm</th>
+                      <th></th>
+                    
+                  </tr>
+              </thead>
+              <tbody>
+                  {% for i in result %}
+                  <tr>
+                      <td>{{i.khoihoc}}</td>
+                      <td>{{i.marks}}</td>
+                      <td><a href="/resultpk/{{i.id}}">Xem thêm</a></td>
+                  </tr>    
+                  {% endfor %}          
+              </tbody>
+          </table>
+      </div> 
+      </div>
+    </div>
+  </div>
+
+  <!-- ======= Footer ======= -->
+  <footer id="footer">
+    <div class="footer-top">
+      <div class="container" style="margin: 0 auto;">
+        <div class="row">
+          <div class="col-lg-12 col-md-6 footer-info">
+            <h3>PathFindr</h3>
+            <p style="font-size: 18px;">PathFindr là dịch vụ giúp tư vấn hướng nghiệp, hay hướng nghiệp khi đăng ký hồ sơ vào các trường cấp ba nhằm hỗ trợ một cá nhân nào đó trong việc lựa chọn ngành nghề phù hợp nhất với khả năng, sở thích của bản thân. Không chỉ là ngành nghề phù hợp, cá nhân đó cũng được tư vấn, hỗ trợ để chọn ngành nghề đáp ứng được nhu cầu nhân lực của xã hội lúc bấy giờ.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container
+
+" style="margin: 0 auto;">
+      <div class="copyright">
+        &copy; Copyright <strong><a href="https://3dviet.vercel.app">VietVu</a></strong>. All Rights Reserved
+      </div>
+    </div>
+  </footer><!-- End Footer -->
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+    class="bi bi-arrow-up-short"></i></a>
+    <a href="/chat" style="display: block; position: relative;">   <img style="    background: #fafafa;
+      box-shadow: 4px 6px 36px -6px rgba(1, 1, 1, 0.5);
+      margin: auto;
+      z-index: 199;
+      padding: 0px;
+      right: 7px;
+      border-radius: 50%;
+      bottom: 64px;
+      position: fixed;
+      margin: auto;"
+      width="60" height="60" src="https://i.ibb.co/SnbvPY7/Thi-t-k-ch-a-c-t-n-1.png" alt="LEVIOOSA"></a>
+  <!-- Vendor JS Files -->
+  <script src="https://cdn.jsdelivr.net/gh/linuxguist/bizpage@main/assets/vendor/purecounter/purecounter_vanilla.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/linuxguist/bizpage@main/assets/vendor/aos/aos.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/linuxguist/bizpage@main/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/linuxguist/bizpage@main/assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/linuxguist/bizpage@main/assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/linuxguist/bizpage@main/assets/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/linuxguist/bizpage@main/assets/vendor/waypoints/noframework.waypoints.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/linuxguist/bizpage@main/assets/vendor/php-email-form/validate.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="https://cdn.jsdelivr.net/gh/linuxguist/bizpage@main/assets/js/main.js"></script>
+
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+
+
+<script type="text/javascript">
+$( ".button--approve" ).click(function() {
+  $( this ).toggleClass( "active" );
+  $( this ).siblings( '.button--deny' ).removeClass( "active" );
+});
+
+
+
+$( ".comment-trigger" ).click(function() {
+  $( this ).parent().parent().toggleClass( "post--commenting" );
+});
+
+$( ".button--flag" ).click(function() {
+  $( this ).parent().parent().toggleClass( "post--commenting" );
+});
+
+
+</script>
+
+</body>
+</html>
+
