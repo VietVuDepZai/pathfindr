@@ -98,29 +98,29 @@ def result(request):
     except:
         pass        
     if chuyenbool == 'yes':
-        diemTong = float(diemToan) + float(diemVan) + float(diemAnh) + float(diemChuyen)*2
-        if diemTong >= 20:
-            thpt = XetDiemChuyen.objects.filter(khoihoc=monchuyen, diemchuyen__lte=diemTong).order_by('-diemchuyen')[:3]
-            print(thpt)
-        else: 
+        # diemTong = float(diemToan) + float(diemVan) + float(diemAnh) + float(diemChuyen)*2
+        # if diemTong >= 20:
+        #     thpt = XetDiemChuyen.objects.filter(khoihoc=monchuyen, diemchuyen__lte=diemTong).order_by('-diemchuyen')[:3]
+        #     print(thpt)
+        # else: 
             return redirect('/path')
     if chuyenbool == 'no':
         if tichhop == 'yes':
-            diemTong = float(diemToan) + float(diemVan) + float(diemAnh) + float(diemtichhop)
-            print(diemTong)
-            monchuyen = 'Tích hợp'
-            if diemTong >= 20:
-                thpt = XetDiemChuyen.objects.filter(khoihoc=monchuyen, diemchuyen__lte=diemTong).order_by('-diemchuyen')[:3]
-                print(thpt)
-            else: 
+            # diemTong = float(diemToan) + float(diemVan) + float(diemAnh) + float(diemtichhop)
+            # print(diemTong)
+            # monchuyen = 'Tích hợp'
+            # if diemTong >= 20:
+            #     thpt = XetDiemChuyen.objects.filter(khoihoc=monchuyen, diemchuyen__lte=diemTong).order_by('-diemchuyen')[:3]
+            #     print(thpt)
+            # else: 
                 return redirect('/path')
         elif tichhop == 'no':
-            diemTong = float(diemToan) + float(diemVan) + float(diemAnh)
-            monchuyen = 'Không chuyên'
-            if diemTong >= 20:
-                thpt = XetDiemChuyen.objects.filter(khoihoc="không chuyên", diemchuyen__lte=diemTong).order_by('-diemchuyen')[:3]
-                print(thpt)
-            else: 
+            # diemTong = float(diemToan) + float(diemVan) + float(diemAnh)
+            # monchuyen = 'Không chuyên'
+            # if diemTong >= 20:
+            #     thpt = XetDiemChuyen.objects.filter(khoihoc="không chuyên", diemchuyen__lte=diemTong).order_by('-diemchuyen')[:3]
+            #     print(thpt)
+            # else: 
                 return redirect('/path')
     try: 
         student = Studenddt.objects.get(user=request.user)
