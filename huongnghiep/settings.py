@@ -116,13 +116,17 @@ WSGI_APPLICATION = 'huongnghiep.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'wdktemon', 
+        'USER': 'wdktemon', 
+        'PASSWORD': '7JaXeX6o7ray037VEmiqz-dOwUUw0keh',
+        'HOST': 'john.db.elephantsql.com', 
+        'PORT': '5432'
     }
 }
+
 
 
 # Password validation
