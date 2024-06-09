@@ -119,9 +119,9 @@ WSGI_APPLICATION = 'huongnghiep.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'wdktemon', 
-        'USER': 'wdktemon', 
-        'PASSWORD': '7JaXeX6o7ray037VEmiqz-dOwUUw0keh',
+        'NAME': 'zoxugzvb', 
+        'USER': 'zoxugzvb', 
+        'PASSWORD': '6sq1Lg8S8vWdmZIX5SG_2ki2LfEkBY39',
         'HOST': 'john.db.elephantsql.com', 
         'PORT': '5432'
     }
